@@ -1,3 +1,4 @@
+import { goto } from '$app/navigation';
 import axios from 'axios';
 
 export const useApi = () => {
@@ -11,10 +12,10 @@ export const useApi = () => {
 					params
 				},
 				{
-					timeout: 0,
 					headers: {
 						'Content-Type': 'application/json'
-					}
+					},
+					withCredentials: true // Include cookies with the request
 				}
 			);
 
@@ -26,7 +27,10 @@ export const useApi = () => {
 				return data;
 			}
 		} catch (error) {
-			console.error(error);
+			if (error.status === 401) {
+				// Unauthorized
+				goto('/login');
+			}
 			return null;
 		}
 	};

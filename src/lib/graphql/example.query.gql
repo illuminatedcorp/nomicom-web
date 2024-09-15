@@ -1,3 +1,0 @@
-query ExampleQuery($id: ID!) {
-  example(id: $id)
-}
