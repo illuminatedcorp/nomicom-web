@@ -58,10 +58,3 @@
 		<slot />
 	</div>
 </div>
-
-<style>
-	.app {
-		color: white;
-		background: linear-gradient(to bottom, transparent, rgb(12, 12, 13)) rgb(12, 12, 13);
-	}
-</style>
