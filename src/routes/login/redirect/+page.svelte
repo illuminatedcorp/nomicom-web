@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
@@ -16,18 +16,15 @@
 		window.history.replaceState({}, document.title, '/');
 
 		if (code && state) {
-			console.log('code', code);
 			let response = await apiGet('login', { code, state });
 
 			if (response.status === 'ok') {
-				console.log('success', response);
 				goto('/');
 			} else {
 				console.error('error', response);
 				// TODO what to do on error?
 			}
 		} else {
-			console.log('trying to goto login');
 			// if they don't have a code, we send them to the login route
 			goto('/login');
 		}

@@ -5,9 +5,9 @@ import { useColors } from './src/lib/models/useColors';
 const { generateBackgroundColors, generateColors } = useColors();
 
 const baseBackgroundColor = '#121212';
-const basePrimaryColor = '#0084ff';
+const basePrimaryColor = '#FF0000';
 const baseSecondaryColor = '#ffb300';
-const overlayOpacity = 0.2;
+const overlayOpacity = 0.3;
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -26,7 +26,8 @@ const config = {
 			primary: generateColors(baseBackgroundColor, basePrimaryColor, overlayOpacity),
 			secondary: generateColors(baseBackgroundColor, baseSecondaryColor, overlayOpacity),
 			background: generateBackgroundColors(baseBackgroundColor),
-			zinc: colors.zinc
+			zinc: colors.zinc,
+			white: colors.white
 		},
 		extend: {
 			colors: {

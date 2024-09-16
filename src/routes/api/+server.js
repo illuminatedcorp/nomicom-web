@@ -3,11 +3,15 @@ dotenv.config();
 
 import { json } from '@sveltejs/kit';
 
-import { useBirdhouse } from '$lib/models/useBirdhouse.ts';
-const { setup } = useBirdhouse();
+import { usePrices } from '$lib/models/usePrices.ts';
+const { getItemPrices } = usePrices();
+
+import { useDatabase } from '$lib/models/useDatabase.ts';
+const { setup, getBuybackRequests, getAllBuybackRequests, saveBuybackRequest } = useDatabase();
 setup();
 
-import { useAuth } from '../../lib/models/useAuth.js';
+import { useAuth } from '$lib/models/useAuth.js';
+import { API_ROUTES } from '$lib/models/useConstants.ts';
 const { login, authenticateSession } = useAuth();
 
 export async function POST({ request }) {
@@ -19,8 +23,6 @@ export async function POST({ request }) {
 			.find((cookie) => cookie.startsWith('sessionId=')) // Find the sessionId cookie
 			?.split('=')[1]; // Get the value part of the sessionId cookie
 
-		console.log('sessionId', sessionId);
-
 		const { apiRoute, params } = await request.json();
 		console.log('apiRoute', apiRoute);
 		console.log('params', params);
@@ -31,7 +33,6 @@ export async function POST({ request }) {
 			// this call auths them against ESI and gets their info from the database
 			// if there the user didn't exist, it creates a new user and a new session
 			let sessionData = await login(params);
-			console.log('sessionData after login', sessionData);
 
 			const response = json({
 				status: 'ok',
@@ -46,8 +47,6 @@ export async function POST({ request }) {
 				`sessionId=${sessionData.sessionId}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=604800`
 			);
 
-			console.log(response.headers);
-
 			return response;
 		}
 
@@ -56,13 +55,50 @@ export async function POST({ request }) {
 		}
 
 		const userData = await authenticateSession(sessionId);
-		console.log('userData', userData);
 
 		if (!userData) {
 			return new Response('Unauthorized', { status: 401 });
 		}
 
 		console.log('AUTHED userData', userData);
+
+		if (apiRoute === API_ROUTES.getSession) {
+			if (!sessionId) {
+				return new Response('Unauthorized', { status: 401 });
+			}
+
+			const userData = await authenticateSession(sessionId);
+
+			if (!userData) {
+				return new Response('Unauthorized', { status: 401 });
+			}
+
+			return json(userData);
+		}
+
+		switch (apiRoute) {
+			case API_ROUTES.buybacksByUser: {
+				let data = await getBuybackRequests(userData.id);
+				return json(data);
+			}
+			case API_ROUTES.getAppraisal: {
+				let data = await getItemPrices(params);
+				return json(data);
+			}
+			case API_ROUTES.saveBuyback: {
+				await saveBuybackRequest(params);
+				break;
+			}
+			case API_ROUTES.allBuybacks: {
+				// for this one we want to make sure they are an admin
+				if (userData.admin) {
+					let data = await getAllBuybackRequests();
+					return json(data);
+				}
+				break;
+			}
+			default:
+		}
 
 		// just return a 200 for now
 		return json({ status: 'ok' });

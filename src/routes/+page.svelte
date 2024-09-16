@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 
 	import { useApi } from '$lib/models/useApi.js';
@@ -11,43 +11,9 @@
 	});
 </script>
 
-<div class="flex items-center justify-center w-full h-full">
+<div class="flex justify-center w-full h-full">
 	<div class="flex flex-col items-center max-w-96">
-		<div class="text-5xl">Illuminated</div>
-		<div class="text-sm mt-1">An EVE Online Corporation | Goonswarm Federation</div>
-
-		<div class="flex gap-3 mt-8">
-			<a
-				href="https://discord.gg/illuminated"
-				class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold py-4 px-8 rounded"
-			>
-				Discord
-			</a>
-			<a
-				href="https://wiki.illuminatedcorp.com/"
-				class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold py-4 px-8 rounded"
-			>
-				Wiki
-			</a>
-			<a
-				href="https://auth.illuminatedcorp.com/"
-				class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold py-4 px-8 rounded"
-			>
-				Auth
-			</a>
-			<a
-				href="https://zkillboard.com/corporation/98718341/"
-				class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold py-4 px-8 rounded"
-			>
-				Killboard
-			</a>
-			<a
-				href="/buyback"
-				class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold py-4 px-8 rounded"
-			>
-				Buyback
-			</a>
-		</div>
+		<div class="text-base mt-1">An EVE Online Corporation | Goonswarm Federation</div>
 
 		<div class="text-xl text-left w-full mt-10">We are recruiting!</div>
 		<div class="w-full text-left">

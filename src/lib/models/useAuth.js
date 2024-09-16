@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useBirdhouse } from './useBirdhouse';
-const { saveUser, getUserData, getUserDataBySessionId } = useBirdhouse();
+import { useDatabase } from './useDatabase';
+const { saveUser, getUserData, getUserDataBySessionId } = useDatabase();
 
 export const useAuth = () => {
 	const login = async ({ code, state }) => {
@@ -85,7 +85,6 @@ export const useAuth = () => {
 	};
 
 	const authenticateSession = async (sessionId) => {
-		console.log('sessionId', sessionId);
 		if (!sessionId) {
 			return null; // Unauthorized
 		}
