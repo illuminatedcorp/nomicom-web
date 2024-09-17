@@ -25,6 +25,9 @@ jobs:
           BASE_PATH: '/${{ github.event.repository.name }}'
         run: |
           npm run build
+        env:
+          VITE_EVE_APP_CLIENT_ID: ${{ secrets.VITE_APP_APIKey }}
+          VITE_APP_HOST: ${{ secrets.VITE_APP_HOST }}
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
