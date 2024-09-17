@@ -1,4 +1,5 @@
 import { goto } from '$app/navigation';
+import { base } from '$app/paths';
 import axios from 'axios';
 
 export const useApi = () => {
@@ -31,7 +32,7 @@ export const useApi = () => {
 		} catch (error) {
 			if (error.status === 401) {
 				// Unauthorized
-				goto('/login');
+				goto(`${base}/login`);
 			}
 			return null;
 		}

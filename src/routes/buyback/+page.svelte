@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
+	import { base } from '$app/paths';
 	import moment from 'moment';
 
 	import { Button } from '$lib/components/ui/button';
@@ -83,7 +84,7 @@
 		<div class="flex flex-col">
 			<div class="flex items-center justify-between bg-background-900 px-2 mt-5 h-12">
 				<div class="text-xl">Your Buyback Requests</div>
-				<Button href="/buyback/request">Request Buyback</Button>
+				<Button href="{base}/buyback/request">Request Buyback</Button>
 			</div>
 
 			<div class="buyback-grid bg-primary-900">

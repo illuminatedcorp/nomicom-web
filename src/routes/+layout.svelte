@@ -3,6 +3,8 @@
 	import '../global.css';
 	import '@fortawesome/fontawesome-free/css/all.min.css';
 
+	import { base } from '$app/paths';
+
 	import { onMount } from 'svelte';
 	import { sessionStore } from '$lib/stores/sessionStore';
 	// import { API_ROUTES } from '$lib/models/useConstants';
@@ -30,7 +32,7 @@
 			class="grid grid-cols-[1fr,auto,1fr] relative items-center tracking-wider bg-background-900 py-2"
 		>
 			<div class="flex justify-center gap-4">
-				<Button href="/contact" class="text-lg font-bold bg-transparent">Contact us</Button>
+				<Button href="{base}/contact" class="text-lg font-bold bg-transparent">Contact us</Button>
 				<Button
 					href="https://zkillboard.com/corporation/98718341/"
 					target="_blank"
@@ -39,14 +41,14 @@
 			</div>
 
 			<Button
-				href="/"
+				href="{base}/"
 				class="text-6xl bg-transparent hover:bg-transparent"
 				style="font-family: Jacquard">Illuminated</Button
 			>
 
 			<div class="flex justify-center gap-4">
-				<Button href="/join" class="text-lg font-bold bg-transparent">Join Today</Button>
-				<Button href="/portal" class="text-lg font-bold bg-transparent">Login</Button>
+				<Button href="{base}/join" class="text-lg font-bold bg-transparent">Join Today</Button>
+				<Button href="{base}/portal" class="text-lg font-bold bg-transparent">Login</Button>
 			</div>
 
 			<div class="absolute top-full flex justify-center w-full tracking-normal">

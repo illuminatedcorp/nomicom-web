@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto, replaceState } from '$app/navigation';
+	import { base } from '$app/paths';
 
 	import { useApi } from '$lib/models/useApi.js';
 	import { API_ROUTES } from '$lib/models/useConstants';
@@ -18,15 +19,15 @@
 			let response = await apiCall(API_ROUTES.login, { code, state });
 
 			if (response.status === 200) {
-				goto('/portal');
+				goto(`${base}/portal`);
 			} else {
 				console.error('error', response);
 				// TODO what to do on error?
-				goto('/portal/login');
+				goto(`${base}/portal/login`);
 			}
 		} else {
 			// if they don't have a code, we send them to the login route
-			goto('/portal/login');
+			goto(`${base}/portal/login`);
 		}
 	});
 </script>
