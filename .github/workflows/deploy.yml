@@ -25,7 +25,6 @@ jobs:
           BASE_PATH: '/${{ github.event.repository.name }}'
           VITE_EVE_APP_CLIENT_ID: ${{ vars.EVE_APP_CLIENT_ID }}
           VITE_APP_HOST: ${{ vars.WEB_HOST }}
-          TESTING: ${{ vars }}
         run: |
           npm run build
 
