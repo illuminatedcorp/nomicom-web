@@ -12,7 +12,7 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: ''
+			base: process.argv.includes('dev') ? '' : 'nomicom-web'
 		},
 		alias: {
 			'@/*': './src/lib/*'
