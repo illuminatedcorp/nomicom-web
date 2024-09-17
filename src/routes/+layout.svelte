@@ -10,6 +10,8 @@
 	// import { API_ROUTES } from '$lib/models/useConstants';
 	// import { useApi } from '$lib/models/useApi';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import * as Tooltip from '$lib/components/ui/tooltip';
+
 	// const { apiCall } = useApi();
 
 	let isAuthenticated = false;
@@ -48,7 +50,17 @@
 
 			<div class="flex justify-center gap-4">
 				<Button href="{base}/join" class="text-lg font-bold bg-transparent">Join Today</Button>
-				<Button href="{base}/portal" class="text-lg font-bold bg-transparent">Login</Button>
+				<!-- <Button href="{base}/portal" class="text-lg font-bold bg-transparent">Login</Button> -->
+				<Tooltip.Root openDelay={1}>
+					<Tooltip.Trigger>
+						<div>
+							<Button class="text-lg font-bold bg-transparent opacity-40">Login</Button>
+						</div>
+					</Tooltip.Trigger>
+					<Tooltip.Content class="bg-background-800">
+						<div class="text-xl">In progress</div>
+					</Tooltip.Content>
+				</Tooltip.Root>
 			</div>
 
 			<div class="absolute top-full flex justify-center w-full tracking-normal">
