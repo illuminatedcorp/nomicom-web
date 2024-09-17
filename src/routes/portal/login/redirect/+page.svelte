@@ -12,8 +12,7 @@
 		let code = new URLSearchParams(window.location.search).get('code');
 		let state = new URLSearchParams(window.location.search).get('state');
 
-		// then we strip the query params from the url
-		// replaceState('/');
+		console.log('Auth code from EVE:', code);
 
 		if (code && state) {
 			let response = await apiCall(API_ROUTES.login, { code, state });

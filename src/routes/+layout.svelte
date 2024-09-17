@@ -50,8 +50,8 @@
 
 			<div class="flex justify-center gap-4">
 				<Button href="{base}/join" class="text-lg font-bold bg-transparent">Join Today</Button>
-				<!-- <Button href="{base}/portal" class="text-lg font-bold bg-transparent">Login</Button> -->
-				<Tooltip.Root openDelay={1}>
+				<Button href="{base}/portal" class="text-lg font-bold bg-transparent">Login</Button>
+				<!-- <Tooltip.Root openDelay={1}>
 					<Tooltip.Trigger>
 						<div>
 							<Button class="text-lg font-bold bg-transparent opacity-40">Login</Button>
@@ -60,7 +60,7 @@
 					<Tooltip.Content class="bg-background-800">
 						<div class="text-xl">In progress</div>
 					</Tooltip.Content>
-				</Tooltip.Root>
+				</Tooltip.Root> -->
 			</div>
 
 			<div class="absolute top-full flex justify-center w-full tracking-normal">
