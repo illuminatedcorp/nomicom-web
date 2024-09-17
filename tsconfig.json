@@ -4,9 +4,9 @@
 		"allowJs": true,
 		"checkJs": false,
 		"types": ["svelte"],
-		"isolatedModules": true,
-		"paths": {
-			"$lib/*": ["./src/lib/*"]
-		}
+		"isolatedModules": true
+		// "paths": {
+		// 	"$lib/*": ["./src/lib/*"]
+		// }
 	}
 }

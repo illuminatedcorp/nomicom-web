@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
+import { resolve } from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -12,10 +13,11 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? '' : 'nomicom-web'
+			base: process.argv.includes('dev') ? '' : '/nomicom-web'
 		},
 		alias: {
-			'@/*': './src/lib/*'
+			'@/*': './src/lib/*',
+			$lib: resolve('./src/lib')
 		}
 	}
 };
