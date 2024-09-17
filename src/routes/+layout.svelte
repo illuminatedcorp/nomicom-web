@@ -22,7 +22,7 @@
 	});
 </script>
 
-<div class="flex flex-col text-white h-full">
+<div class="flex flex-col h-full">
 	{#if isAuthenticated}
 		<div class="grid grid-cols-[1fr,auto,1fr] items-center tracking-wider bg-background-900 py-2">
 			portal nav
@@ -76,6 +76,6 @@
 		background-image: url('/images/red-gallente.jpg');
 		background-size: cover;
 		background-position: center;
-		filter: brightness(30%);
+		filter: brightness(10%);
 	}
 </style>
