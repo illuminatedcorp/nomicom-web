@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { goto, replaceState } from '$app/navigation';
 
 	import { useApi } from '$lib/models/useApi.js';
-	const { apiGet } = useApi();
-
-	const afterLoginRedirectUrl = '/buyback';
+	import { API_ROUTES } from '$lib/models/useConstants';
+	const { apiCall } = useApi();
 
 	onMount(async () => {
 		// get the code from the url
@@ -13,20 +12,21 @@
 		let state = new URLSearchParams(window.location.search).get('state');
 
 		// then we strip the query params from the url
-		window.history.replaceState({}, document.title, '/');
+		// replaceState('/');
 
 		if (code && state) {
-			let response = await apiGet('login', { code, state });
+			let response = await apiCall(API_ROUTES.login, { code, state });
 
-			if (response.status === 'ok') {
-				goto('/');
+			if (response.status === 200) {
+				goto('/portal');
 			} else {
 				console.error('error', response);
 				// TODO what to do on error?
+				goto('/portal/login');
 			}
 		} else {
 			// if they don't have a code, we send them to the login route
-			goto('/login');
+			goto('/portal/login');
 		}
 	});
 </script>

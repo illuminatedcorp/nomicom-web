@@ -8,8 +8,8 @@
 
 	import { sessionStore } from '$lib/stores/sessionStore';
 	import { API_ROUTES, BUYBACK_STATES } from '$lib/models/useConstants';
-	import { useApi } from '$lib/models/useApi';
-	const { apiGet } = useApi();
+	// import { useApi } from '$lib/models/useApi';
+	// const { apiCall } = useApi();
 
 	// so on this main page we want to display the user's buyback requests
 	// we'll need to see
@@ -47,29 +47,29 @@
 	const updateBuybacks = async () => {
 		let data = await get(sessionStore);
 		if (data.id) {
-			buybacks = await apiGet(API_ROUTES.buybacksByUser, { id: data.id });
+			// buybacks = await apiCall(API_ROUTES.buybacksByUser, { id: data.id });
 		}
 
 		if (data.admin) {
 			// get admin metrics
-			allBuybacks = await apiGet(API_ROUTES.allBuybacks);
+			// allBuybacks = await apiCall(API_ROUTES.allBuybacks);
 		}
 	};
 
 	const onCancel = (buyback) => async () => {
-		await apiGet(API_ROUTES.saveBuyback, {
-			id: buyback.id,
-			state: BUYBACK_STATES.canceled
-		});
+		// await apiCall(API_ROUTES.saveBuyback, {
+		// 	id: buyback.id,
+		// 	state: BUYBACK_STATES.canceled
+		// });
 
 		updateBuybacks();
 	};
 
 	const onChangeState = async (event, buyback) => {
-		await apiGet(API_ROUTES.saveBuyback, {
-			id: buyback.id,
-			state: event.value
-		});
+		// await apiCall(API_ROUTES.saveBuyback, {
+		// 	id: buyback.id,
+		// 	state: event.value
+		// });
 
 		updateBuybacks();
 	};
