@@ -27,8 +27,8 @@ jobs:
       - name: build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
-          VITE_EVE_APP_CLIENT_ID: $VITE_EVE_APP_CLIENT_ID
-          VITE_APP_HOST: $VITE_APP_HOST
+          VITE_EVE_APP_CLIENT_ID: '$VITE_EVE_APP_CLIENT_ID'
+          VITE_APP_HOST: '$VITE_APP_HOST'
         run: |
           npm run build
 
