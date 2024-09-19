@@ -3,7 +3,7 @@
 	import { base } from '$app/paths';
 
 	let redirectUri = encodeURIComponent(
-		import.meta.env.VITE_APP_HOST + base + '/portal/login/redirect'
+		import.meta.env.VITE_WEB_HOST + base + '/portal/login/redirect'
 	);
 	let clientId = import.meta.env.VITE_EVE_APP_CLIENT_ID;
 	let uuidState = uuidv4();

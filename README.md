@@ -8,7 +8,8 @@ There are some important ENV vars that are required. They are placed in a `.env`
 
 ```
 VITE_EVE_APP_CLIENT_ID=1234567
-VITE_APP_HOST=http://localhost:3000
+VITE_WEB_HOST=http://localhost:3000
+VITE_SERVER_HOST=http://localhost:4000
 ```
 
 ## Running
