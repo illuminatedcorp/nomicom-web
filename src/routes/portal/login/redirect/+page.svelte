@@ -18,16 +18,12 @@
 			goto(`${base}${WEB_ROUTES.login}`);
 		}
 
-		console.log('Auth code from EVE:', code);
-
 		if (code && state) {
 			let response = await apiCall(API_ROUTES.login, { auth_code: code });
 
-			if (response?.status === 200) {
+			if (response) {
 				goto(`${base}${WEB_ROUTES.portal}`);
 			} else {
-				console.error('error', response);
-				// TODO what to do on error?
 				goto(`${base}${WEB_ROUTES.login}`);
 			}
 		} else {

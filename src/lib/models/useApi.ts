@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import { base } from '$app/paths';
 import axios from 'axios';
+import { WEB_ROUTES } from './useConstants';
 
 export const useApi = () => {
 	// so the idea here is that we simple forward all API requests, their route labels, and params to the sveltkit server
@@ -17,18 +18,10 @@ export const useApi = () => {
 				}
 			);
 
-			// for dev we just want to mock a response and print the request
-			// console.log('API CALL:', apiRoute, params);
-			// const response = {
-			// 	data: {
-			// 		error: undefined,
-			// 		status: 200
-			// 	}
-			// };
-
 			const data = response.data;
 
 			if (data.error) {
+				console.error(data.error);
 				return null;
 			} else {
 				return data;
@@ -36,7 +29,7 @@ export const useApi = () => {
 		} catch (error) {
 			if (error.status === 401) {
 				// Unauthorized
-				goto(`${base}/login`);
+				goto(`${base}${WEB_ROUTES.login}`);
 			}
 			return null;
 		}
