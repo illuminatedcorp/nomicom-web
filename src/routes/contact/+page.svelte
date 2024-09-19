@@ -47,6 +47,19 @@
 			</a>
 		</div>
 
+		<div class="grid grid-cols-4 bg-primary-800 bg-opacity-50 px-2 py-1">
+			<div>Line Member+</div>
+			<div>Vantaanya</div>
+			<div>drivenmad</div>
+			<a
+				href="https://evewho.com/character/90248105"
+				target="_blank"
+				class="underline hover:text-primary-200"
+			>
+				Vantaanya
+			</a>
+		</div>
+
 		<div class="mt-3">If discord is not an option, you may send someone an in-game mail.</div>
 		<div>Though, do not expect a snappy response to a in-game mail.</div>
 
