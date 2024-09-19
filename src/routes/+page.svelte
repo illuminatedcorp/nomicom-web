@@ -2,14 +2,13 @@
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 
-	import { useApi } from '$lib/models/useApi.js';
+	// import { useApi } from '$lib/models/useApi.js';
 	import Button from '@/components/ui/button/button.svelte';
-	const { apiCall } = useApi();
+	// const { apiCall } = useApi();
 
 	onMount(async () => {
 		// goto('/login');
-
-		await apiCall('test');
+		// await apiCall('test');
 	});
 </script>
 
