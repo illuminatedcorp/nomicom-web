@@ -6,7 +6,7 @@
 
 	import { sessionStore } from '$lib/stores/sessionStore';
 
-	import { API_ROUTES, BUYBACK_STATES } from '$lib/models/useConstants';
+	import { API_ROUTES, BUYBACK_STATES, WEB_ROUTES } from '$lib/models/useConstants';
 	import { useApi } from '$lib/models/useApi';
 	const { apiCall } = useApi();
 
@@ -67,7 +67,7 @@
 
 		if (response.status === 'ok') {
 			// redirect to the main page
-			window.location.href = '/portal/buyback';
+			window.location.href = WEB_ROUTES.buyback;
 		}
 	};
 </script>

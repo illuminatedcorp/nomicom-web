@@ -11,6 +11,7 @@
 	// import { useApi } from '$lib/models/useApi';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
+	import { WEB_ROUTES } from '@/models/useConstants';
 
 	// const { apiCall } = useApi();
 
@@ -34,7 +35,9 @@
 			class="grid grid-cols-[1fr,auto,1fr] relative items-center tracking-wider bg-background-900 py-2"
 		>
 			<div class="flex justify-center gap-4">
-				<Button href="{base}/contact" class="text-lg font-bold bg-transparent">Contact us</Button>
+				<Button href="{base}{WEB_ROUTES.contact}" class="text-lg font-bold bg-transparent"
+					>Contact us</Button
+				>
 				<Button
 					href="https://zkillboard.com/corporation/98718341/"
 					target="_blank"
@@ -49,8 +52,12 @@
 			>
 
 			<div class="flex justify-center gap-4">
-				<Button href="{base}/join" class="text-lg font-bold bg-transparent">Join Today</Button>
-				<Button href="{base}/portal" class="text-lg font-bold bg-transparent">Login</Button>
+				<Button href="{base}{WEB_ROUTES.join}" class="text-lg font-bold bg-transparent"
+					>Join Today</Button
+				>
+				<Button href="{base}{WEB_ROUTES.portal}" class="text-lg font-bold bg-transparent"
+					>Login</Button
+				>
 				<!-- <Tooltip.Root openDelay={1}>
 					<Tooltip.Trigger>
 						<div>

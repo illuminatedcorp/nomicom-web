@@ -4,7 +4,7 @@
 	import { base } from '$app/paths';
 
 	import { useApi } from '$lib/models/useApi.js';
-	import { API_ROUTES } from '$lib/models/useConstants';
+	import { API_ROUTES, WEB_ROUTES } from '$lib/models/useConstants';
 	const { apiCall } = useApi();
 
 	onMount(async () => {
@@ -12,21 +12,27 @@
 		let code = new URLSearchParams(window.location.search).get('code');
 		let state = new URLSearchParams(window.location.search).get('state');
 
+		let storedState = localStorage.getItem('state');
+		if (state !== storedState) {
+			console.error('state mismatch');
+			goto(`${base}${WEB_ROUTES.login}`);
+		}
+
 		console.log('Auth code from EVE:', code);
 
 		if (code && state) {
-			let response = await apiCall(API_ROUTES.login, { code, state });
+			let response = await apiCall(API_ROUTES.login, { code });
 
 			if (response.status === 200) {
-				goto(`${base}/portal`);
+				goto(`${base}${WEB_ROUTES.portal}`);
 			} else {
 				console.error('error', response);
 				// TODO what to do on error?
-				goto(`${base}/portal/login`);
+				goto(`${base}${WEB_ROUTES.login}`);
 			}
 		} else {
 			// if they don't have a code, we send them to the login route
-			goto(`${base}/portal/login`);
+			goto(`${base}${WEB_ROUTES.login}`);
 		}
 	});
 </script>

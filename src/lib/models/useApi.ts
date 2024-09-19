@@ -7,7 +7,7 @@ export const useApi = () => {
 	const apiCall = async (apiRoute, params) => {
 		try {
 			const response = await axios.post(
-				import.meta.env.VITE_SERVER_HOST + '/api/v1/' + apiRoute,
+				import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute,
 				params,
 				{
 					headers: {

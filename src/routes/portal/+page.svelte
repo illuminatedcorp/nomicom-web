@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 
+	import { WEB_ROUTES } from '$lib/models/useConstants';
 	import { sessionStore } from '$lib/stores/sessionStore';
 
 	let isAuthenticated = false;
@@ -15,7 +16,7 @@
 				isAuthenticated = true;
 			} else {
 				// send them to the login page
-				goto(`${base}/portal/login`);
+				goto(`${base}${WEB_ROUTES.login}`);
 			}
 		});
 	});

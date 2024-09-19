@@ -4,6 +4,7 @@
 
 	// import { useApi } from '$lib/models/useApi.js';
 	import Button from '@/components/ui/button/button.svelte';
+	import { WEB_ROUTES } from '@/models/useConstants';
 	// const { apiCall } = useApi();
 
 	onMount(async () => {
@@ -50,6 +51,8 @@
 		class="flex flex-col justify-center bg-background-900 bg-opacity-80 border-2 border-background-900 rounded-md px-10 py-5 mt-5 min-w-fit"
 	>
 		<div class="text-2xl text-center">Interested?</div>
-		<Button href="{base}/join" target="_blank" class="text-xl py-5 px-8 mt-4">Join Today</Button>
+		<Button href="{base}{WEB_ROUTES.join}" target="_blank" class="text-xl py-5 px-8 mt-4"
+			>Join Today</Button
+		>
 	</div>
 </div>
