@@ -67,7 +67,7 @@
 
 		if (response.status === 'ok') {
 			// redirect to the main page
-			window.location.href = '/buyback';
+			window.location.href = '/portal/buyback';
 		}
 	};
 </script>
