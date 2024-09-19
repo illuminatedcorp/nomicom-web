@@ -35,14 +35,16 @@
 			class="grid grid-cols-[1fr,auto,1fr] relative items-center tracking-wider bg-background-900 py-2"
 		>
 			<div class="flex justify-center gap-4">
-				<Button href="{base}{WEB_ROUTES.contact}" class="text-lg font-bold bg-transparent"
-					>Contact us</Button
-				>
+				<Button href="{base}{WEB_ROUTES.contact}" class="text-lg font-bold bg-transparent">
+					Contact us
+				</Button>
 				<Button
 					href="https://zkillboard.com/corporation/98718341/"
 					target="_blank"
-					class="text-lg font-bold bg-transparent">Killboard</Button
+					class="text-lg font-bold bg-transparent"
 				>
+					Killboard
+				</Button>
 			</div>
 
 			<Button

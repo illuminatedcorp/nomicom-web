@@ -24,7 +24,7 @@
 		Please log in with an EVE Online character that is associated with your account.
 	</div>
 
-	<Button on:click={onLogin} class="mt-5">
+	<Button on:click={onLogin} class="mt-5 bg-transparent hover:bg-transparent">
 		<img
 			src="https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-white-large.png"
 			alt="EVE SSO Login"

@@ -21,9 +21,9 @@
 		console.log('Auth code from EVE:', code);
 
 		if (code && state) {
-			let response = await apiCall(API_ROUTES.login, { code });
+			let response = await apiCall(API_ROUTES.login, { auth_code: code });
 
-			if (response.status === 200) {
+			if (response?.status === 200) {
 				goto(`${base}${WEB_ROUTES.portal}`);
 			} else {
 				console.error('error', response);
@@ -37,4 +37,4 @@
 	});
 </script>
 
-<div>Please wait...</div>
+<div class="px-2 py-1">Please wait...</div>
