@@ -8,8 +8,6 @@
 	let clientId = import.meta.env.VITE_EVE_APP_CLIENT_ID;
 	let uuidState = uuidv4();
 	let loginUrl = `https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=${redirectUri}&client_id=${clientId}&state=${uuidState}`;
-
-	console.log(import.meta.env);
 </script>
 
 <div class="flex flex-col items-center justify-center h-full">

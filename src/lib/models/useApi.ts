@@ -6,21 +6,25 @@ export const useApi = () => {
 	// so the idea here is that we simple forward all API requests, their route labels, and params to the sveltkit server
 	const apiCall = async (apiRoute, params) => {
 		try {
-			// const response = await axios.post(process.env.BACKEND_HOST + '/api/v1/' + apiRoute, params, {
-			// 	headers: {
-			// 		'Content-Type': 'application/json'
-			// 	},
-			// 	withCredentials: true // Include cookies with the request
-			// });
+			const response = await axios.post(
+				process.env.VITE_SERVER_HOST + '/api/v1/' + apiRoute,
+				params,
+				{
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					withCredentials: true // Include cookies with the request
+				}
+			);
 
 			// for dev we just want to mock a response and print the request
-			console.log('API CALL:', apiRoute, params);
-			const response = {
-				data: {
-					error: undefined,
-					status: 200
-				}
-			};
+			// console.log('API CALL:', apiRoute, params);
+			// const response = {
+			// 	data: {
+			// 		error: undefined,
+			// 		status: 200
+			// 	}
+			// };
 
 			const data = response.data;
 
