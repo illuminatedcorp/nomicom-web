@@ -1,5 +1,5 @@
 export const API_ROUTES = {
-	login: 'login',
+	login: 'characters',
 	buybacksByUser: 'buybacksByUser',
 	getSession: 'getSession',
 	saveBuyback: 'saveBuyback',
