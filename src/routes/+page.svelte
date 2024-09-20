@@ -2,9 +2,10 @@
 	import { get } from 'svelte/store';
 	import { base } from '$app/paths';
 
-	import { SITE_MODES } from '@/models/useConstants';
+	import { SITE_MODES, WEB_ROUTES } from '@/models/useConstants';
 	import { styleStore, getMode } from '@/stores/styleStore';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	const onSetSiteMode = (mode) => {
 		let currentSelectedMode = get(styleStore).selectedMode;
@@ -13,10 +14,13 @@
 
 	const onDarkClick = () => {
 		styleStore.set({ hoveredMode: get(styleStore).hoveredMode, selectedMode: SITE_MODES.dark });
+		// open in new tab
+		window.open('https://reddit.com/r/pandemichorde', '_blank');
 	};
 
 	const onLightClick = () => {
 		styleStore.set({ hoveredMode: get(styleStore).hoveredMode, selectedMode: SITE_MODES.light });
+		goto(base + WEB_ROUTES.join);
 	};
 
 	let currentMode = get(styleStore).selectedMode;
