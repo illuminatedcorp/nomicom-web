@@ -1,10 +1,13 @@
 export const API_ROUTES = {
-	login: '/characters',
-	buybacksByUser: '/buybacksByUser',
-	getSession: '/getSession',
-	saveBuyback: '/saveBuyback',
-	allBuybacks: '/allBuybacks',
-	getAppraisal: '/getAppraisal'
+	login: {
+		method: 'POST',
+		route: '/characters'
+	}
+	// buybacksByUser: '/buybacksByUser',
+	// getSession: '/getSession',
+	// saveBuyback: '/saveBuyback',
+	// allBuybacks: '/allBuybacks',
+	// getAppraisal: '/getAppraisal'
 };
 
 export const WEB_ROUTES = {
@@ -22,4 +25,10 @@ export const BUYBACK_STATES = {
 	declined: 'declined',
 	completed: 'completed',
 	canceled: 'canceled'
+};
+
+export const SITE_MODES = {
+	neutral: 'neutral',
+	dark: 'dark',
+	light: 'light'
 };

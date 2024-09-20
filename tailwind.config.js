@@ -5,10 +5,10 @@ import { useColors } from './src/lib/models/useColors';
 const { generateBackgroundColors, generateColors } = useColors();
 
 const baseBackgroundColor = '#121212';
-const basePrimaryColor = '#FF0000';
-const baseSecondaryColor = '#ffb300';
+const basePrimaryColor = '#981c20';
+const baseSecondaryColor = '#E2DCD0';
 const overlayOpacity = 0.3;
-
+//981c20
 /** @type {import('tailwindcss').Config} */
 const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -77,6 +77,7 @@ const config = {
 			}
 		}
 	},
+	safelist: ['logo-button', 'dark', 'neutral', 'light', 'nav-button'],
 	plugins: [
 		function ({ addBase, theme }) {
 			function extractColorVars(colorObj, colorGroup = '') {

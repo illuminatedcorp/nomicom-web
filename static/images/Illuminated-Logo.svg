@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="-20 -20 270 340" width="330" height="400" overflow="visible">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #981c20;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #000000;
+        opacity: 0.6;
+      }
+
+      .cls-3 {
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 8px;
+      }
+    </style>
+
+    <!-- Define the rough edges filter -->
+<filter id="rough-edges" filterUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
+      <!-- Generate fractal noise -->
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="10" result="turbulence" />
+      
+      <!-- Apply displacement to the entire shape -->
+      <feDisplacementMap in="SourceAlpha" in2="turbulence" scale="100" result="displaced" />
+
+      <!-- Erode the shape to create an edge mask -->
+      <feMorphology operator="erode" radius="2" in="SourceAlpha" result="edges" />
+
+      <!-- Apply displacement only to the eroded edges -->
+      <feComposite in="displaced" in2="edges" operator="out" result="rough-edges" />
+
+      <!-- Color transformation to apply color to the rough edges -->
+      <feFlood flood-color="#981c20" result="flooded" />
+      <feComposite in="flooded" in2="rough-edges" operator="in" result="colored-edges" />
+
+      <!-- Merge the rough edges with the original shape -->
+      <feMerge>
+        <feMergeNode in="colored-edges" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Define a mask to exclude the polygon (cls-2) from the rough edges -->
+    <mask id="polygon-mask">
+      <rect width="200%" height="200%" x="-50%" y="-50%" fill="white" />
+      <polygon points="93.27 300.04 93.27 129.29 7.75 129.29 7.75 84.65 93.27 84.65 93.27 8.04 137.91 8.04 137.91 84.65 222.47 84.65 222.47 129.29 137.91 129.29 137.91 300.04 93.27 300.04" fill="black" />
+    </mask>
+  </defs>
+
+  <g>
+    <!-- Use the polygon for cropping and apply the rough edges filter -->
+    <path filter="url(#rough-edges)" mask="url(#polygon-mask)" class="cls-1" d="M134.16,11.8v76.61h84.56v37.14h-84.56v170.74h-37.14V125.54H11.51v-37.14h85.51V11.8h37.14M141.66,4.29h-52.15v76.61H4v52.15h85.51v170.74h52.15v-170.74h84.56v-52.15h-84.56V4.29h0Z"/>
+    <!-- The original polygon used as a crop -->
+    <polygon class="cls-2" points="93.27 300.04 93.27 129.29 7.75 129.29 7.75 84.65 93.27 84.65 93.27 8.04 137.91 8.04 137.91 84.65 222.47 84.65 222.47 129.29 137.91 129.29 137.91 300.04 93.27 300.04"/>
+    <!-- Original cross shape with no filter -->
+    <path class="cls-1" d="M134.16,11.8v76.61h84.56v37.14h-84.56v170.74h-37.14V125.54H11.51v-37.14h85.51V11.8h37.14M141.66,4.29h-52.15v76.61H4v52.15h85.51v170.74h52.15v-170.74h84.56v-52.15h-84.56V4.29h0Z"/>
+  </g>
+</svg>

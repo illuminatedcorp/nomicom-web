@@ -26,6 +26,8 @@
 		"mitt": "^3.0.1",
 		"moment": "^2.30.1",
 		"postcss": "^8.4.47",
+		"postcss-load-config": "^6.0.1",
+		"postcss-nested": "^6.2.0",
 		"simple-icons": "^13.10.0",
 		"svelte-radix": "^1.1.1",
 		"tailwind-merge": "^2.5.2",

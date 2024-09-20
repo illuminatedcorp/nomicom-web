@@ -14,7 +14,7 @@
 
 		let storedState = localStorage.getItem('state');
 		if (state !== storedState) {
-			console.error('state mismatch');
+			// console.error('state mismatch');
 			goto(`${base}${WEB_ROUTES.login}`);
 		}
 
