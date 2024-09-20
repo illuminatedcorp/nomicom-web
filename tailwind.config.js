@@ -5,10 +5,11 @@ import { useColors } from './src/lib/models/useColors';
 const { generateBackgroundColors, generateColors } = useColors();
 
 const baseBackgroundColor = '#121212';
-const basePrimaryColor = '#981c20';
+const basePrimaryColor = '#960005';
 const baseSecondaryColor = '#E2DCD0';
-const overlayOpacity = 0.3;
-//981c20
+const primaryOverlayOpacity = 0.6;
+const secondaryOverlayOpacity = 0.3;
+// 981c20 = red
 /** @type {import('tailwindcss').Config} */
 const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -23,8 +24,8 @@ const config = {
 		colors: {
 			slate: colors.slate,
 			red: colors.red,
-			primary: generateColors(baseBackgroundColor, basePrimaryColor, overlayOpacity),
-			secondary: generateColors(baseBackgroundColor, baseSecondaryColor, overlayOpacity),
+			primary: generateColors(baseBackgroundColor, basePrimaryColor, primaryOverlayOpacity),
+			secondary: generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity),
 			background: generateBackgroundColors(baseBackgroundColor),
 			zinc: colors.zinc,
 			white: colors.white
@@ -37,14 +38,26 @@ const config = {
 				background: generateBackgroundColors(baseBackgroundColor),
 				foreground: 'hsl(var(--foreground) / <alpha-value>)',
 				primary: {
-					DEFAULT: generateColors(baseBackgroundColor, basePrimaryColor, overlayOpacity)[500],
-					foreground: generateColors(baseBackgroundColor, basePrimaryColor, overlayOpacity),
-					...generateColors(baseBackgroundColor, basePrimaryColor, overlayOpacity)
+					DEFAULT: generateColors(
+						baseBackgroundColor,
+						basePrimaryColor,
+						primaryOverlayOpacity
+					)[500],
+					foreground: generateColors(baseBackgroundColor, basePrimaryColor, primaryOverlayOpacity),
+					...generateColors(baseBackgroundColor, basePrimaryColor, primaryOverlayOpacity)
 				},
 				secondary: {
-					DEFAULT: generateColors(baseBackgroundColor, baseSecondaryColor, overlayOpacity)[500],
-					foreground: generateColors(baseBackgroundColor, baseSecondaryColor, overlayOpacity),
-					...generateColors(baseBackgroundColor, baseSecondaryColor, overlayOpacity)
+					DEFAULT: generateColors(
+						baseBackgroundColor,
+						baseSecondaryColor,
+						secondaryOverlayOpacity
+					)[500],
+					foreground: generateColors(
+						baseBackgroundColor,
+						baseSecondaryColor,
+						secondaryOverlayOpacity
+					),
+					...generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity)
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',

@@ -47,6 +47,10 @@
       0 0 20px #9b7f3c,
       0 0 20px #fff;
   }
+
+  * {
+    @apply transition-all duration-100 ease-in-out;
+  }
 }
 
 html {

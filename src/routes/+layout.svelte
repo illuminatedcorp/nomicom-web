@@ -6,6 +6,8 @@
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 
+	import * as Tooltip from '$lib/components/ui/tooltip';
+
 	import { styleStore, getMode } from '@/stores/styleStore';
 
 	import { sessionStore } from '$lib/stores/sessionStore';
@@ -36,8 +38,10 @@
 	{#if isAuthenticated}
 		<div class="grid grid-cols-[1fr,auto,1fr] items-center tracking-wider py-2">portal nav</div>
 	{:else}
-		<div class="grid grid-cols-[1fr,auto,1fr] relative items-center tracking-wider pt-5 pb-2">
-			<div class="flex justify-center gap-12">
+		<div
+			class="grid max-lg:grid-cols-[auto,auto] max-lg:gap-x-6 lg:grid-cols-[1fr,auto,1fr] relative items-center tracking-wider pt-5 pb-2"
+		>
+			<div class="flex justify-center max-lg:gap-6 lg:gap-12 max-lg:order-1 max-lg:justify-end">
 				<a
 					href="{base}{WEB_ROUTES.contact}"
 					class="nav-button text-lg font-bold hover:text-glow hover:!opacity-100"
@@ -53,49 +57,47 @@
 				</a>
 			</div>
 
-			<a
-				href="{base}/"
-				class="text-6xl bg-transparent hover:bg-transparent uppercase border-0 shadow-none hover:text-glow hover:bg-transparent hover:opacity-100"
-				style="font-family: Garamond, serif;"
-			>
-				<div class="logo-button">
+			<div class="flex flex-col items-center max-lg:col-span-2">
+				<a
+					href="{base}/"
+					class="flex text-6xl max-lg:w-3/4 max-lg:max-h-10 bg-transparent justify-center hover:bg-transparent uppercase border-0 shadow-none hover:text-glow hover:bg-transparent hover:opacity-100"
+					style="font-family: Garamond, serif;"
+				>
 					<img
 						src="{base}/images/Illuminated-Text.svg"
 						alt="Illuminated Logo"
-						class="text-logo h-10"
+						class="logo-button h-10"
 					/>
-				</div>
-			</a>
+				</a>
 
-			<div class="flex justify-center gap-12">
+				<div
+					class="corp-text lg:text-base max-lg:text-sm rounded-bl-xl rounded-br-xl px-4 text-background-300 tracking-widest"
+				>
+					An EVE Online Corporation - Goonswarm Federation
+				</div>
+			</div>
+
+			<div class="flex justify-center max-lg:gap-6 lg:gap-12 max-lg:order-2 max-lg:justify-start">
 				<a
 					href="{base}{WEB_ROUTES.join}"
 					class="nav-button text-lg font-bold hover:text-glow hover:!opacity-100"
 				>
 					Join Today
 				</a>
-				<a
+				<!-- <a
 					href="{base}{WEB_ROUTES.portal}"
 					class="nav-button text-lg font-bold hover:text-glow hover:!opacity-100"
 				>
 					Login
-				</a>
-				<!-- <Tooltip.Root openDelay={1}>
+				</a> -->
+				<Tooltip.Root openDelay={1}>
 					<Tooltip.Trigger>
-						<div>
-							<Button class="text-lg font-bold bg-transparent opacity-40">Login</Button>
-						</div>
+						<div class="nav-button text-lg font-bold hover:text-glow hover:!opacity-100">Login</div>
 					</Tooltip.Trigger>
 					<Tooltip.Content class="bg-background-800">
 						<div class="text-xl">In progress</div>
 					</Tooltip.Content>
-				</Tooltip.Root> -->
-			</div>
-
-			<div class="corp-text absolute flex justify-center w-full" style="top: 110%">
-				<div class="text-base rounded-bl-xl rounded-br-xl px-4 text-background-300 tracking-widest">
-					An EVE Online Corporation - Goonswarm Federation
-				</div>
+				</Tooltip.Root>
 			</div>
 		</div>
 	{/if}

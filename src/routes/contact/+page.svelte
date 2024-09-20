@@ -1,92 +1,83 @@
 <script lang="ts">
+	import { base } from '$app/paths';
+
 	import Button from '$lib/components/ui/button/button.svelte';
 </script>
 
 <div class="flex justify-center items-center gap-16 w-full h-full">
-	<div
-		class="flex flex-col justify-center bg-background-900 bg-opacity-80 border-2 border-background-900 rounded-md px-10 py-5 mx-24 mt-10"
-	>
-		<div class="text-3xl">Contact Us</div>
+	<div class="relative mx-3">
+		<div class="background-border"></div>
+		<div class="flex flex-col items-center justify-center relative z-10 p-10">
+			<div class="text-5xl">Who we are</div>
+			<div class="text-2xl text-center">We are the Resplendent Light in the Darkest of Space</div>
 
-		<div>Discord is the most effective way to contact corporation leadership.</div>
+			<div class="separator mt-3" />
 
-		<Button href="https://discord.gg/illuminated" target="_blank" class="text-xl py-5 px-8 mt-4">
-			Join Discord <i class="fab fa-discord ml-2" />
-		</Button>
+			<div class="mt-3">Discord is the best way of contacting us.</div>
 
-		<div class="grid grid-cols-4 bg-background-800 px-2 mt-5">
-			<div>Role</div>
-			<div>Name</div>
-			<div>Discord</div>
-			<div>EVE Character</div>
+			<Button href="https://discord.gg/illuminated" target="_blank" class="text-xl py-5 px-8 mt-4">
+				Join Discord <i class="fab fa-discord ml-2" />
+			</Button>
+
+			<div class="separator mt-3" />
+
+			<div class="text-3xl mt-3">Other Links</div>
+
+			<div class="flex gap-2">
+				<a
+					href="https://evemaps.dotlan.net/corp/Illuminated"
+					target="_blank"
+					class="underline hover:text-primary-200"
+				>
+					Dotlan
+				</a>
+				<a
+					href="https://evewho.com/corporation/98718341"
+					target="_blank"
+					class="underline hover:text-primary-200"
+				>
+					EveWho
+				</a>
+				<a
+					href="https://wiki.illuminatedcorp.com/"
+					target="_blank"
+					class="underline hover:text-primary-200"
+				>
+					Wiki
+				</a>
+			</div>
 		</div>
-
-		<div class="grid grid-cols-4 bg-primary-900 bg-opacity-50 px-2 py-1">
-			<div>CEO</div>
-			<div>Isomerc</div>
-			<div>isomerc</div>
-			<a
-				href="https://evewho.com/character/2035047876"
-				target="_blank"
-				class="underline hover:text-primary-200"
-			>
-				Isomerc
-			</a>
-		</div>
-
-		<div class="grid grid-cols-4 bg-primary-800 bg-opacity-50 px-2 py-1">
-			<div>HR</div>
-			<div>Fryke</div>
-			<div>fryke</div>
-			<a
-				href="https://evewho.com/character/1437193525"
-				target="_blank"
-				class="underline hover:text-primary-200"
-			>
-				Haigor
-			</a>
-		</div>
-
-		<div class="grid grid-cols-4 bg-primary-800 bg-opacity-50 px-2 py-1">
-			<div>Line Member+</div>
-			<div>Vantaanya</div>
-			<div>drivenmad</div>
-			<a
-				href="https://evewho.com/character/90248105"
-				target="_blank"
-				class="underline hover:text-primary-200"
-			>
-				Vantaanya
-			</a>
-		</div>
-
-		<div class="mt-3">If discord is not an option, you may send someone an in-game mail.</div>
-		<div>Though, do not expect a snappy response to a in-game mail.</div>
-
-		<div class="text-3xl mt-7">Other Links</div>
-
-		<a
-			href="https://evemaps.dotlan.net/corp/Illuminated"
-			target="_blank"
-			class="underline hover:text-primary-200"
-		>
-			Dotlan
-		</a>
-		<a
-			href="https://evewho.com/corporation/98718341"
-			target="_blank"
-			class="underline hover:text-primary-200"
-		>
-			EveWho
-		</a>
-		<a
-			href="https://wiki.illuminatedcorp.com/"
-			target="_blank"
-			class="underline hover:text-primary-200"
-		>
-			Wiki
-		</a>
 	</div>
-
-	<!-- <div>image or something</div> -->
 </div>
+
+<style>
+	.background-border {
+		position: absolute; /* Ensure the base element is positioned relative to the pseudo-element */
+		inset: 0;
+		z-index: 1; /* Ensure the base element and its border appear above the background */
+		border-width: 30px; /* Adjust the width to match the size of your border */
+		border-style: solid; /* A solid border to support the image */
+		border-image: url('/images/card_border.png') 40 round;
+		filter: brightness(2) sepia(1) hue-rotate(0deg) saturate(0.5);
+	}
+
+	.background-border::before {
+		content: '';
+		position: absolute;
+		inset: -16px; /* Optional: Adjust this value to control how far the background extends */
+		z-index: 0; /* Ensure the background is behind the border */
+		background: var(--color-background-800); /* Background color or image */
+		opacity: 0.5;
+		filter: brightness(0.2);
+	}
+
+	.separator {
+		width: 100%;
+		height: 10px;
+		background-image: url('/images/separator.png');
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		width: 100%;
+		filter: brightness(2) sepia(1) hue-rotate(0deg) saturate(0.5);
+	}
+</style>

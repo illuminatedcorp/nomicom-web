@@ -28,7 +28,9 @@
 	});
 </script>
 
-<div class="grid grid-cols-3 justify-center items-center gap-24 mx-24 h-full {currentMode}">
+<div
+	class="max-lg:flex max-lg:flex-col-reverse max-lg:justify-end max-lg:mt-12 lg:grid lg:grid-cols-3 lg:gap-12 lg:justify-center items-center lg:mx-12 lg:h-full {currentMode}"
+>
 	<button
 		on:mouseover={() => {
 			onSetSiteMode(SITE_MODES.dark);
@@ -43,13 +45,17 @@
 			onSetSiteMode(SITE_MODES.neutral);
 		}}
 		on:click={() => onDarkClick()}
-		class="dark-button text-center text-4xl border-0 outline-none shadow-0 bg-transparent hover:bg-transparent hover:text-background-600 mb-16"
+		class="dark-button text-center text-4xl border-0 outline-none shadow-0 bg-transparent hover:bg-transparent hover:text-background-600 lg:mb-16"
 	>
 		descend into darkness
 	</button>
 
-	<div class="flex justify-center mt-16 w-full">
-		<img src="{base}/images/Illuminated-Logo.svg" alt="Logo" class="logo-image w-full" />
+	<div class="flex justify-center lg:mt-16 my-10 w-full">
+		<img
+			src="{base}/images/Illuminated-Logo.svg"
+			alt="Logo"
+			class="logo-image max-lg:max-h-96 w-full"
+		/>
 	</div>
 
 	<button
@@ -66,7 +72,7 @@
 			onSetSiteMode(SITE_MODES.neutral);
 		}}
 		on:click={() => onLightClick()}
-		class="light-button text-center text-4xl border-0 outline-none bg-transparent hover:bg-transparent hover:text-background-50 mb-16"
+		class="light-button text-center text-4xl border-0 outline-none bg-transparent hover:bg-transparent hover:text-background-50 lg:mb-16"
 	>
 		come into the light
 	</button>
