@@ -8,12 +8,14 @@
 	<div class="relative mx-3">
 		<div class="background-border"></div>
 		<div class="flex flex-col items-center justify-center relative z-10 p-10">
-			<div class="text-5xl">Who we are</div>
-			<div class="text-2xl text-center">We are the Resplendent Light in the Darkest of Space</div>
+			<div class="text-5xl whitespace-nowrap">Who we are</div>
+			<div class="max-sm:text-lg sm:text-2xl text-center mt-2">
+				We are the Resplendent Light in the Darkest of Space
+			</div>
 
 			<div class="separator mt-3" />
 
-			<div class="mt-3">Discord is the best way of contacting us.</div>
+			<div class="mt-3 text-center">Discord is the best way of contacting us.</div>
 
 			<Button href="https://discord.gg/illuminated" target="_blank" class="text-xl py-5 px-8 mt-4">
 				Join Discord <i class="fab fa-discord ml-2" />

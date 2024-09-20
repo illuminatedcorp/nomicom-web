@@ -45,7 +45,7 @@
 			onSetSiteMode(SITE_MODES.neutral);
 		}}
 		on:click={() => onDarkClick()}
-		class="dark-button text-center text-4xl border-0 outline-none shadow-0 bg-transparent hover:bg-transparent hover:text-background-600 lg:mb-16"
+		class="dark-button text-center text-4xl border-0 outline-none shadow-0 bg-transparent hover:bg-transparent hover:text-background-600 lg:mb-16 xl:mb-28 whitespace-nowrap"
 	>
 		descend into darkness
 	</button>
@@ -72,7 +72,7 @@
 			onSetSiteMode(SITE_MODES.neutral);
 		}}
 		on:click={() => onLightClick()}
-		class="light-button text-center text-4xl border-0 outline-none bg-transparent hover:bg-transparent hover:text-background-50 lg:mb-16"
+		class="light-button text-center text-4xl border-0 outline-none bg-transparent hover:bg-transparent hover:text-background-50 lg:mb-16 xl:mb-28 whitespace-nowrap"
 	>
 		come into the light
 	</button>

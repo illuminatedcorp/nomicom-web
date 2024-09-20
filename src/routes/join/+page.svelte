@@ -2,13 +2,13 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 </script>
 
-<div class="flex justify-center items-center gap-16 w-full h-full">
+<div class="flex justify-center sm:items-center gap-16 w-full max-sm:h-fit sm:h-full">
 	<div class="relative mx-3">
 		<div class="background-border"></div>
-		<div class="flex flex-col items-center justify-center relative z-10 p-10">
-			<div class="max-lg:text-4xl lg:text-5xl text-center">Interested in joining?</div>
+		<div class="flex flex-col items-center justify-center relative z-10 max-sm:p-6 sm:p-6">
+			<div class="max-sm:text-2xl lg:text-5xl text-center">Interested in joining?</div>
 			<div
-				class="flex flex-col max-lg:gap-3 lg:gap-1 max-lg:text-xl lg:text-2xl text-center mt-5 px-2"
+				class="flex flex-col max-lg:gap-3 lg:gap-1 max-sm:text-base sm:text-2xl text-center mt-5"
 			>
 				<div>Illuminated is not only an EVE Online corporation, but also a community.</div>
 				<div>We use Discord as our primary communication platform.</div>
@@ -21,10 +21,8 @@
 
 			<div class="separator mt-3" />
 
-			<div class="text-center mt-5">
-				<div
-					class="flex flex-col max-lg:gap-3 lg:gap-1 max-lg:text-xl lg:text-2xl text-center mt-5 px-2"
-				>
+			<div class="text-center mt-3">
+				<div class="flex flex-col max-lg:gap-3 lg:gap-1 max-sm:text-base sm:text-2xl text-center">
 					<div>
 						Once in Discord, look for the <span
 							class="text-primary-50 font-bold bg-background-900 px-1 rounded-sm"
