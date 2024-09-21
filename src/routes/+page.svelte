@@ -3,23 +3,26 @@
 	import { base } from '$app/paths';
 
 	import { SITE_MODES, WEB_ROUTES } from '@/models/useConstants';
-	import { styleStore, getMode } from '@/stores/styleStore';
+	import { styleStore, getMode, setModes } from '@/stores/styleStore';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
 	const onSetSiteMode = (mode) => {
 		let currentSelectedMode = get(styleStore).selectedMode;
-		styleStore.set({ hoveredMode: mode, selectedMode: currentSelectedMode });
+		// styleStore.set({ hoveredMode: mode, selectedMode: currentSelectedMode });
+		setModes(mode, currentSelectedMode);
 	};
 
 	const onDarkClick = () => {
-		styleStore.set({ hoveredMode: get(styleStore).hoveredMode, selectedMode: SITE_MODES.dark });
+		setModes(get(styleStore).hoveredMode, SITE_MODES.dark);
+		// styleStore.set({ hoveredMode: get(styleStore).hoveredMode, selectedMode: SITE_MODES.dark });
 		// open in new tab
 		window.open('https://reddit.com/r/pandemichorde', '_blank');
 	};
 
 	const onLightClick = () => {
-		styleStore.set({ hoveredMode: get(styleStore).hoveredMode, selectedMode: SITE_MODES.light });
+		// styleStore.set({ hoveredMode: get(styleStore).hoveredMode, selectedMode: SITE_MODES.light });
+		setModes(get(styleStore).hoveredMode, SITE_MODES.light);
 		goto(base + WEB_ROUTES.join);
 	};
 
@@ -51,7 +54,13 @@
 		on:click={() => onDarkClick()}
 		class="dark-button text-center text-4xl border-0 outline-none shadow-0 bg-transparent hover:bg-transparent hover:text-background-600 lg:mb-16 xl:mb-28 whitespace-nowrap"
 	>
-		descend into darkness
+		{#if $styleStore.selectedMode === SITE_MODES.dark}
+			dwell in the dark
+		{:else if $styleStore.selectedMode === SITE_MODES.light}
+			fall from grace
+		{:else}
+			descend into darkness
+		{/if}
 	</button>
 
 	<div class="flex justify-center lg:mt-16 my-10 w-full">
@@ -78,7 +87,13 @@
 		on:click={() => onLightClick()}
 		class="light-button text-center text-4xl border-0 outline-none bg-transparent hover:bg-transparent hover:text-background-50 lg:mb-16 xl:mb-28 whitespace-nowrap"
 	>
-		come into the light
+		{#if $styleStore.selectedMode === SITE_MODES.dark}
+			seek redemption
+		{:else if $styleStore.selectedMode === SITE_MODES.light}
+			bask in brilliance
+		{:else}
+			ascend into light
+		{/if}
 	</button>
 </div>
 

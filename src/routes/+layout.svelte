@@ -8,8 +8,7 @@
 
 	import * as Tooltip from '$lib/components/ui/tooltip';
 
-	import { styleStore, getMode } from '@/stores/styleStore';
-
+	import { styleStore, getMode, initStore as initStyleStore } from '@/stores/styleStore';
 	import { sessionStore } from '$lib/stores/sessionStore';
 	import { WEB_ROUTES } from '@/models/useConstants';
 
@@ -18,8 +17,10 @@
 
 	let isAuthenticated = false;
 	let currentMode = get(styleStore).selectedMode;
+	let ready = false;
 
-	onMount(() => {
+	onMount(async () => {
+		await initStyleStore();
 		setupUserData();
 
 		sessionStore.subscribe(async (session) => {
@@ -29,6 +30,8 @@
 		styleStore.subscribe(() => {
 			currentMode = getMode();
 		});
+
+		ready = true;
 	});
 </script>
 
@@ -106,7 +109,9 @@
 		</div>
 	{/if}
 
-	<div class="flex-grow relative">
+	<div
+		class="flex-grow relative {ready ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300"
+	>
 		<slot />
 	</div>
 </div>

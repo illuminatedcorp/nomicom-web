@@ -1,7 +1,6 @@
 export const useUsers = () => {
 	const setup = async () => {
-		console.log('trying to setup user stuff');
-
+		// console.log('trying to setup user stuff');
 		// const user = await getUserDataByToken();
 		// return user;
 	};
