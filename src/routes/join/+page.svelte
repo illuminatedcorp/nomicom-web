@@ -15,7 +15,11 @@
 				<div>If you are interested in joining, Discord is your first step.</div>
 			</div>
 
-			<Button href="https://discord.gg/illuminated" target="_blank" class="text-xl py-5 px-8 mt-4">
+			<Button
+				href="https://discord.gg/illuminated"
+				target="_blank"
+				class="flex items-center text-xl py-5 px-8 mt-4"
+			>
 				Join Discord <i class="fab fa-discord ml-2" />
 			</Button>
 
@@ -33,13 +37,15 @@
 					<div>To join, you must follow the instructions on our Wiki page to the letter.</div>
 				</div>
 
-				<Button
-					href="https://wiki.illuminatedcorp.com/en/public/how-to-join"
-					target="_blank"
-					class="text-xl py-5 px-8 mt-4"
-				>
-					Illuminated Wiki
-				</Button>
+				<div class="flex justify-center">
+					<Button
+						href="https://wiki.illuminatedcorp.com/en/public/how-to-join"
+						target="_blank"
+						class="flex items-center text-xl py-5 px-8 mt-4"
+					>
+						Illuminated Wiki
+					</Button>
+				</div>
 			</div>
 		</div>
 	</div>

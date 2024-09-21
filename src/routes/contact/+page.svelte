@@ -17,7 +17,11 @@
 
 			<div class="mt-3 text-center">Discord is the best way of contacting us.</div>
 
-			<Button href="https://discord.gg/illuminated" target="_blank" class="text-xl py-5 px-8 mt-4">
+			<Button
+				href="https://discord.gg/illuminated"
+				target="_blank"
+				class="flex items-center text-xl py-5 px-8 mt-4"
+			>
 				Join Discord <i class="fab fa-discord ml-2" />
 			</Button>
 
