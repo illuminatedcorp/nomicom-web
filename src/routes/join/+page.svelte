@@ -16,8 +16,9 @@
 			</div>
 
 			<Button
-				href="https://discord.gg/illuminated"
-				target="_blank"
+				on:click={() => {
+					window.open('https://discord.gg/illuminated', '_blank');
+				}}
 				class="flex items-center text-xl py-5 px-8 mt-4"
 			>
 				Join Discord <i class="fab fa-discord ml-2" />
@@ -39,8 +40,9 @@
 
 				<div class="flex justify-center">
 					<Button
-						href="https://wiki.illuminatedcorp.com/en/public/how-to-join"
-						target="_blank"
+						on:click={() => {
+							window.open('https://wiki.illuminatedcorp.com/en/public/how-to-join', '_blank');
+						}}
 						class="flex items-center text-xl py-5 px-8 mt-4"
 					>
 						Illuminated Wiki
