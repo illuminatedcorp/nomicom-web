@@ -76,7 +76,7 @@
 				</a>
 
 				<div
-					class="corp-text absolute top-full max-md:-mt-2 lg:mt-1 md:text-base max-md:text-xs rounded-bl-xl rounded-br-xl text-background-300 tracking-widest whitespace-nowrap"
+					class="corp-text absolute top-full max-md:-mt-1 lg:mt-1 md:text-base max-md:text-xs rounded-bl-xl rounded-br-xl text-background-300 tracking-widest whitespace-nowrap"
 				>
 					An EVE Online Corporation - Goonswarm Federation
 				</div>

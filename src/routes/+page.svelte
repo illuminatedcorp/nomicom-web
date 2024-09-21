@@ -63,7 +63,12 @@
 		{/if}
 	</button>
 
-	<div class="flex justify-center lg:mt-16 my-10 w-full">
+	<div class="flex flex-col items-center justify-center relative lg:mt-16 my-10 w-full">
+		<div
+			class="absolute text-5xl lg:-top-14 max-lg:top-28 max-lg:text-2xl max-lg:mt-4 z-20 whitespace-nowrap"
+		>
+			Which way capsuleer?
+		</div>
 		<img
 			src="{base}/images/Illuminated-Logo.svg"
 			alt="Logo"
