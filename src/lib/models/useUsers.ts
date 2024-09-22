@@ -13,7 +13,10 @@ export const useUsers = () => {
 		const user = await apiCall(API_ROUTES.userData, {});
 
 		if (user) {
-			userStore.set(user);
+			userStore.set({
+				valid: true,
+				characters: user.characters
+			});
 		}
 	};
 
