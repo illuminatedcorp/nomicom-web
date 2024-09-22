@@ -41,7 +41,7 @@
 	<div class="background-picture"></div>
 
 	{#if isAuthenticated}
-		<div class="grid grid-cols-[1fr,auto,1fr] items-center tracking-wider py-2">portal nav</div>
+		<div class="grid grid-cols-[1fr,auto,1fr] items-center tracking-wider py-2">atrium nav</div>
 	{:else}
 		<div
 			class="grid max-lg:grid-cols-[auto,auto] max-lg:gap-x-4 lg:grid-cols-[1fr,auto,1fr] relative items-center justify-center tracking-wider pt-5 pb-2"
@@ -94,7 +94,7 @@
 					Join Today
 				</a>
 				<!-- <a
-					href="{base}{WEB_ROUTES.portal}"
+					href="{base}{WEB_ROUTES.atrium}"
 					class="nav-button text-lg font-bold hover:text-glow hover:!opacity-100"
 				>
 					Login

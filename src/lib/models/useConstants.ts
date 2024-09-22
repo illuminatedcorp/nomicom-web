@@ -18,10 +18,10 @@ export const WEB_ROUTES = {
 	home: '/',
 	join: '/join',
 	contact: '/contact',
-	portal: '/portal',
-	login: '/portal/login',
-	loginRedirect: '/portal/login/redirect',
-	buyback: '/portal/buyback'
+	atrium: '/atrium',
+	login: '/atrium/login',
+	loginRedirect: '/atrium/login/redirect',
+	buyback: '/atrium/buyback'
 };
 
 export const BUYBACK_STATES = {

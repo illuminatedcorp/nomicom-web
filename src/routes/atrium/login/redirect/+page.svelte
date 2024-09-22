@@ -22,7 +22,7 @@
 			let response = await apiCall(API_ROUTES.login, { auth_code: code });
 
 			if (response) {
-				goto(`${base}${WEB_ROUTES.portal}`);
+				goto(`${base}${WEB_ROUTES.atrium}`);
 			} else {
 				goto(`${base}${WEB_ROUTES.login}`);
 			}

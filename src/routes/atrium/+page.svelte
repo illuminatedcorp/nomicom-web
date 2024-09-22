@@ -22,4 +22,4 @@
 	});
 </script>
 
-<div>portal page</div>
+<div>atrium page</div>
