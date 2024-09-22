@@ -80,7 +80,8 @@ export const useApi = () => {
 		} catch (error) {
 			if (error.status === 401) {
 				// Unauthorized
-				goto(`${base}${WEB_ROUTES.login}`);
+				// goto(`${base}${WEB_ROUTES.login}`);
+				// what do we do here?
 			}
 			return null;
 		}
