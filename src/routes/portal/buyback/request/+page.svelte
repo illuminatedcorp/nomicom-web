@@ -4,7 +4,7 @@
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { Button } from '$lib/components/ui/button';
 
-	import { sessionStore } from '$lib/stores/sessionStore';
+	import { userStore } from '@/stores/userStore';
 
 	import { API_ROUTES, BUYBACK_STATES, WEB_ROUTES } from '$lib/models/useConstants';
 	import { useApi } from '$lib/models/useApi';

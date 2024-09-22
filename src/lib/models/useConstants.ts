@@ -2,6 +2,10 @@ export const API_ROUTES = {
 	login: {
 		method: 'POST',
 		route: '/characters'
+	},
+	userData: {
+		method: 'GET',
+		route: '/me'
 	}
 	// buybacksByUser: '/buybacksByUser',
 	// getSession: '/getSession',

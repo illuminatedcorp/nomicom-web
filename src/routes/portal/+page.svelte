@@ -4,15 +4,15 @@
 	import { base } from '$app/paths';
 
 	import { WEB_ROUTES } from '$lib/models/useConstants';
-	import { sessionStore } from '$lib/stores/sessionStore';
+	import { userStore } from '@/stores/userStore';
 
 	let isAuthenticated = false;
 
 	onMount(() => {
-		sessionStore.subscribe(async (session) => {
+		userStore.subscribe(async (session) => {
 			let data = await session;
 
-			if (data.isAuthenticated) {
+			if (data.characters.length > 0) {
 				isAuthenticated = true;
 			} else {
 				// send them to the login page

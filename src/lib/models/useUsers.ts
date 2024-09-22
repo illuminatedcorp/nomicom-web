@@ -1,8 +1,20 @@
+import { useApi } from './useApi';
+import { API_ROUTES } from './useConstants';
+const { apiCall } = useApi();
+
+import { userStore } from '@/stores/userStore';
+
 export const useUsers = () => {
 	const setup = async () => {
-		// console.log('trying to setup user stuff');
-		// const user = await getUserDataByToken();
-		// return user;
+		getUserData();
+	};
+
+	const getUserData = async () => {
+		const user = await apiCall(API_ROUTES.userData, {});
+
+		if (user) {
+			userStore.set(user);
+		}
 	};
 
 	// const getUserDataByToken = async (id) => {
@@ -22,7 +34,8 @@ export const useUsers = () => {
 	// };
 
 	return {
-		setup
+		setup,
+		getUserData
 		// getUserDataByToken
 	};
 };

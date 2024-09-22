@@ -9,7 +9,7 @@
 	import * as Tooltip from '$lib/components/ui/tooltip';
 
 	import { styleStore, getMode, initStore as initStyleStore } from '@/stores/styleStore';
-	import { sessionStore } from '$lib/stores/sessionStore';
+	import { userStore } from '@/stores/userStore';
 	import { WEB_ROUTES } from '@/models/useConstants';
 
 	import { useUsers } from '@/models/useUsers';
@@ -19,14 +19,16 @@
 	let currentMode = get(styleStore).selectedMode;
 	let ready = false;
 
+	let userData = get(userStore);
+
 	onMount(async () => {
 		await initStyleStore();
 		setupUserData();
 
-		sessionStore.subscribe(async (session) => {
-			let data = await session;
-			isAuthenticated = data.isAuthenticated;
+		userStore.subscribe(async (session) => {
+			userData = await session;
 		});
+
 		styleStore.subscribe(() => {
 			currentMode = getMode();
 		});

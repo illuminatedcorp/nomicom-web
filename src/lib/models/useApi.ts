@@ -11,7 +11,7 @@ export const useApi = () => {
 
 			if (apiRoute.method === 'GET') {
 				// for get data is sent via query params
-				response = await axios.get(import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute, {
+				response = await axios.get(import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route, {
 					params,
 					headers: {
 						'Content-Type': 'application/json'
@@ -19,17 +19,31 @@ export const useApi = () => {
 					withCredentials: true // Include cookies with the request
 				});
 			} else if (apiRoute.method === 'POST') {
-				// for a post we send the data via body
-				response = await axios.post(
-					import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute,
-					params,
-					{
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						withCredentials: true // Include cookies with the request
-					}
-				);
+				if (apiRoute.route === API_ROUTES.login.route) {
+					response = await axios.post(
+						import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route,
+						null,
+						{
+							params,
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							withCredentials: true // Include cookies with the request
+						}
+					);
+				} else {
+					// for a post we send the data via body
+					response = await axios.post(
+						import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route,
+						params,
+						{
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							withCredentials: true // Include cookies with the request
+						}
+					);
+				}
 			} else {
 				console.error('What on earth are you doing? Tried to make a', apiRoute.method, 'request??');
 			}
