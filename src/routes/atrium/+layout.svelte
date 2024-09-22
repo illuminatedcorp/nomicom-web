@@ -6,15 +6,11 @@
 	import { WEB_ROUTES } from '$lib/models/useConstants';
 	import { userStore } from '@/stores/userStore';
 
-	let isAuthenticated = false;
-
 	onMount(() => {
-		userStore.subscribe(async (session) => {
-			let data = await session;
+		userStore.subscribe(async (data) => {
+			let userData = await data;
 
-			if (data.characters.length > 0) {
-				isAuthenticated = true;
-			} else {
+			if (!userData.valid) {
 				// send them to the login page
 				goto(`${base}${WEB_ROUTES.login}`);
 			}

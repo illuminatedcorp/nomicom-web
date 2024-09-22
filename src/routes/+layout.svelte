@@ -10,21 +10,28 @@
 
 	import { initStore as initStyleStore } from '@/stores/styleStore';
 	import { userStore } from '@/stores/userStore';
+	import { styleStore, getMode } from '@/stores/styleStore';
 
 	import { useUsers } from '@/models/useUsers';
 	const { setup: setupUserData } = useUsers();
 
 	let ready = false;
 
+	let currentMode = get(styleStore).selectedMode;
+
 	onMount(async () => {
 		await initStyleStore();
 		setupUserData();
+
+		styleStore.subscribe(() => {
+			currentMode = getMode();
+		});
 
 		ready = true;
 	});
 </script>
 
-<div class="flex flex-col relative h-full">
+<div class="flex flex-col relative h-full {currentMode}">
 	<div class="background-picture {$userStore.valid ? 'hidden' : ''}"></div>
 
 	{#if $userStore.valid}
@@ -55,5 +62,23 @@
 		background-position: center;
 		filter: brightness(10%) contrast(100%) grayscale(100%);
 		transition: filter 0.3s;
+	}
+
+	.dark {
+		.background-picture {
+			filter: brightness(10%) grayscale(100%) opacity(0.1);
+		}
+	}
+
+	.light {
+		.background-picture {
+			filter: brightness(40%) grayscale(0%);
+		}
+	}
+
+	.neutral {
+		.background-picture {
+			filter: brightness(10%) grayscale(100%);
+		}
 	}
 </style>

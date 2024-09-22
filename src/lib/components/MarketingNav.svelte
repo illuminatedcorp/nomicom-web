@@ -3,8 +3,6 @@
 	import { get } from 'svelte/store';
 	import { onMount } from 'svelte';
 
-	import * as Tooltip from '$lib/components/ui/tooltip';
-
 	import { WEB_ROUTES } from '@/models/useConstants';
 	import { styleStore, getMode } from '@/stores/styleStore';
 
@@ -73,14 +71,6 @@
 		>
 			Login
 		</a>
-		<!-- <Tooltip.Root openDelay={1}>
-			<Tooltip.Trigger>
-				<div class="nav-button font-bold hover:text-glow hover:!opacity-100">Login</div>
-			</Tooltip.Trigger>
-			<Tooltip.Content class="bg-background-800">
-				<div class="text-xl">In progress</div>
-			</Tooltip.Content>
-		</Tooltip.Root> -->
 	</div>
 </div>
 
@@ -98,10 +88,6 @@
 			opacity: 0.4;
 		}
 
-		.background-picture {
-			filter: brightness(10%) grayscale(100%);
-		}
-
 		.logo-button {
 			filter: brightness(60%) grayscale(0%) opacity(1);
 		}
@@ -116,10 +102,6 @@
 			opacity: 1;
 		}
 
-		.background-picture {
-			filter: brightness(40%) grayscale(0%);
-		}
-
 		.logo-button {
 			filter: brightness(100%) grayscale(0%) opacity(1);
 		}
@@ -132,10 +114,6 @@
 	.dark {
 		.nav-button {
 			opacity: 0.1;
-		}
-
-		.background-picture {
-			filter: brightness(10%) grayscale(100%) opacity(0.1);
 		}
 
 		.logo-button {

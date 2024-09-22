@@ -79,9 +79,10 @@ export const useApi = () => {
 			}
 		} catch (error) {
 			if (error.status === 401) {
-				// Unauthorized
-				// goto(`${base}${WEB_ROUTES.login}`);
-				// what do we do here?
+				// we want to redirect to login if we get a 401 and are on a route that starts with /atrium
+				if (window.location.pathname.startsWith(WEB_ROUTES.atrium)) {
+					goto(`${base}${WEB_ROUTES.login}`);
+				}
 			}
 			return null;
 		}
