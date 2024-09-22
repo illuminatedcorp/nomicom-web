@@ -55,10 +55,10 @@
 	};
 
 	const onSubmitBuyback = async () => {
-		let sessionData = await get(sessionStore);
+		let userData = await get(userStore);
 
 		let response = await apiCall(API_ROUTES.saveBuyback, {
-			userId: sessionData.id,
+			userId: userData.id,
 			contractId: buybackId,
 			items: appraisalData,
 			total: getTotalPrice(),

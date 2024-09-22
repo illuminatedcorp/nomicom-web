@@ -36,17 +36,17 @@
 
 	let buybacks = [];
 	let allBuybacks = [];
-	let sessionData = get(sessionStore);
+	let sessionData = get(userStore);
 
 	onMount(async () => {
-		sessionStore.subscribe(async (session) => {
+		userStore.subscribe(async (session) => {
 			sessionData = await session;
 			updateBuybacks();
 		});
 	});
 
 	const updateBuybacks = async () => {
-		let data = await get(sessionStore);
+		let data = await get(userStore);
 		if (data.id) {
 			// buybacks = await apiCall(API_ROUTES.buybacksByUser, { id: data.id });
 		}
