@@ -84,7 +84,7 @@
 		<div class="flex flex-col">
 			<div class="flex items-center justify-between bg-background-900 px-2 mt-5 h-12">
 				<div class="text-xl">Your Buyback Requests</div>
-				<Button href="{base}/atrium/buyback/request">Request Buyback</Button>
+				<Button href="{base}/nomicon/buyback/request">Request Buyback</Button>
 			</div>
 
 			<div class="buyback-grid bg-primary-900">

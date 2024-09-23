@@ -6,6 +6,9 @@ import { API_ROUTES, WEB_ROUTES } from './useConstants';
 export const useApi = () => {
 	// so the idea here is that we simple forward all API requests, their route labels, and params to the sveltkit server
 	const apiCall = async (apiRoute, params) => {
+		// first up we need to get the api token from local storage
+		const token = await localStorage.getItem('api_token');
+
 		try {
 			let response;
 
@@ -14,7 +17,8 @@ export const useApi = () => {
 				response = await axios.get(import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route, {
 					params,
 					headers: {
-						'Content-Type': 'application/json'
+						'Content-Type': 'application/json',
+						Authorization: token ? `Bearer ${token}` : undefined
 					},
 					withCredentials: true // Include cookies with the request
 				});
@@ -26,7 +30,8 @@ export const useApi = () => {
 						{
 							params,
 							headers: {
-								'Content-Type': 'application/json'
+								'Content-Type': 'application/json',
+								Authorization: token ? `Bearer ${token}` : undefined
 							},
 							withCredentials: true // Include cookies with the request
 						}
@@ -38,7 +43,8 @@ export const useApi = () => {
 						params,
 						{
 							headers: {
-								'Content-Type': 'application/json'
+								'Content-Type': 'application/json',
+								Authorization: token ? `Bearer ${token}` : undefined
 							},
 							withCredentials: true // Include cookies with the request
 						}
@@ -47,27 +53,6 @@ export const useApi = () => {
 			} else {
 				console.error('What on earth are you doing? Tried to make a', apiRoute.method, 'request??');
 			}
-
-			// if (apiRoute === API_ROUTES.login) {
-			// 	response = await axios.post(import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute, null, {
-			// 		params,
-			// 		headers: {
-			// 			'Content-Type': 'application/json'
-			// 		},
-			// 		withCredentials: true // Include cookies with the request
-			// 	});
-			// } else {
-			// 	response = await axios.post(
-			// 		import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute,
-			// 		params,
-			// 		{
-			// 			headers: {
-			// 				'Content-Type': 'application/json'
-			// 			},
-			// 			withCredentials: true // Include cookies with the request
-			// 		}
-			// 	);
-			// }
 
 			const data = response.data;
 
@@ -79,10 +64,10 @@ export const useApi = () => {
 			}
 		} catch (error) {
 			if (error.status === 401) {
-				// we want to redirect to login if we get a 401 and are on a route that starts with /atrium
-				if (window.location.pathname.startsWith(WEB_ROUTES.atrium)) {
-					goto(`${base}${WEB_ROUTES.login}`);
-				}
+				// we want to redirect to login if we get a 401 and are on a route that starts with /nomicon
+				// if (window.location.pathname.startsWith(WEB_ROUTES.nomicon)) {
+				// 	goto(`${base}${WEB_ROUTES.login}`);
+				// }
 			}
 			return null;
 		}

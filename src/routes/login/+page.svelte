@@ -21,15 +21,51 @@
 	};
 </script>
 
-<div class="flex flex-col items-center justify-center h-full">
-	<div class="mt-10">
-		Please log in with an EVE Online character that is associated with your account.
-	</div>
+<div class="flex justify-center lg:items-center max-lg:mt-10 lg:h-full w-full h-fit">
+	<div class="relative mx-3">
+		<div class="background-border"></div>
 
-	<Button on:click={onLogin} class="mt-5 bg-transparent hover:bg-transparent">
-		<img
-			src="https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-white-large.png"
-			alt="EVE SSO Login"
-		/>
-	</Button>
+		<div class="flex flex-col text-center relative px-10 py-10 z-10">
+			<div>Please log in with an EVE Online character that is associated with your account.</div>
+
+			<Button on:click={onLogin} class="mt-5 bg-transparent hover:bg-transparent">
+				<img
+					src="https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-white-large.png"
+					alt="EVE SSO Login"
+				/>
+			</Button>
+		</div>
+	</div>
 </div>
+
+<style>
+	.background-border {
+		position: absolute; /* Ensure the base element is positioned relative to the pseudo-element */
+		inset: 0;
+		z-index: 1; /* Ensure the base element and its border appear above the background */
+		border-width: 30px; /* Adjust the width to match the size of your border */
+		border-style: solid; /* A solid border to support the image */
+		border-image: url('/images/card_border.png') 40 round;
+		filter: brightness(2) sepia(1) hue-rotate(0deg) saturate(0.5);
+	}
+
+	.background-border::before {
+		content: '';
+		position: absolute;
+		inset: -16px; /* Optional: Adjust this value to control how far the background extends */
+		z-index: 0; /* Ensure the background is behind the border */
+		background: var(--color-background-800); /* Background color or image */
+		opacity: 0.5;
+		filter: brightness(0.2);
+	}
+
+	.separator {
+		width: 100%;
+		height: 10px;
+		background-image: url('/images/separator.png');
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		width: 100%;
+		filter: brightness(2) sepia(1) hue-rotate(0deg) saturate(0.5);
+	}
+</style>

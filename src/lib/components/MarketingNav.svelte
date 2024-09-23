@@ -5,6 +5,7 @@
 
 	import { WEB_ROUTES } from '@/models/useConstants';
 	import { styleStore, getMode } from '@/stores/styleStore';
+	import { userStore } from '@/stores/userStore';
 
 	let currentMode = get(styleStore).selectedMode;
 
@@ -65,12 +66,22 @@
 		>
 			Join Today
 		</a>
-		<a
-			href="{base}{WEB_ROUTES.login}"
-			class="nav-button text-lg font-bold hover:text-glow hover:!opacity-100"
-		>
-			Login
-		</a>
+
+		{#if $userStore.valid}
+			<a
+				href="{base}{WEB_ROUTES.nomicon}"
+				class="nav-button font-bold hover:text-glow hover:!opacity-100"
+			>
+				Nomicon
+			</a>
+		{:else}
+			<a
+				href="{base}{WEB_ROUTES.login}"
+				class="nav-button font-bold hover:text-glow hover:!opacity-100"
+			>
+				Login
+			</a>
+		{/if}
 	</div>
 </div>
 

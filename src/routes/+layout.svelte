@@ -2,52 +2,86 @@
 	import '../app.css';
 	import '@fortawesome/fontawesome-free/css/all.min.css';
 
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { get } from 'svelte/store';
+	import { page } from '$app/stores';
 
 	import MarketingNav from '@/components/MarketingNav.svelte';
-	import AtriumNav from '@/components/AtriumNav.svelte';
+	import NomiconNav from '@/components/NomiconNav.svelte';
 
 	import { initStore as initStyleStore } from '@/stores/styleStore';
-	import { userStore } from '@/stores/userStore';
 	import { styleStore, getMode } from '@/stores/styleStore';
 
 	import { useUsers } from '@/models/useUsers';
+	import { WEB_ROUTES } from '@/models/useConstants';
+	import { userStore } from '@/stores/userStore';
 	const { setup: setupUserData } = useUsers();
 
-	let ready = false;
-
+	let loading = true;
+	let fadeInFlag = false;
 	let currentMode = get(styleStore).selectedMode;
+	let currentRoute = '';
 
 	onMount(async () => {
+		currentRoute = $page.route.id;
+
 		await initStyleStore();
-		setupUserData();
+		await setupUserData();
 
 		styleStore.subscribe(() => {
 			currentMode = getMode();
 		});
 
-		ready = true;
+		loading = false;
 	});
+
+	const fadeIn = async () => {
+		if (!loading && $userStore.initialized && currentRoute !== WEB_ROUTES.loginRedirect) {
+			setTimeout(() => {
+				fadeInFlag = true;
+			}, 400);
+		}
+	};
+
+	$: {
+		currentRoute = $page.route.id;
+		$userStore;
+
+		console.log(currentRoute);
+		console.log(!loading && $userStore.initialized && currentRoute !== WEB_ROUTES.loginRedirect);
+		fadeIn();
+	}
 </script>
 
-<div class="flex flex-col relative h-full {currentMode}">
-	<div class="background-picture {$userStore.valid ? 'hidden' : ''}"></div>
-
-	{#if $userStore.valid}
-		<AtriumNav />
-	{:else}
-		<MarketingNav />
-	{/if}
-
+{#if !loading && $userStore.initialized && currentRoute !== WEB_ROUTES.loginRedirect}
 	<div
-		class="flex-grow relative {$userStore.valid ? 'bg-background-900' : ''} {ready
+		class="flex flex-col relative h-full transition-opacity duration-300 {fadeInFlag
 			? 'opacity-100'
-			: 'opacity-0'} transition-opacity duration-300"
+			: 'opacity-0'} {currentMode}"
 	>
-		<slot />
+		<div
+			class="background-picture {currentRoute.startsWith(WEB_ROUTES.nomicon) ? 'hidden' : ''}"
+		></div>
+
+		{#if currentRoute.startsWith(WEB_ROUTES.nomicon)}
+			<NomiconNav />
+		{:else}
+			<MarketingNav />
+		{/if}
+
+		<div
+			class="flex-grow relative {currentRoute.startsWith(WEB_ROUTES.nomicon)
+				? 'bg-background-900'
+				: ''} "
+		>
+			<slot />
+		</div>
 	</div>
-</div>
+{/if}
+
+{#if currentRoute === WEB_ROUTES.loginRedirect}
+	<slot />
+{/if}
 
 <style lang="postcss">
 	.background-picture {

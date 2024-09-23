@@ -7,7 +7,7 @@
 	import { userStore } from '@/stores/userStore';
 </script>
 
-<div>atrium page</div>
+<!-- <div>nomicon page</div>
 <div>
 	what do we want here<br /><br />
 
@@ -21,4 +21,6 @@
 	nav at the top will have a link to this base page called Home or something<br />
 	illuminated in the center like marketing nav, but smaller? maybe that takes them back to the marketing
 	page?<br />
-</div>
+</div> -->
+
+<div class="flex justify-center items-center h-full">This page is under construction.</div>

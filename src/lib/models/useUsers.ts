@@ -11,30 +11,20 @@ export const useUsers = () => {
 
 	const getUserData = async () => {
 		const user = await apiCall(API_ROUTES.userData, {});
-
 		if (user) {
 			userStore.set({
 				valid: true,
+				initialized: true,
 				characters: user.characters
+			});
+		} else {
+			userStore.set({
+				valid: false,
+				initialized: true,
+				characters: []
 			});
 		}
 	};
-
-	// const getUserDataByToken = async (id) => {
-	// 	try {
-	// 		const response = await fetch(`/api/v1/users/${id}`);
-	// 		const data = await response.json();
-	// 		if (data.error) {
-	// 			console.error(data.error);
-	// 			return null;
-	// 		} else {
-	// 			return data;
-	// 		}
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 		return null;
-	// 	}
-	// };
 
 	return {
 		setup,

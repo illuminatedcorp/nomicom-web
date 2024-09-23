@@ -3,6 +3,9 @@
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 
+	import { useUsers } from '@/models/useUsers';
+	const { getUserData } = useUsers();
+
 	import { useApi } from '$lib/models/useApi.js';
 	import { API_ROUTES, WEB_ROUTES } from '$lib/models/useConstants';
 	const { apiCall } = useApi();
@@ -21,8 +24,13 @@
 		if (code && state) {
 			let response = await apiCall(API_ROUTES.login, { auth_code: code });
 
+			// we need to save the API token to local storage
+			await localStorage.setItem('api_token', response.api_token);
+
 			if (response) {
-				goto(`${base}${WEB_ROUTES.atrium}`);
+				// here we want to refetch the user data
+				await getUserData();
+				goto(`${base}${WEB_ROUTES.nomicon}`);
 			} else {
 				goto(`${base}${WEB_ROUTES.login}`);
 			}
@@ -33,4 +41,4 @@
 	});
 </script>
 
-<div class="px-2 py-1">Please wait...</div>
+<div></div>
