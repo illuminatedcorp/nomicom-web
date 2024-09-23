@@ -1,10 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
-
-	import { WEB_ROUTES } from '$lib/models/useConstants';
-	import { userStore } from '@/stores/userStore';
 </script>
 
 <!-- <div>nomicon page</div>

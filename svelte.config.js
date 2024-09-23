@@ -1,6 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
-import postcss from 'postcss';
 import { resolve } from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */

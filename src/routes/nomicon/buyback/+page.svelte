@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { base } from '$app/paths';
@@ -8,7 +8,7 @@
 	import * as Select from '$lib/components/ui/select';
 
 	import { userStore } from '@/stores/userStore';
-	import { API_ROUTES, BUYBACK_STATES } from '$lib/models/useConstants';
+	import { BUYBACK_STATES } from '$lib/models/useConstants';
 	// import { useApi } from '$lib/models/useApi';
 	// const { apiCall } = useApi();
 
@@ -46,15 +46,14 @@
 	});
 
 	const updateBuybacks = async () => {
-		let data = await get(userStore);
-		if (data.id) {
-			// buybacks = await apiCall(API_ROUTES.buybacksByUser, { id: data.id });
-		}
-
-		if (data.admin) {
-			// get admin metrics
-			// allBuybacks = await apiCall(API_ROUTES.allBuybacks);
-		}
+		// let data = await get(userStore);
+		// if (data.id) {
+		// 	// buybacks = await apiCall(API_ROUTES.buybacksByUser, { id: data.id });
+		// }
+		// if (data.admin) {
+		// 	// get admin metrics
+		// 	// allBuybacks = await apiCall(API_ROUTES.allBuybacks);
+		// }
 	};
 
 	const onCancel = (buyback) => async () => {
@@ -167,4 +166,4 @@
 		display: grid;
 		grid-template-columns: 110px 1fr 80px 100px 1fr 150px;
 	}
-</style>
+</style> -->

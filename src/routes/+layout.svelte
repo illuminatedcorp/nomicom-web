@@ -2,7 +2,7 @@
 	import '../app.css';
 	import '@fortawesome/fontawesome-free/css/all.min.css';
 
-	import { onMount, tick } from 'svelte';
+	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { page } from '$app/stores';
 

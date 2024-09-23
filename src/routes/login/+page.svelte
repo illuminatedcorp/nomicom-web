@@ -58,14 +58,4 @@
 		opacity: 0.5;
 		filter: brightness(0.2);
 	}
-
-	.separator {
-		width: 100%;
-		height: 10px;
-		background-image: url('/images/separator.png');
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
-		width: 100%;
-		filter: brightness(2) sepia(1) hue-rotate(0deg) saturate(0.5);
-	}
 </style>
