@@ -47,8 +47,6 @@
 		currentRoute = $page.route.id;
 		$userStore;
 
-		console.log(currentRoute);
-		console.log(!loading && $userStore.initialized && currentRoute !== WEB_ROUTES.loginRedirect);
 		fadeIn();
 	}
 </script>
