@@ -30,6 +30,9 @@
 			if (response) {
 				// here we want to refetch the user data
 				await getUserData();
+
+				// we may need to check local storage here eventually if the character management section is under a different route
+
 				goto(`${base}${WEB_ROUTES.nomicon}`);
 			} else {
 				goto(`${base}${WEB_ROUTES.login}`);

@@ -2,9 +2,9 @@
 	import { v4 as uuidv4 } from 'uuid';
 	import { base } from '$app/paths';
 
-	import Button from '@/components/ui/button/button.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
 
-	import { WEB_ROUTES } from '@/models/useConstants';
+	import { WEB_ROUTES } from '$lib/models/useConstants';
 
 	let redirectUri = encodeURIComponent(
 		import.meta.env.VITE_WEB_HOST + base + WEB_ROUTES.loginRedirect

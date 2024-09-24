@@ -20,6 +20,7 @@
 			<Button
 				href="https://discord.gg/illuminated"
 				target="_blank"
+				rel="noopener noreferrer"
 				class="flex items-center text-xl py-5 px-8 mt-4"
 			>
 				Join Discord <i class="fab fa-discord ml-2" />
@@ -33,6 +34,7 @@
 				<a
 					href="https://evemaps.dotlan.net/corp/Illuminated"
 					target="_blank"
+					rel="noopener noreferrer"
 					class="underline hover:text-primary-200"
 				>
 					Dotlan
@@ -40,6 +42,7 @@
 				<a
 					href="https://evewho.com/corporation/98718341"
 					target="_blank"
+					rel="noopener noreferrer"
 					class="underline hover:text-primary-200"
 				>
 					EveWho
@@ -47,6 +50,7 @@
 				<a
 					href="https://wiki.illuminatedcorp.com/"
 					target="_blank"
+					rel="noopener noreferrer"
 					class="underline hover:text-primary-200"
 				>
 					Wiki

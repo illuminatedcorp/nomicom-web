@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { base } from '$app/paths';
@@ -36,11 +36,11 @@
 
 	let buybacks = [];
 	let allBuybacks = [];
-	let sessionData = get(userStore);
+	let userData = get(userStore);
 
 	onMount(async () => {
-		userStore.subscribe(async (session) => {
-			sessionData = await session;
+		userStore.subscribe(async (data) => {
+			userData = await data;
 			updateBuybacks();
 		});
 	});
@@ -75,7 +75,7 @@
 	};
 </script>
 
-<div class="flex items-center flex-col px-2 py-1">
+<div class="flex flex-col p-3">
 	<div class="text-3xl">Buyback System</div>
 	<div>If you encounter a bug or issue with this system, open an admin ticket on Discord.</div>
 
@@ -114,7 +114,7 @@
 			{/each}
 		</div>
 
-		{#if sessionData.admin}
+		{#if userData.admin}
 			<div class="flex flex-col">
 				<div class="flex items-center justify-between bg-background-900 px-2 mt-5 h-12">
 					<div class="text-xl">Admin List (All Buyback Requests)</div>
@@ -166,4 +166,4 @@
 		display: grid;
 		grid-template-columns: 110px 1fr 80px 100px 1fr 150px;
 	}
-</style> -->
+</style>

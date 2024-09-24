@@ -7,6 +7,9 @@
 	import { styleStore, getMode } from '@/stores/styleStore';
 	import { userStore } from '@/stores/userStore';
 
+	import { useAuth } from '@/models/useAuth';
+	const { safeGoto } = useAuth();
+
 	let currentMode = get(styleStore).selectedMode;
 
 	onMount(async () => {
@@ -22,15 +25,16 @@
 	<div
 		class="flex justify-center max-sm:text-sm lg:text-lg max-lg:mt-5 items-center max-lg:gap-4 lg:gap-6 xl:gap-12 max-lg:order-1 max-lg:justify-end whitespace-nowrap"
 	>
-		<a
-			href="{base}{WEB_ROUTES.contact}"
+		<button
+			on:click={() => safeGoto(WEB_ROUTES.contact)}
 			class="nav-button font-bold hover:text-glow hover:!opacity-100"
 		>
 			Contact us
-		</a>
+		</button>
 		<a
 			href="https://zkillboard.com/corporation/98718341/"
 			target="_blank"
+			rel="noopener noreferrer"
 			class="nav-button font-bold hover:text-glow hover:!opacity-100"
 		>
 			Killboard
@@ -60,27 +64,27 @@
 	<div
 		class="flex justify-center max-sm:text-sm lg:text-lg max-lg:mt-5 max-lg:gap-4 xl:gap-12 lg:gap-6 max-lg:order-2 max-lg:justify-start whitespace-nowrap"
 	>
-		<a
-			href="{base}{WEB_ROUTES.join}"
+		<button
+			on:click={() => safeGoto(WEB_ROUTES.join)}
 			class="nav-button font-bold hover:text-glow hover:!opacity-100"
 		>
 			Join Today
-		</a>
+		</button>
 
 		{#if $userStore.valid}
-			<a
-				href="{base}{WEB_ROUTES.nomicon}"
+			<button
+				on:click={() => safeGoto(WEB_ROUTES.nomicon)}
 				class="nav-button font-bold hover:text-glow hover:!opacity-100"
 			>
 				Nomicon
-			</a>
+			</button>
 		{:else}
-			<a
-				href="{base}{WEB_ROUTES.login}"
+			<button
+				on:click={() => safeGoto(WEB_ROUTES.login)}
 				class="nav-button font-bold hover:text-glow hover:!opacity-100"
 			>
 				Login
-			</a>
+			</button>
 		{/if}
 	</div>
 </div>
