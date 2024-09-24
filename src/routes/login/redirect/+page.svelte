@@ -41,6 +41,9 @@
 				goto(`${base}${WEB_ROUTES.login}`);
 			}
 		} else {
+			// we clear the stored api token from local storage
+			localStorage.removeItem('api_token');
+
 			// if they don't have a code, we send them to the login route
 			goto(`${base}${WEB_ROUTES.login}`);
 		}
