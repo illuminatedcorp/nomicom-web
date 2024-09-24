@@ -38,6 +38,7 @@
 				<a
 					href="https://evewho.com/character/{mainCharacter.eve_id}"
 					target="_blank"
+					rel="noopener noreferrer"
 					class="border-2 border-background-200 hover:border-primary-50"
 				>
 					<img
@@ -49,6 +50,7 @@
 				<a
 					href="https://zkillboard.com/character/{mainCharacter.eve_id}/"
 					target="_blank"
+					rel="noopener noreferrer"
 					class="border-2 border-background-200 hover:border-primary-50"
 				>
 					<img src={`https://zkillboard.com/img/wreck.png`} alt="zkill icon" width="24" />

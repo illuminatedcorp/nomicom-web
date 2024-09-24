@@ -34,6 +34,7 @@
 		<a
 			href="https://zkillboard.com/corporation/98718341/"
 			target="_blank"
+			rel="noopener noreferrer"
 			class="nav-button font-bold hover:text-glow hover:!opacity-100"
 		>
 			Killboard

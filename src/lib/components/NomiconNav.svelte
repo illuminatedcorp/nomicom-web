@@ -50,6 +50,7 @@
 		<Button
 			href="https://zkillboard.com/corporation/98718341/"
 			target="_blank"
+			rel="noopener noreferrer"
 			variant="ghost"
 			class="nav-button text-base hover:bg-background-800 hover:text-background-50 px-2"
 		>
@@ -59,6 +60,7 @@
 		<Button
 			href="https://discord.gg/illuminated"
 			target="_blank"
+			rel="noopener noreferrer"
 			variant="ghost"
 			class="nav-button text-base hover:bg-background-800 hover:text-background-50 px-2"
 		>
