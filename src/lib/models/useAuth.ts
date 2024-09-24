@@ -8,7 +8,7 @@ import { API_ROUTES, WEB_ROUTES, ROUTE_PERMISSIONS } from '$lib/models/useConsta
 
 import { userStore } from '$lib/stores/userStore';
 import { useUsers } from '@/models/useUsers';
-const { getPermissionList } = useUsers();
+const { getUserData, getPermissionList } = useUsers();
 
 import { useApi } from '$lib/models/useApi';
 const { apiCall } = useApi();
@@ -25,19 +25,7 @@ export const useAuth = () => {
 
 			// if the user data is not initialized, we need to get it
 			if (!userData.initialized) {
-				let data = await apiCall(API_ROUTES.userData, {});
-
-				if (data !== null) {
-					userStore.set({
-						...data,
-						valid: true
-					});
-				} else {
-					userStore.set({
-						...userData,
-						valid: false
-					});
-				}
+				await getUserData();
 
 				userData = get(userStore);
 			}
@@ -49,11 +37,6 @@ export const useAuth = () => {
 			if (route === WEB_ROUTES.loginRedirect) {
 				return {};
 			}
-
-			userStore.set({
-				...userData,
-				initialized: true
-			});
 
 			// here is where we check their permissions to see if they can access the route
 			if (userData.valid) {
