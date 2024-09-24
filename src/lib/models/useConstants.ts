@@ -7,11 +7,6 @@ export const API_ROUTES = {
 		method: 'GET',
 		route: '/me'
 	}
-	// buybacksByUser: '/buybacksByUser',
-	// getSession: '/getSession',
-	// saveBuyback: '/saveBuyback',
-	// allBuybacks: '/allBuybacks',
-	// getAppraisal: '/getAppraisal'
 };
 
 export const WEB_ROUTES = {
@@ -21,7 +16,9 @@ export const WEB_ROUTES = {
 	nomicon: '/nomicon',
 	login: '/login',
 	loginRedirect: '/login/redirect',
-	buyback: '/nomicon/buyback'
+	buyback: '/nomicon/buyback',
+	wiki: '/nomicon/wiki',
+	admin: '/nomicon/admin'
 };
 
 export const BUYBACK_STATES = {
@@ -35,4 +32,11 @@ export const SITE_MODES = {
 	neutral: 'neutral',
 	dark: 'dark',
 	light: 'light'
+};
+
+export const ROUTE_PERMISSIONS = {
+	[WEB_ROUTES.nomicon]: [],
+	[WEB_ROUTES.buyback]: ['fuckifiknow'],
+	[WEB_ROUTES.wiki]: ['fuckifiknow'],
+	[WEB_ROUTES.admin]: ['admin']
 };

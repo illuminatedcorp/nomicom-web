@@ -8,6 +8,7 @@
 
 	import MarketingNav from '@/components/MarketingNav.svelte';
 	import NomiconNav from '@/components/NomiconNav.svelte';
+	import { Toaster } from '$lib/components/ui/sonner';
 
 	import { initStore as initStyleStore } from '@/stores/styleStore';
 	import { styleStore, getMode } from '@/stores/styleStore';
@@ -50,6 +51,12 @@
 		fadeIn();
 	}
 </script>
+
+<Toaster
+	toastOptions={{
+		class: 'nomicon-toast'
+	}}
+/>
 
 {#if !loading && $userStore.initialized && currentRoute !== WEB_ROUTES.loginRedirect}
 	<div

@@ -23,12 +23,13 @@ const config = {
 		},
 		colors: {
 			slate: colors.slate,
-			red: colors.red,
+			red: generateColors(baseBackgroundColor, '#FF0000', 0.2),
 			primary: generateColors(baseBackgroundColor, basePrimaryColor, primaryOverlayOpacity),
 			secondary: generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity),
 			background: generateBackgroundColors(baseBackgroundColor),
 			zinc: colors.zinc,
-			white: colors.white
+			white: colors.white,
+			black: colors.black
 		},
 		extend: {
 			colors: {
