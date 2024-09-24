@@ -37,6 +37,9 @@
 
 				goto(`${base}${WEB_ROUTES.nomicon}`);
 			} else {
+				// we clear the stored api token from local storage
+				localStorage.removeItem('api_token');
+
 				toast.error('There was an error logging in. Please try again.');
 				goto(`${base}${WEB_ROUTES.login}`);
 			}
