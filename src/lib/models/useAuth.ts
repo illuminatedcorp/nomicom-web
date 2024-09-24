@@ -63,7 +63,7 @@ export const useAuth = () => {
 				let userPermissions = getPermissionList(userData);
 
 				if (
-					permissions.length > 0 &&
+					permissions?.length > 0 &&
 					permissions.some((permission) => userPermissions.includes(permission))
 				) {
 					return {};
