@@ -3,6 +3,8 @@
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 
+	import { toast } from 'svelte-sonner';
+
 	import { useUsers } from '@/models/useUsers';
 	const { getUserData } = useUsers();
 
@@ -24,10 +26,10 @@
 		if (code && state) {
 			let response = await apiCall(API_ROUTES.login, { auth_code: code });
 
-			// we need to save the API token to local storage
-			await localStorage.setItem('api_token', response.api_token);
-
 			if (response) {
+				// we need to save the API token to local storage
+				await localStorage.setItem('api_token', response.api_token);
+
 				// here we want to refetch the user data
 				await getUserData();
 
@@ -35,6 +37,7 @@
 
 				goto(`${base}${WEB_ROUTES.nomicon}`);
 			} else {
+				toast.error('There was an error logging in. Please try again.');
 				goto(`${base}${WEB_ROUTES.login}`);
 			}
 		} else {
