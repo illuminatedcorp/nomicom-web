@@ -36,6 +36,15 @@
 				Buyback
 			</Button>
 		{/if}
+		{#if hasAccessToRoute(WEB_ROUTES.admin)}
+			<Button
+				on:click={() => safeGoto(WEB_ROUTES.admin)}
+				variant="ghost"
+				class="nav-button text-base hover:bg-background-800 hover:text-background-50"
+			>
+				Admin
+			</Button>
+		{/if}
 	</div>
 
 	<a href="/" class="flex items-center nav-button text-2xl">Illuminated</a>

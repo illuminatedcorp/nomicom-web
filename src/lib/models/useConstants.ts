@@ -6,6 +6,14 @@ export const API_ROUTES = {
 	userData: {
 		method: 'GET',
 		route: '/me'
+	},
+	roles: {
+		method: 'GET',
+		route: '/roles'
+	},
+	createRole: {
+		method: 'POST',
+		route: '/roles'
 	}
 };
 
@@ -18,7 +26,8 @@ export const WEB_ROUTES = {
 	loginRedirect: '/login/redirect',
 	buyback: '/nomicon/buyback',
 	wiki: '/nomicon/wiki',
-	admin: '/nomicon/admin'
+	admin: '/nomicon/admin',
+	adminRoles: '/nomicon/admin/roles'
 };
 
 export const BUYBACK_STATES = {
@@ -38,5 +47,6 @@ export const ROUTE_PERMISSIONS = {
 	[WEB_ROUTES.nomicon]: [],
 	[WEB_ROUTES.buyback]: ['fuckifiknow'],
 	[WEB_ROUTES.wiki]: ['fuckifiknow'],
-	[WEB_ROUTES.admin]: ['admin']
+	[WEB_ROUTES.admin]: ['admin'],
+	[WEB_ROUTES.adminRoles]: ['admin']
 };

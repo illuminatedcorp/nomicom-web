@@ -76,7 +76,7 @@
 
 		<div
 			class="flex-grow relative {currentRoute.startsWith(WEB_ROUTES.nomicon)
-				? 'bg-background-900'
+				? 'bg-gradient-to-br from-background-900 to-background-800'
 				: ''} "
 		>
 			<slot />
