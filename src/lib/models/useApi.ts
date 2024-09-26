@@ -50,6 +50,23 @@ export const useApi = () => {
 						}
 					);
 				}
+			} else if (apiRoute.method === 'PUT' || apiRoute.method === 'DELETE') {
+				// for a put we send the data via body
+				// but there is probably an ID we need to include in the route
+				let url = import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route;
+
+				// if there is an ID in the route we need to replace it with the ID from the params
+				if (apiRoute.route.includes(':id')) {
+					url = url.replace(':id', params.id);
+				}
+
+				response = await axios.put(url, params, {
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: token ? `Bearer ${token}` : undefined
+					},
+					withCredentials: true // Include cookies with the request
+				});
 			} else {
 				console.error('What on earth are you doing? Tried to make a', apiRoute.method, 'request??');
 			}

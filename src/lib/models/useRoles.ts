@@ -11,6 +11,7 @@ export const useRoles = () => {
 	const createRole = async () => {
 		let newRole = {
 			name: 'New Role',
+			description: 'New Role Description',
 			permissions: []
 		};
 
@@ -19,13 +20,25 @@ export const useRoles = () => {
 	};
 
 	const updateRole = async (role) => {
-		// let response = await apiCall(API_ROUTES.roles, role);
-		// return response.data;
+		let response = await apiCall(API_ROUTES.updateRole, role);
+		return response.data;
+	};
+
+	const deleteRole = async (role) => {
+		let response = await apiCall(API_ROUTES.deleteRole, role);
+		return response.data;
+	};
+
+	const getAllPermissions = async () => {
+		let response = await apiCall(API_ROUTES.permissions, {});
+		return response.permissions;
 	};
 
 	return {
 		getAllRoles,
 		createRole,
-		updateRole
+		updateRole,
+		deleteRole,
+		getAllPermissions
 	};
 };

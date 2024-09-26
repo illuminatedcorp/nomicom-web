@@ -14,6 +14,18 @@ export const API_ROUTES = {
 	createRole: {
 		method: 'POST',
 		route: '/roles'
+	},
+	updateRole: {
+		method: 'PUT',
+		route: '/roles/:id'
+	},
+	deleteRole: {
+		method: 'DELETE',
+		route: '/roles/:id'
+	},
+	permissions: {
+		method: 'GET',
+		route: '/permissions'
 	}
 };
 

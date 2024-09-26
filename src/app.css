@@ -86,3 +86,28 @@ body {
   color: var(--color-background-50);
   border-color: var(--color-background-700);
 }
+
+.nomicon-toast[data-type='success'] {
+  background-color: var(--color-green-900);
+  color: var(--color-background-50);
+  border-color: var(--color-background-700);
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-200);
+  border-radius: 10px;
+}

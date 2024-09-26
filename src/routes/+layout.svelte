@@ -75,7 +75,7 @@
 		{/if}
 
 		<div
-			class="flex-grow relative {currentRoute.startsWith(WEB_ROUTES.nomicon)
+			class="flex-grow relative overflow-hidden {currentRoute.startsWith(WEB_ROUTES.nomicon)
 				? 'bg-gradient-to-br from-background-900 to-background-800'
 				: ''} "
 		>

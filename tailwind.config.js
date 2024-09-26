@@ -29,7 +29,8 @@ const config = {
 			background: generateBackgroundColors(baseBackgroundColor),
 			zinc: colors.zinc,
 			white: colors.white,
-			black: colors.black
+			black: colors.black,
+			green: colors.green
 		},
 		extend: {
 			colors: {
