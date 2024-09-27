@@ -12,7 +12,7 @@ export const useRoles = () => {
 		let newRole = {
 			name: 'New Role',
 			description: 'New Role Description',
-			permissions: []
+			permissions: ['testing']
 		};
 
 		let response = await apiCall(API_ROUTES.createRole, newRole);
