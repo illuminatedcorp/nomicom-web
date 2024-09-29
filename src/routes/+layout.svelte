@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import '@fortawesome/fontawesome-free/css/all.min.css';
+	import 'swagger-ui/dist/swagger-ui.css';
 
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
@@ -22,6 +23,8 @@
 	let fadeInFlag = false;
 	let currentMode = get(styleStore).selectedMode;
 	let currentRoute = '';
+
+	let standaloneRoutes = [WEB_ROUTES.loginRedirect, WEB_ROUTES.api];
 
 	onMount(async () => {
 		currentRoute = $page.route.id;
@@ -58,7 +61,7 @@
 	}}
 />
 
-{#if !loading && $userStore.initialized && currentRoute !== WEB_ROUTES.loginRedirect}
+{#if !loading && $userStore.initialized && !standaloneRoutes.includes(currentRoute)}
 	<div
 		class="flex flex-col relative h-full transition-opacity duration-300 {fadeInFlag
 			? 'opacity-100'
@@ -84,7 +87,7 @@
 	</div>
 {/if}
 
-{#if currentRoute === WEB_ROUTES.loginRedirect}
+{#if standaloneRoutes.includes(currentRoute)}
 	<slot />
 {/if}
 

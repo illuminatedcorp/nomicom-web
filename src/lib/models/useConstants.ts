@@ -46,7 +46,8 @@ export const WEB_ROUTES = {
 	loginRedirect: '/login/redirect',
 	buyback: '/nomicon/buyback',
 	wiki: '/nomicon/wiki',
-	admin: '/nomicon/admin'
+	admin: '/nomicon/admin',
+	api: '/api'
 };
 
 export const BUYBACK_STATES = {

@@ -33,6 +33,7 @@
 		"svelte-preprocess": "^6.0.2",
 		"svelte-radix": "^1.1.1",
 		"svelte-sonner": "^0.3.28",
+		"swagger-ui": "^5.17.14",
 		"tailwind-merge": "^2.5.2",
 		"tailwind-variants": "^0.2.1",
 		"tailwindcss": "^3.4.10",

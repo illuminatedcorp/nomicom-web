@@ -17,7 +17,7 @@
 		>
 			Home
 		</Button>
-		{#if hasAccessToRoute(WEB_ROUTES.wiki)}
+		<!-- {#if hasAccessToRoute(WEB_ROUTES.wiki)}
 			<Button
 				on:click={() => safeGoto(WEB_ROUTES.wiki)}
 				variant="ghost"
@@ -26,7 +26,7 @@
 			>
 				Wiki
 			</Button>
-		{/if}
+		{/if} -->
 		{#if hasAccessToRoute(WEB_ROUTES.buyback)}
 			<Button
 				on:click={() => safeGoto(WEB_ROUTES.buyback)}
@@ -55,6 +55,16 @@
 		>
 			Search bar TODO
 		</div> -->
+
+		{#if hasAccessToRoute(WEB_ROUTES.api)}
+			<Button
+				on:click={() => safeGoto(WEB_ROUTES.api)}
+				variant="ghost"
+				class="nav-button text-base hover:bg-background-800 hover:text-background-50 px-2"
+			>
+				API
+			</Button>
+		{/if}
 
 		<Button
 			href="https://zkillboard.com/corporation/98718341/"
