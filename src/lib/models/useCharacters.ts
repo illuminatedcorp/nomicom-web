@@ -10,9 +10,7 @@ import { userStore } from '@/stores/userStore';
 // const { getCharacterPublicData } = useEsi();
 
 export const useCharacters = () => {
-	const getMainCharacter = () => {
-		let user = get(userStore);
-
+	const getMainCharacter = (user) => {
 		let mainCharacter = user.characters.find((character) => {
 			return character.main;
 		});
