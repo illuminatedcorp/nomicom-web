@@ -9,7 +9,7 @@
 	import { onMount } from 'svelte';
 	const { getMainCharacter, redirectToAddCharacter } = useCharacters();
 
-	let mainCharacter = null;
+	let mainCharacter = getMainCharacter(get(userStore));
 
 	onMount(() => {
 		userStore.subscribe(() => {
