@@ -64,7 +64,7 @@ export const SITE_MODES = {
 
 export const ROUTE_PERMISSIONS = {
 	[WEB_ROUTES.nomicon]: [],
-	[WEB_ROUTES.buyback]: ['fuckifiknow'],
+	[WEB_ROUTES.buyback]: ['index_buyback_items'],
 	[WEB_ROUTES.wiki]: ['fuckifiknow'],
 	[WEB_ROUTES.admin]: ['admin']
 };

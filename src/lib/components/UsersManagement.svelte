@@ -110,7 +110,7 @@
 										<div class="flex items-center gap-2 py-1 px-2 border-b-2 border-background-800">
 											<input
 												type="checkbox"
-												disabled={role.name === 'Admin'}
+												disabled={role.name.toLowerCase() === 'admin'}
 												checked={hasRole(role)}
 												on:change={() => onChangeRoles(role)}
 											/>
