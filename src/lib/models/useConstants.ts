@@ -46,8 +46,7 @@ export const WEB_ROUTES = {
 	loginRedirect: '/login/redirect',
 	buyback: '/nomicon/buyback',
 	wiki: '/nomicon/wiki',
-	admin: '/nomicon/admin',
-	adminRoles: '/nomicon/admin/roles'
+	admin: '/nomicon/admin'
 };
 
 export const BUYBACK_STATES = {
@@ -67,6 +66,5 @@ export const ROUTE_PERMISSIONS = {
 	[WEB_ROUTES.nomicon]: [],
 	[WEB_ROUTES.buyback]: ['fuckifiknow'],
 	[WEB_ROUTES.wiki]: ['fuckifiknow'],
-	[WEB_ROUTES.admin]: ['admin'],
-	[WEB_ROUTES.adminRoles]: ['admin']
+	[WEB_ROUTES.admin]: ['admin']
 };
