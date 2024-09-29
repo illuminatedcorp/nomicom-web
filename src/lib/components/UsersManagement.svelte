@@ -90,35 +90,37 @@
 
 					<div class="text-base text-background-300">User ID: {selectedUser.id}</div>
 
-					<div class="flex gap-2 flex-wrap w-full mt-3">
-						<div class="flex flex-col flex-grow bg-background-800">
-							<div class="bg-black px-2">Characters</div>
-							<div class="overflow-y-auto">
-								{#each selectedUser.characters as character}
-									<div class="py-1 px-2 border-b-2 border-background-800">
-										{character.name} ({character.eve_id})
-									</div>
-								{/each}
+					{#key selectedUser.id}
+						<div class="flex gap-2 flex-wrap w-full mt-3">
+							<div class="flex flex-col flex-grow bg-background-800">
+								<div class="bg-black px-2">Characters</div>
+								<div class="overflow-y-auto">
+									{#each selectedUser.characters as character}
+										<div class="py-1 px-2 border-b-2 border-background-800">
+											{character.name} ({character.eve_id})
+										</div>
+									{/each}
+								</div>
 							</div>
-						</div>
 
-						<div class="flex flex-col flex-grow bg-background-800">
-							<div class="bg-black px-2">Roles</div>
-							<div class="overflow-y-auto">
-								{#each allRoles as role}
-									<div class="flex items-center gap-2 py-1 px-2 border-b-2 border-background-800">
-										<input
-											type="checkbox"
-											disabled={role.name === 'Admin'}
-											checked={hasRole(role)}
-											on:change={() => onChangeRoles(role)}
-										/>
-										<div>{role.name}</div>
-									</div>
-								{/each}
+							<div class="flex flex-col flex-grow bg-background-800">
+								<div class="bg-black px-2">Roles</div>
+								<div class="overflow-y-auto">
+									{#each allRoles as role}
+										<div class="flex items-center gap-2 py-1 px-2 border-b-2 border-background-800">
+											<input
+												type="checkbox"
+												disabled={role.name === 'Admin'}
+												checked={hasRole(role)}
+												on:change={() => onChangeRoles(role)}
+											/>
+											<div>{role.name}</div>
+										</div>
+									{/each}
+								</div>
 							</div>
 						</div>
-					</div>
+					{/key}
 				</div>
 			{:else}
 				<div class="px-2 py-3">Select a role to view and select its permissions.</div>
