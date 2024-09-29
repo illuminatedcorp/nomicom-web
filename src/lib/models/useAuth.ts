@@ -45,6 +45,11 @@ export const useAuth = () => {
 
 				let userPermissions = getPermissionList(userData);
 
+				// if they are an admin, they can go anywhere
+				if (userPermissions.includes('admin')) {
+					return {};
+				}
+
 				if (
 					permissions?.length > 0 &&
 					permissions.some((permission) => userPermissions.includes(permission))
@@ -109,6 +114,11 @@ export const useAuth = () => {
 
 			// get the array of actual permissions we need to check
 			let userPermissions = getPermissionList(userData);
+
+			// if they are an admin, they can go anywhere
+			if (userPermissions.includes('admin')) {
+				return true;
+			}
 
 			// if there are permissions to check on the route, we see if the user has them
 			if (permissions.length > 0) {
