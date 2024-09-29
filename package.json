@@ -19,7 +19,7 @@
 		"@types/node": "^22.5.5",
 		"autoprefixer": "^10.4.20",
 		"axios": "^1.7.5",
-		"bits-ui": "^0.21.13",
+		"bits-ui": "^0.21.15",
 		"dotenv": "^16.4.5",
 		"jsonwebtoken": "^9.0.2",
 		"lodash": "^4.17.21",

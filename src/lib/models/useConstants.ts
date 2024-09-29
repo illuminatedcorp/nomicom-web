@@ -3,9 +3,17 @@ export const API_ROUTES = {
 		method: 'POST',
 		route: '/characters'
 	},
+	users: {
+		method: 'GET',
+		route: '/users'
+	},
 	userData: {
 		method: 'GET',
 		route: '/me'
+	},
+	updateUserRoles: {
+		method: 'PUT',
+		route: '/users/:id'
 	},
 	roles: {
 		method: 'GET',

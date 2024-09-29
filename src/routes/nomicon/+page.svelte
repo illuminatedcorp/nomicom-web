@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { get } from 'svelte/store';
+
 	import Button from '$lib/components/ui/button/button.svelte';
 
 	import { userStore } from '@/stores/userStore';
@@ -7,11 +9,12 @@
 	import { onMount } from 'svelte';
 	const { getMainCharacter, redirectToAddCharacter } = useCharacters();
 
-	let mainCharacter = getMainCharacter();
+	let mainCharacter = null;
 
 	onMount(() => {
 		userStore.subscribe(() => {
-			mainCharacter = getMainCharacter();
+			let user = get(userStore);
+			mainCharacter = getMainCharacter(user);
 		});
 	});
 

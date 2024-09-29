@@ -1,16 +1,40 @@
 <script lang="ts">
-	import Button from '@/components/ui/button/button.svelte';
+	import * as Tabs from '$lib/components/ui/tabs/index.js';
+	import RolesManagement from '@/components/RolesManagement.svelte';
+	import UsersManagement from '@/components/UsersManagement.svelte';
 
-	import { WEB_ROUTES } from '@/models/useConstants';
+	let userManagement;
+	let roleManagement;
 
-	import { useAuth } from '@/models/useAuth';
-	const { safeGoto } = useAuth();
+	const onTabChange = () => {
+		userManagement.update();
+		roleManagement.update();
+	};
 </script>
 
-<div class="flex flex-col p-3">
-	<div class="text-3xl">Admin Dashboard</div>
-
-	<div class="mt-3">
-		<Button on:click={() => safeGoto(WEB_ROUTES.adminRoles)}>Role Management</Button>
-	</div>
+<div class="flex pb-3 px-3 h-full overflow-hidden">
+	<Tabs.Root value="users" class="flex flex-col w-full h-full" onValueChange={onTabChange}>
+		<Tabs.List
+			class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none py-2"
+		>
+			<Tabs.Trigger
+				value="users"
+				class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50"
+			>
+				Users
+			</Tabs.Trigger>
+			<Tabs.Trigger
+				value="roles"
+				class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50"
+			>
+				Roles
+			</Tabs.Trigger>
+		</Tabs.List>
+		<Tabs.Content value="users" class="overflow-hidden flex-grow">
+			<UsersManagement bind:this={userManagement} />
+		</Tabs.Content>
+		<Tabs.Content value="roles" class="overflow-hidden flex-grow">
+			<RolesManagement bind:this={roleManagement} />
+		</Tabs.Content>
+	</Tabs.Root>
 </div>

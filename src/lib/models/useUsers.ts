@@ -51,9 +51,29 @@ export const useUsers = () => {
 		return permissions;
 	};
 
+	const getAllUsers = async () => {
+		let response = await apiCall(API_ROUTES.users, {});
+		return response.users;
+	};
+
+	const updateUserRoles = async (userData) => {
+		let newRoles = userData.roles.map((role) => {
+			return role.id;
+		});
+
+		let response = await apiCall(API_ROUTES.updateUserRoles, {
+			id: userData.id,
+			roles: newRoles
+		});
+
+		return response;
+	};
+
 	return {
 		setup,
 		getUserData,
-		getPermissionList
+		getPermissionList,
+		getAllUsers,
+		updateUserRoles
 	};
 };
