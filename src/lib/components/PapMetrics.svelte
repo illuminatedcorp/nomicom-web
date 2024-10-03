@@ -347,7 +347,7 @@
 	<div class="flex flex-col gap-3 w-full h-full">
 		<div class="flex flex-wrap gap-3 items-center justify-center border-b-2 border-black pb-3">
 			<div
-				class="flex items-center bg-green-900 border-4 border-black lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2"
+				class="flex items-center bg-slate-800 border-4 border-black lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2"
 			>
 				<div class="text-4xl mr-4 ml-1">{getTotalStrategicForMonth()}</div>
 				<div class="lg:text-xl max-lg:text-lg text-left">Strategic PAPs<br />this month</div>
