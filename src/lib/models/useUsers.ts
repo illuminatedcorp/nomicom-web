@@ -40,7 +40,7 @@ export const useUsers = () => {
 	const getPermissionList = (userData) => {
 		let permissions = [];
 
-		if (userData.roles === undefined) {
+		if (userData.roles === undefined || userData.roles.length === 0) {
 			return permissions;
 		}
 
