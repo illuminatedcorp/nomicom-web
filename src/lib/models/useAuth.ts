@@ -45,6 +45,10 @@ export const useAuth = () => {
 
 				let userPermissions = getPermissionList(userData);
 
+				if (!userPermissions) {
+					console.log('No permissions found for user in onLoad', userPermissions);
+				}
+
 				// if they are an admin, they can go anywhere
 				if (userPermissions.includes('admin')) {
 					return {};
@@ -114,6 +118,10 @@ export const useAuth = () => {
 
 			// get the array of actual permissions we need to check
 			let userPermissions = getPermissionList(userData);
+
+			if (!userPermissions) {
+				console.log('No permissions found for user in hasAccessToRoute', userPermissions);
+			}
 
 			// if they are an admin, they can go anywhere
 			if (userPermissions.includes('admin')) {
