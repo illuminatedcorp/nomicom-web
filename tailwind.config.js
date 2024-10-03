@@ -30,7 +30,8 @@ const config = {
 			zinc: colors.zinc,
 			white: colors.white,
 			black: colors.black,
-			green: colors.green
+			green: colors.green,
+			orange: colors.orange
 		},
 		extend: {
 			colors: {

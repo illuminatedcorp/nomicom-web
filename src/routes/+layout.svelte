@@ -14,9 +14,9 @@
 	import { initStore as initStyleStore } from '@/stores/styleStore';
 	import { styleStore, getMode } from '@/stores/styleStore';
 
-	import { useUsers } from '@/models/useUsers';
 	import { WEB_ROUTES } from '@/models/useConstants';
 	import { userStore } from '@/stores/userStore';
+	import { useUsers } from '@/models/useUsers';
 	const { setup: setupUserData } = useUsers();
 
 	let loading = true;

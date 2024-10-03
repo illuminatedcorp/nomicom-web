@@ -13,9 +13,12 @@
 		<Button
 			href="{base}{WEB_ROUTES.nomicon}"
 			variant="ghost"
-			class="nav-button text-base hover:bg-background-800 hover:text-background-50"
+			class="nav-button text-base hover:bg-background-800 hover:text-background-50 max-md:px-2"
 		>
-			Home
+			<div class="md:hidden">
+				<i class="fas fa-home" />
+			</div>
+			<span class="max-md:hidden">Home</span>
 		</Button>
 		<!-- {#if hasAccessToRoute(WEB_ROUTES.wiki)}
 			<Button
@@ -31,19 +34,25 @@
 			<Button
 				on:click={() => safeGoto(WEB_ROUTES.buyback)}
 				variant="ghost"
-				class="nav-button text-base hover:bg-background-800 hover:text-background-50"
+				class="nav-button text-base hover:bg-background-800 hover:text-background-50 max-md:px-2"
 			>
-				Buyback
+				<div class="md:hidden">
+					<i class="fas fa-coins" />
+				</div>
+				<span class="max-md:hidden">Buyback</span>
 			</Button>
 		{/if}
 		{#if hasAccessToRoute(WEB_ROUTES.admin)}
 			<Button
 				on:click={() => safeGoto(WEB_ROUTES.admin)}
 				variant="ghost"
-				class="nav-button text-base hover:bg-background-800 hover:text-background-50"
+				class="nav-button text-base hover:bg-background-800 hover:text-background-50 max-md:px-2"
 			>
-				Admin
-			</Button>
+				<div class="md:hidden">
+					<i class="fas fa-cogs" />
+				</div>
+				<span class="max-md:hidden">Admin</span></Button
+			>
 		{/if}
 	</div>
 
