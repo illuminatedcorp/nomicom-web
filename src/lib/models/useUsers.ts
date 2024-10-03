@@ -40,6 +40,10 @@ export const useUsers = () => {
 	const getPermissionList = (userData) => {
 		let permissions = [];
 
+		if (userData.roles === undefined) {
+			return permissions;
+		}
+
 		userData.roles.forEach((role) => {
 			role.permissions.forEach((permission) => {
 				if (!permissions.includes(permission)) {
