@@ -30,19 +30,16 @@
 </script>
 
 {#if mainCharacter}
-	<div class="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-2 h-full max-lg:overflow-y-auto">
-		<div
-			class="flex flex-col max-lg:border-b-2 max-lg:h-fit lg:border-r-2 border-black lg:h-full p-3"
-		>
-			<div class="flex items-center gap-1 bg-background-800 border-2 border-black">
+	<div class="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-2 h-full overflow-y-auto">
+		<div class="flex flex-col max-lg:border-b-2 max-lg:h-fit background-gradient lg:h-full p-3">
+			<div class="flex items-center gap-1 bg-background-900">
 				<img
 					src="https://images.evetech.net/characters/{mainCharacter.eve_id}/portrait"
 					alt="portrait"
 					width="100"
-					class="border-2 border-r-4 border-black"
 				/>
 
-				<div class="flex flex-col justify-start gap-2 mt-1 h-full">
+				<div class="flex flex-col justify-start gap-2 mt-1 h-full ml-1">
 					<a
 						href="https://evewho.com/character/{mainCharacter.eve_id}"
 						target="_blank"
@@ -84,17 +81,77 @@
 			</div>
 
 			{#each $userStore.characters as character}
-				<div class="flex items-center gap-2 px-2 py-1 border-2 border-black bg-background-800">
+				<div class="flex items-center gap-2 px-2 py-1 bg-background-900">
 					<div class="text-lg">{character.name} ({character.eve_id})</div>
 					<div class="flex-grow"></div>
+					{#if character.main}
+						<div class="text-base text-primary-50">Main</div>
+					{:else}
+						<div class="text-base text-background-300">Alt</div>
+					{/if}
 					<!-- <Button on:click={onRemoveCharacter}>Remove</Button> -->
 				</div>
 			{/each}
+
+			<div class="flex-grow"></div>
+
+			<div class="flex flex-col bg-background-900 text-left">
+				<div class="text-2xl bg-black px-2 py-1">Alliance Services</div>
+
+				<div class="px-2">
+					<a
+						href="https://esi.goonfleet.com/"
+						rel="noopener noreferrer"
+						class="flex items-center gap-2 hover:text-primary-50 transition-none"
+					>
+						Goonswarm ESI Auth Website
+						<i class="text-xs fas fa-external-link-alt transition-none"></i>
+					</a>
+					<a
+						href="https://goonfleet.com/"
+						rel="noopener noreferrer"
+						class="flex items-center gap-2 hover:text-primary-50 transition-none"
+					>
+						Goonswarm Forums
+						<i class="text-xs fas fa-external-link-alt transition-none"></i>
+					</a>
+					<a
+						href="https://wiki.goonswarm.org/w/Main_Page"
+						rel="noopener noreferrer"
+						class="flex items-center gap-2 hover:text-primary-50 transition-none"
+					>
+						Goonswarm Wiki
+						<i class="text-xs fas fa-external-link-alt transition-none"></i>
+					</a>
+					<a
+						href="https://fleets.gnf.lt/dashboard"
+						rel="noopener noreferrer"
+						class="flex items-center gap-2 hover:text-primary-50 transition-none"
+					>
+						Dankfleet Dashboard
+						<i class="text-xs fas fa-external-link-alt transition-none"></i>
+					</a>
+					<a
+						href="https://affordablecare.goonfleet.com/home"
+						rel="noopener noreferrer"
+						class="flex items-center gap-2 hover:text-primary-50 transition-none"
+					>
+						Affordable Care - Goonswarm SRP
+						<i class="text-xs fas fa-external-link-alt transition-none"></i>
+					</a>
+					<a
+						href="https://skills.apps.gnf.lt/"
+						rel="noopener noreferrer"
+						class="flex items-center gap-2 hover:text-primary-50 transition-none"
+					>
+						Imperium Skill Checker
+						<i class="text-xs fas fa-external-link-alt transition-none"></i>
+					</a>
+				</div>
+			</div>
 		</div>
 
-		<div
-			class="flex flex-col text-center items-center justify-center max-lg:border-t-2 lg:border-l-2 border-black h-full p-3"
-		>
+		<div class="flex flex-col text-center items-center justify-center background-gradient h-full">
 			<PapMetrics characterId={mainCharacter.eve_id} />
 		</div>
 	</div>

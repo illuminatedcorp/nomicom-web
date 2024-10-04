@@ -79,7 +79,7 @@
 
 		<div
 			class="flex-grow relative overflow-hidden {currentRoute.startsWith(WEB_ROUTES.nomicon)
-				? 'bg-gradient-to-br from-background-900 to-background-800'
+				? 'background-gradient'
 				: ''} "
 		>
 			<slot />
