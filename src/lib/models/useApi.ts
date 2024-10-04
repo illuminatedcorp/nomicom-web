@@ -60,13 +60,23 @@ export const useApi = () => {
 					url = url.replace(':id', params.id);
 				}
 
-				response = await axios.put(url, params, {
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: token ? `Bearer ${token}` : undefined
-					},
-					withCredentials: true // Include cookies with the request
-				});
+				if (apiRoute.method === 'DELETE') {
+					response = await axios.delete(url, {
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: token ? `Bearer ${token}` : undefined
+						},
+						withCredentials: true // Include cookies with the request
+					});
+				} else if (apiRoute.method === 'PUT') {
+					response = await axios.put(url, params, {
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: token ? `Bearer ${token}` : undefined
+						},
+						withCredentials: true // Include cookies with the request
+					});
+				}
 			} else {
 				console.error('What on earth are you doing? Tried to make a', apiRoute.method, 'request??');
 			}

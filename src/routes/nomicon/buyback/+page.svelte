@@ -1,27 +1,24 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
-	import { base } from '$app/paths';
 	import moment from 'moment';
 
 	import { Button } from '$lib/components/ui/button';
-	import * as Select from '$lib/components/ui/select';
 	import { Textarea } from '$lib/components/ui/textarea';
 
 	import { userStore } from '@/stores/userStore';
-	import { BUYBACK_STATES } from '$lib/models/useConstants';
+	import { BUYBACK_STATES, WEB_ROUTES } from '$lib/models/useConstants';
 	// import { useApi } from '$lib/models/useApi';
 	// const { apiCall } = useApi();
 
+	import { useAuth } from '@/models/useAuth';
+	const { safeGoto } = useAuth();
+
 	let pasteText = '';
 	let buybacks = [];
-	let allBuybacks = [];
-	let userData = get(userStore);
 	let parsedData = [];
 
 	onMount(async () => {
 		userStore.subscribe(async (data) => {
-			userData = await data;
 			updateBuybacks();
 		});
 	});
@@ -31,25 +28,12 @@
 		// if (data.id) {
 		// 	// buybacks = await apiCall(API_ROUTES.buybacksByUser, { id: data.id });
 		// }
-		// if (data.admin) {
-		// 	// get admin metrics
-		// 	// allBuybacks = await apiCall(API_ROUTES.allBuybacks);
-		// }
 	};
 
 	const onCancel = (buyback) => async () => {
 		// await apiCall(API_ROUTES.saveBuyback, {
 		// 	id: buyback.id,
 		// 	state: BUYBACK_STATES.canceled
-		// });
-
-		updateBuybacks();
-	};
-
-	const onChangeState = async (event, buyback) => {
-		// await apiCall(API_ROUTES.saveBuyback, {
-		// 	id: buyback.id,
-		// 	state: event.value
 		// });
 
 		updateBuybacks();
@@ -70,7 +54,10 @@
 </script>
 
 <div class="flex flex-col p-3 overflow-y-auto h-full">
-	<div class="text-3xl">Buyback System</div>
+	<div class="flex items-center gap-3 text-3xl">
+		Buyback System
+		<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-xl">Admin view</Button>
+	</div>
 	<div>If you encounter a bug or issue with this system, open an admin ticket on Discord.</div>
 
 	<div class="flex flex-wrap gap-4 mt-5">
@@ -151,51 +138,6 @@
 				</div>
 			{/each}
 		</div>
-
-		{#if userData.admin}
-			<div class="flex flex-col">
-				<div class="flex items-center justify-between bg-background-900 px-2 mt-5 h-12">
-					<div class="text-xl">Admin List (All Buyback Requests)</div>
-				</div>
-
-				<div class="buyback-grid bg-primary-900">
-					<div class="px-2">Buyback ID</div>
-					<div class="px-2">Price</div>
-					<div class="px-2"># Items</div>
-					<div class="px-2">Status</div>
-					<div class="px-2">Date</div>
-					<div class="px-2">Actions</div>
-				</div>
-
-				{#each allBuybacks as buyback}
-					<div class="buyback-grid even:bg-background-700 odd:bg-background-600 py-2">
-						<div class="px-2">{buyback.contract_id}</div>
-						<div class="px-2">{buyback.total_price.toLocaleString()} ISK</div>
-						<div class="px-2">{buyback.items.length}</div>
-						<div class="px-2 capitalize">{buyback.state}</div>
-						<div class="px-2">{moment(buyback.created_at).format('Do MMM YYYY, h:mm a')}</div>
-						<div class="px-2">
-							<Select.Root
-								selected={{ value: buyback.state, label: buyback.state }}
-								onSelectedChange={(event) => onChangeState(event, buyback)}
-							>
-								<Select.Trigger
-									class="bg-primary-600 text-white border-0 text-lg hover:bg-primary-900 capitalize w-32"
-								>
-									<Select.Value placeholder="State" />
-								</Select.Trigger>
-								<Select.Content>
-									<Select.Item value={BUYBACK_STATES.pending}>Pending</Select.Item>
-									<Select.Item value={BUYBACK_STATES.completed}>Completed</Select.Item>
-									<Select.Item value={BUYBACK_STATES.declined}>Declined</Select.Item>
-									<Select.Item value={BUYBACK_STATES.canceled}>Canceled</Select.Item>
-								</Select.Content>
-							</Select.Root>
-						</div>
-					</div>
-				{/each}
-			</div>
-		{/if}
 	</div>
 </div>
 

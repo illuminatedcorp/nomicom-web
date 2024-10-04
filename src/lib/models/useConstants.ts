@@ -1,40 +1,19 @@
 export const API_ROUTES = {
-	login: {
-		method: 'POST',
-		route: '/characters'
-	},
-	users: {
-		method: 'GET',
-		route: '/users'
-	},
-	userData: {
-		method: 'GET',
-		route: '/me'
-	},
-	updateUserRoles: {
-		method: 'PUT',
-		route: '/users/:id'
-	},
-	roles: {
-		method: 'GET',
-		route: '/roles'
-	},
-	createRole: {
-		method: 'POST',
-		route: '/roles'
-	},
-	updateRole: {
-		method: 'PUT',
-		route: '/roles/:id'
-	},
-	deleteRole: {
-		method: 'DELETE',
-		route: '/roles/:id'
-	},
-	permissions: {
-		method: 'GET',
-		route: '/permissions'
-	}
+	login: { method: 'POST', route: '/characters' },
+	users: { method: 'GET', route: '/users' },
+	userData: { method: 'GET', route: '/me' },
+	updateUserRoles: { method: 'PUT', route: '/users/:id' },
+	roles: { method: 'GET', route: '/roles' },
+	createRole: { method: 'POST', route: '/roles' },
+	updateRole: { method: 'PUT', route: '/roles/:id' },
+	deleteRole: { method: 'DELETE', route: '/roles/:id' },
+	permissions: { method: 'GET', route: '/permissions' },
+	allBuybackRequests: { method: 'GET', route: '/buyback_requests' },
+	allBuybackItems: { method: 'GET', route: '/buyback_items' },
+	createBuybackItem: { method: 'POST', route: '/buyback_items' },
+	getBuybackItem: { method: 'GET', route: '/buyback_items/:id' },
+	updateBuybackItem: { method: 'PUT', route: '/buyback_items/:id' },
+	deleteBuybackItem: { method: 'DELETE', route: '/buyback_items/:id' }
 };
 
 export const WEB_ROUTES = {
@@ -45,6 +24,7 @@ export const WEB_ROUTES = {
 	login: '/login',
 	loginRedirect: '/login/redirect',
 	buyback: '/nomicon/buyback',
+	buybackAdmin: '/nomicon/buyback/admin',
 	wiki: '/nomicon/wiki',
 	admin: '/nomicon/admin',
 	api: '/api'
@@ -66,6 +46,7 @@ export const SITE_MODES = {
 export const ROUTE_PERMISSIONS = {
 	[WEB_ROUTES.nomicon]: [],
 	[WEB_ROUTES.buyback]: ['index_buyback_items'],
+	[WEB_ROUTES.buybackAdmin]: ['admin'],
 	[WEB_ROUTES.wiki]: ['fuckifiknow'],
 	[WEB_ROUTES.admin]: ['admin'],
 	[WEB_ROUTES.api]: ['admin']

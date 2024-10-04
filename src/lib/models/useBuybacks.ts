@@ -10,13 +10,18 @@ export const useBuybacks = () => {
 	};
 
 	const getAllBuybackRequests = async () => {
-		// const response = await apiCall(API_ROUTES.buybacks, {});
-		// return response.buybacks;
-		return [];
+		const response = await apiCall(API_ROUTES.allBuybackRequests, {});
+		return response.buyback_requests;
+	};
+
+	const getAllItemEntries = async () => {
+		const response = await apiCall(API_ROUTES.allBuybackItems, {});
+		return response.buyback_items;
 	};
 
 	return {
 		createBuybackRequest,
-		getAllBuybackRequests
+		getAllBuybackRequests,
+		getAllItemEntries
 	};
 };
