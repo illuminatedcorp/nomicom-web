@@ -59,7 +59,7 @@ export const useSearch = () => {
 
 	const getItemsByMarketGroup = async (marketGroupId: number) => {
 		const items = itemsDataArray.filter((item: any) => {
-			return item.marketGroupId === marketGroupId;
+			return item.marketGroupID === marketGroupId;
 		});
 
 		return items;
