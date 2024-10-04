@@ -13,14 +13,21 @@
 	import { useAuth } from '@/models/useAuth';
 	const { safeGoto, hasAccessToRoute } = useAuth();
 
+	import { useBuybacks } from '@/models/useBuybacks';
+	const { createBuybackRequest, getAllItemEntries } = useBuybacks();
+
 	let pasteText = '';
 	let buybacks = [];
 	let parsedData = [];
+	let allItemEntries = [];
+	let hasInvalidItems = false;
 
 	onMount(async () => {
 		userStore.subscribe(async (data) => {
 			updateBuybacks();
 		});
+
+		allItemEntries = await getAllItemEntries();
 	});
 
 	const updateBuybacks = async () => {
@@ -44,13 +51,23 @@
 		let matches = pasteText.matchAll(regex);
 		let items = [];
 		for (const match of matches) {
-			items.push({ name: match[1], quantity: match[2] });
+			items.push({ item_name: match[1], quantity: parseInt(match[2]) });
 		}
 
 		parsedData = items;
 	};
 
-	const onSubmitBuyback = async () => {};
+	const onSubmitBuyback = async () => {
+		await createBuybackRequest(parsedData);
+	};
+
+	const isValidItem = (item) => {
+		return allItemEntries.find((entry) => entry.name === item.item_name);
+	};
+
+	$: {
+		hasInvalidItems = parsedData.some((item) => !isValidItem(item));
+	}
 </script>
 
 <div class="flex flex-col p-3 overflow-y-auto h-full">
@@ -80,15 +97,29 @@
 				<div class="overflow-auto h-0 flex-grow">
 					{#each parsedData as item}
 						<div
-							class="grid grid-cols-[1fr,100px] text-sm even:bg-background-800 odd:bg-background-700 px-2 py-1"
+							class="grid grid-cols-[1fr,100px] text-sm even:bg-background-800 odd:bg-background-700 px-2 py-1 {isValidItem(
+								item
+							)
+								? ''
+								: 'even:bg-red-800 odd:bg-red-700 text-red-50'}"
 						>
-							<div>{item.name}</div>
+							<div>{item.item_name}</div>
 							<div class="text-right pr-2">{item.quantity}</div>
 						</div>
 					{/each}
 				</div>
 
-				<Button on:click={onSubmitBuyback} class="text-xl mt-4">Submit Buyback Request</Button>
+				{#if hasInvalidItems}
+					<div class="text-red-50 mt-1">We do not buyback the items marked in red.</div>
+				{/if}
+
+				<Button on:click={onSubmitBuyback} class="text-xl mt-2" disabled={hasInvalidItems}>
+					{#if hasInvalidItems}
+						Invalid Items
+					{:else}
+						Submit Buyback Request
+					{/if}
+				</Button>
 			{:else}
 				<div class="bg-background-800 px-2 py-1 h-full">
 					Paste your inventory data into the box on the left and click "Parse Pasted Data".
@@ -101,9 +132,20 @@
 			{/if}
 		</div>
 
-		<div class="flex flex-col">
+		<div class="flex flex-col bg-background-800">
 			<div class="text-xl bg-black px-2 py-1">Instructions</div>
-			<div>Blah blah blah TODO</div>
+			<div class="flex flex-col px-2">
+				<div>1. Paste your inventory information to the left.</div>
+				<div>2. Click "Parse Pasted Data" to see the results.</div>
+				<div>3. Review the items and click "Submit Buyback Request".</div>
+				<div>4. Set up the contract in-game.</div>
+				<div class="ml-3">!! Assign your contract to our corporation "Illuminated"</div>
+				<div class="ml-3">
+					!! Your contract description must have the "Contract ID" from the list below.
+				</div>
+				<div class="ml-3">!! Make sure the price for the contract is correct.</div>
+				<div>5. Click "Cancel" if you need to cancel a buyback request.</div>
+			</div>
 		</div>
 	</div>
 
@@ -114,7 +156,7 @@
 			</div>
 
 			<div class="buyback-grid bg-background-900">
-				<div class="px-2">Buyback ID</div>
+				<div class="px-2">Contract ID</div>
 				<div class="px-2">Price</div>
 				<div class="px-2"># Items</div>
 				<div class="px-2">Status</div>
@@ -146,7 +188,7 @@
 <style>
 	.buyback-grid {
 		display: grid;
-		grid-template-columns: 110px 1fr 80px 100px 1fr 150px;
+		grid-template-columns: 120px 1fr 80px 100px 1fr 150px;
 	}
 
 	.hotkey {
