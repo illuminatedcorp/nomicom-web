@@ -11,7 +11,7 @@
 	// const { apiCall } = useApi();
 
 	import { useAuth } from '@/models/useAuth';
-	const { safeGoto } = useAuth();
+	const { safeGoto, hasAccessToRoute } = useAuth();
 
 	let pasteText = '';
 	let buybacks = [];
@@ -56,7 +56,9 @@
 <div class="flex flex-col p-3 overflow-y-auto h-full">
 	<div class="flex items-center gap-3 text-3xl">
 		Buyback System
-		<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-xl">Admin view</Button>
+		{#if hasAccessToRoute(WEB_ROUTES.buybackAdmin)}
+			<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-xl">Admin view</Button>
+		{/if}
 	</div>
 	<div>If you encounter a bug or issue with this system, open an admin ticket on Discord.</div>
 
