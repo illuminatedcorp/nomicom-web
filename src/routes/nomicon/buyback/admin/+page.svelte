@@ -36,7 +36,7 @@
 	let allBuybacks = [];
 	let allItemEntries = [];
 
-	let newItemPercentage = 0.9;
+	let newItemPercentage = 90;
 	let newItemSelection = null;
 
 	onMount(async () => {
