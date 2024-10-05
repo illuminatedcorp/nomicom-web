@@ -20,6 +20,7 @@
 </script>
 
 <div
+	style="font-family: Garamond, sans-serif;"
 	class="{currentMode} grid max-lg:grid-cols-[auto,auto] max-lg:gap-x-4 lg:grid-cols-[1fr,auto,1fr] relative items-center justify-center tracking-wider pt-5 pb-2"
 >
 	<div

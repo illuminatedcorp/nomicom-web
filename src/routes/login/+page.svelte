@@ -21,7 +21,10 @@
 	};
 </script>
 
-<div class="flex justify-center lg:items-center max-lg:mt-10 lg:h-full w-full h-fit">
+<div
+	class="flex justify-center lg:items-center max-lg:mt-10 lg:h-full w-full h-fit"
+	style="font-family: Garamond, sans-serif;"
+>
 	<div class="relative mx-3">
 		<div class="background-border"></div>
 

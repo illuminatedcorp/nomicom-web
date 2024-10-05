@@ -2,7 +2,10 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 </script>
 
-<div class="flex justify-center sm:items-center gap-16 w-full max-sm:h-fit sm:h-full">
+<div
+	class="flex justify-center sm:items-center gap-16 w-full max-sm:h-fit sm:h-full"
+	style="font-family: Garamond, sans-serif;"
+>
 	<div class="relative mx-3">
 		<div class="background-border"></div>
 		<div class="flex flex-col items-center justify-center relative z-10 max-sm:p-6 sm:p-6">

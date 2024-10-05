@@ -56,7 +56,11 @@
 		{/if}
 	</div>
 
-	<a href="/" class="flex items-center nav-button text-2xl">Illuminated</a>
+	<a
+		href="/"
+		class="flex items-center nav-button text-2xl"
+		style="font-family: Garamond, sans-serif;">Illuminated</a
+	>
 
 	<div class="flex items-center justify-end gap-2 h-full">
 		<!-- <div

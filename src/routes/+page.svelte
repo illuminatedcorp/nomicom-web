@@ -36,6 +36,7 @@
 </script>
 
 <div
+	style="font-family: Garamond, sans-serif;"
 	class="max-lg:flex max-lg:flex-col-reverse max-lg:justify-end max-lg:mt-12 lg:grid lg:grid-cols-3 lg:gap-12 lg:justify-center items-center lg:mx-12 lg:h-full {currentMode}"
 >
 	<button

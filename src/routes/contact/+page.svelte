@@ -4,7 +4,10 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 </script>
 
-<div class="flex justify-center items-center gap-16 w-full h-full">
+<div
+	class="flex justify-center items-center gap-16 w-full h-full"
+	style="font-family: Garamond, sans-serif;"
+>
 	<div class="relative mx-3">
 		<div class="background-border"></div>
 		<div class="flex flex-col items-center justify-center relative z-10 p-10">
@@ -15,7 +18,7 @@
 
 			<div class="separator mt-3" />
 
-			<div class="mt-3 text-center">Discord is the best way of contacting us.</div>
+			<div class="text-xl mt-3 text-center">Discord is the best way of contacting us.</div>
 
 			<Button
 				href="https://discord.gg/illuminated"
@@ -30,7 +33,7 @@
 
 			<div class="text-3xl mt-3">Other Links</div>
 
-			<div class="flex gap-2">
+			<div class="flex gap-2 text-lg">
 				<a
 					href="https://evemaps.dotlan.net/corp/Illuminated"
 					target="_blank"
