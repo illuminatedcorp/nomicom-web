@@ -16,7 +16,15 @@
 	const { safeGoto } = useAuth();
 
 	import { useBuybacks } from '@/models/useBuybacks';
-	const { getAllBuybackRequests, getAllItemEntries } = useBuybacks();
+	const {
+		getAllBuybackRequests,
+		getAllItemEntries,
+		completeBuybackRequest,
+		rejectBuybackRequest,
+		cancelBuybackRequest,
+		getState,
+		getUpdatedAtDate
+	} = useBuybacks();
 
 	import { useSearch } from '$lib/models/useSearch';
 	const { getItemsByMarketGroup } = useSearch();
@@ -32,20 +40,24 @@
 	let newItemSelection = null;
 
 	onMount(async () => {
-		allBuybacks = await getAllBuybackRequests();
-		allItemEntries = await getAllItemEntries();
+		updateData();
 	});
 
-	const updateData = async () => {
+	const updateData = debounce(async () => {
 		allBuybacks = await getAllBuybackRequests();
 		allItemEntries = await getAllItemEntries();
-	};
+	}, 100);
 
 	const onChangeState = async (event, buyback) => {
-		// await apiCall(API_ROUTES.saveBuyback, {
-		// 	id: buyback.id,
-		// 	state: event.value
-		// });
+		if (event.value === BUYBACK_STATES.pending) {
+			return;
+		} else if (event.value === BUYBACK_STATES.completed) {
+			await completeBuybackRequest(buyback.id);
+		} else if (event.value === BUYBACK_STATES.rejected) {
+			await rejectBuybackRequest(buyback.id);
+		} else if (event.value === BUYBACK_STATES.canceled) {
+			await cancelBuybackRequest(buyback.id);
+		}
 
 		updateData();
 	};
@@ -93,26 +105,6 @@
 		});
 	}, 300);
 
-	const getState = (buyback) => {
-		if (buyback.completed_at) {
-			return BUYBACK_STATES.completed;
-		} else if (buyback.rejected_at) {
-			return BUYBACK_STATES.canceled;
-		} else {
-			return BUYBACK_STATES.pending;
-		}
-	};
-
-	const getUpdatedAtDate = (buyback) => {
-		if (buyback.completed_at) {
-			return buyback.completed_at;
-		} else if (buyback.rejected_at) {
-			return buyback.rejected_at;
-		} else {
-			return buyback.created_at;
-		}
-	};
-
 	const onCopyBuybackID = (buyback) => {
 		navigator.clipboard.writeText(buyback.contract_id);
 		toast.success('Contract ID copied to clipboard.');
@@ -139,7 +131,7 @@
 			</div>
 
 			<div
-				class="grid max-lg:grid-cols-[100px,100px,80px,120px,70px] lg:grid-cols-[320px,1fr,100px,180px,100px] bg-background-900"
+				class="grid max-lg:grid-cols-[100px,100px,80px,120px,75px] lg:grid-cols-[320px,1fr,100px,180px,140px] bg-background-900"
 			>
 				<div class="ml-4">Contract ID</div>
 				<div class="ml-4">Price</div>
@@ -151,7 +143,7 @@
 
 			{#each allBuybacks as buyback}
 				<div
-					class="grid max-lg:text-sm max-lg:grid-cols-[100px,100px,80px,120px,70px] lg:grid-cols-[320px,1fr,100px,180px,100px] items-center even:bg-background-700 odd:bg-background-800 py-2"
+					class="grid max-lg:text-sm max-lg:grid-cols-[100px,100px,80px,120px,75px] lg:grid-cols-[320px,1fr,100px,180px,140px] items-center even:bg-background-700 odd:bg-background-800 py-2"
 				>
 					<div class="px-2">
 						<Button
@@ -178,18 +170,18 @@
 					<div class="px-2">{moment(getUpdatedAtDate(buyback)).format('Do MMM YYYY, h:mm a')}</div>
 					<div class="flex justify-end px-2">
 						<Select.Root
-							selected={{ value: buyback.state, label: buyback.state }}
+							selected={{ value: getState(buyback), label: getState(buyback) }}
 							onSelectedChange={(event) => onChangeState(event, buyback)}
 						>
 							<Select.Trigger
-								class="bg-primary-600 text-white border-0 text-lg hover:bg-primary-900 capitalize w-32"
+								class="bg-primary-600 text-white border-0 max-lg:px-2 max-lg:text-xs lg:text-lg hover:bg-primary-900 capitalize w-32"
 							>
 								<Select.Value placeholder="State" />
 							</Select.Trigger>
 							<Select.Content>
-								<Select.Item value={BUYBACK_STATES.pending}>Pending</Select.Item>
+								<!-- <Select.Item value={BUYBACK_STATES.pending}>Pending</Select.Item> -->
 								<Select.Item value={BUYBACK_STATES.completed}>Completed</Select.Item>
-								<Select.Item value={BUYBACK_STATES.declined}>Declined</Select.Item>
+								<Select.Item value={BUYBACK_STATES.rejected}>Rejected</Select.Item>
 								<Select.Item value={BUYBACK_STATES.canceled}>Canceled</Select.Item>
 							</Select.Content>
 						</Select.Root>

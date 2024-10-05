@@ -1,5 +1,5 @@
 import { useApi } from './useApi';
-import { API_ROUTES } from './useConstants';
+import { API_ROUTES, BUYBACK_STATES } from './useConstants';
 const { apiCall } = useApi();
 
 export const useBuybacks = () => {
@@ -39,6 +39,54 @@ export const useBuybacks = () => {
 		return response.buyback_request;
 	};
 
+	const getState = (buyback) => {
+		// so we want to determine which of the dates is the most recent
+		// and use that to determine the state
+		const stateDates = [
+			{ date: buyback.inserted_at, state: BUYBACK_STATES.pending },
+			{ date: buyback.completed_at, state: BUYBACK_STATES.completed },
+			{ date: buyback.rejected_at, state: BUYBACK_STATES.rejected },
+			{ date: buyback.canceled_at, state: BUYBACK_STATES.canceled }
+		];
+
+		// sort the dates in descending order
+		stateDates.sort((a, b) => {
+			if (a.date > b.date) {
+				return -1;
+			} else if (a.date < b.date) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+
+		return stateDates[0].state;
+	};
+
+	const getUpdatedAtDate = (buyback) => {
+		// so we want to determine which of the dates is the most recent
+		// and use that to determine the state
+		const stateDates = [
+			{ date: buyback.inserted_at, state: BUYBACK_STATES.pending },
+			{ date: buyback.completed_at, state: BUYBACK_STATES.completed },
+			{ date: buyback.rejected_at, state: BUYBACK_STATES.rejected },
+			{ date: buyback.canceled_at, state: BUYBACK_STATES.canceled }
+		];
+
+		// sort the dates in descending order
+		stateDates.sort((a, b) => {
+			if (a.date > b.date) {
+				return -1;
+			} else if (a.date < b.date) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+
+		return stateDates[0].date;
+	};
+
 	return {
 		createBuybackRequest,
 		getAllBuybackRequests,
@@ -46,6 +94,8 @@ export const useBuybacks = () => {
 		getAllItemEntries,
 		cancelBuybackRequest,
 		completeBuybackRequest,
-		rejectBuybackRequest
+		rejectBuybackRequest,
+		getState,
+		getUpdatedAtDate
 	};
 };

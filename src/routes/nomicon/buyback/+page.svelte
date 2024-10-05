@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import moment from 'moment';
 	import { toast } from 'svelte-sonner';
+	import debounce from 'lodash/debounce';
 
 	import { Button } from '$lib/components/ui/button';
 	import { Textarea } from '$lib/components/ui/textarea';
@@ -13,8 +14,14 @@
 	const { safeGoto, hasAccessToRoute } = useAuth();
 
 	import { useBuybacks } from '@/models/useBuybacks';
-	const { createBuybackRequest, getAllItemEntries, getBuybackRequests, cancelBuybackRequest } =
-		useBuybacks();
+	const {
+		createBuybackRequest,
+		getAllItemEntries,
+		getBuybackRequests,
+		cancelBuybackRequest,
+		getState,
+		getUpdatedAtDate
+	} = useBuybacks();
 
 	let pasteText = '';
 	let buybacks = [];
@@ -27,14 +34,13 @@
 			updateData();
 		});
 
-		buybacks = await getBuybackRequests();
-		allItemEntries = await getAllItemEntries();
+		updateData();
 	});
 
-	const updateData = async () => {
+	const updateData = debounce(async () => {
 		buybacks = await getBuybackRequests();
 		allItemEntries = await getAllItemEntries();
-	};
+	}, 100);
 
 	const onCancel = (buyback) => async () => {
 		await cancelBuybackRequest(buyback.id);
@@ -61,26 +67,6 @@
 
 	const isValidItem = (item) => {
 		return allItemEntries.find((entry) => entry.name === item.item_name);
-	};
-
-	const getState = (buyback) => {
-		if (buyback.completed_at) {
-			return BUYBACK_STATES.completed;
-		} else if (buyback.rejected_at) {
-			return BUYBACK_STATES.canceled;
-		} else {
-			return BUYBACK_STATES.pending;
-		}
-	};
-
-	const getUpdatedAtDate = (buyback) => {
-		if (buyback.completed_at) {
-			return buyback.completed_at;
-		} else if (buyback.rejected_at) {
-			return buyback.rejected_at;
-		} else {
-			return buyback.created_at;
-		}
 	};
 
 	const onCopyBuybackID = (buyback) => {
@@ -110,21 +96,21 @@
 	<div>If you encounter a bug or issue with this system, open an admin ticket on Discord.</div>
 
 	<div class="flex flex-wrap gap-4 mt-5">
-		<div class="flex flex-col w-96">
+		<div class="flex flex-col lg:w-96 max-lg:w-full">
 			<div class="text-xl bg-black px-2 py-1">Paste your inventory data below</div>
 			<Textarea
 				bind:value={pasteText}
 				placeholder="Paste your data here."
-				class="bg-background-800 rounded-none border-0 h-64"
+				class="bg-background-800 rounded-none border-0 lg:h-64 max-lg:h-32"
 			/>
 
 			<Button on:click={onSubmitText} class="text-xl mt-4">Parse Pasted Data</Button>
 		</div>
 
-		<div class="flex flex-col w-96 overflow-hidden">
+		<div class="flex flex-col lg:w-96 max-lg:w-full overflow-hidden">
 			<div class="text-xl bg-black px-2 py-1">Parsing Results</div>
 			{#if parsedData.length > 0}
-				<div class="overflow-auto h-0 flex-grow">
+				<div class="overflow-auto max-lg:h-32 lg:h-0 flex-grow">
 					{#each parsedData as item}
 						<div
 							class="grid grid-cols-[1fr,100px] text-sm even:bg-background-800 odd:bg-background-700 px-2 py-1 {isValidItem(
@@ -165,15 +151,15 @@
 		<div class="flex flex-col bg-background-800">
 			<div class="text-xl bg-black px-2 py-1">Instructions</div>
 			<div class="flex flex-col px-2">
-				<div>1. Paste your inventory information to the left.</div>
+				<div>1. Paste your inventory information here.</div>
 				<div>2. Click "Parse Pasted Data" to see the results.</div>
 				<div>3. Review the items and click "Submit Buyback Request".</div>
 				<div>4. Set up the contract in-game.</div>
-				<div class="ml-3">!! Assign your contract to our corporation "Illuminated"</div>
+				<div class="ml-3">• Assign your contract to our corporation "Illuminated".</div>
 				<div class="ml-3">
-					!! Your contract description must have the "Contract ID" from the list below.
+					• Your contract description must have the "Contract ID" from the list below.
 				</div>
-				<div class="ml-3">!! Make sure the price for the contract is correct.</div>
+				<div class="ml-3">• Make sure the price for the contract is correct.</div>
 				<div>5. Click "Cancel" if you need to cancel a buyback request.</div>
 			</div>
 		</div>

@@ -36,7 +36,7 @@ export const WEB_ROUTES = {
 
 export const BUYBACK_STATES = {
 	pending: 'pending',
-	declined: 'declined',
+	rejected: 'rejected',
 	completed: 'completed',
 	canceled: 'canceled'
 };
