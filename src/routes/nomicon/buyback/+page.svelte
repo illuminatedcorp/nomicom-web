@@ -48,12 +48,17 @@
 	};
 
 	const onSubmitText = async () => {
-		const regex = /^([\w\s-]*?)(?=\t|\s{2,})(?:\t|\s{4})(\d+)?/gm;
+		const regex = /^([\w -]*?)(?=\t| {2,}|\n|$| x)(?:\t| {4}|)?(\d+)?(?: x(\d+))?/gm;
 		let matches = pasteText.matchAll(regex);
-		console.log(matches);
+
 		let items = [];
 		for (const match of matches) {
-			items.push({ item_name: match[1], quantity: parseInt(match[2]) || 1 });
+			items.push({ item_name: match[1], quantity: parseInt(match[2]) || parseInt(match[3]) || 1 });
+		}
+
+		if (items.length === 0) {
+			toast.error('There was a problem with your data. Please check your format and try again.');
+			return;
 		}
 
 		parsedData = items;
