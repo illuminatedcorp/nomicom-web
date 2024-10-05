@@ -8,8 +8,8 @@ export const useBuybacks = () => {
 		return response.buyback_request;
 	};
 
-	const getBuybackRequests = async (id) => {
-		const response = await apiCall(API_ROUTES.buybackRequests, { id });
+	const getBuybackRequests = async () => {
+		const response = await apiCall(API_ROUTES.buybackRequests, {});
 		return response.buyback_requests;
 	};
 
@@ -24,10 +24,28 @@ export const useBuybacks = () => {
 		return response.buyback_items;
 	};
 
+	const cancelBuybackRequest = async (buybackRequestId) => {
+		const response = await apiCall(API_ROUTES.cancelBuybackRequest, { id: buybackRequestId });
+		return response.buyback_request;
+	};
+
+	const completeBuybackRequest = async (buybackRequestId) => {
+		const response = await apiCall(API_ROUTES.completeBuybackRequest, { id: buybackRequestId });
+		return response.buyback_request;
+	};
+
+	const rejectBuybackRequest = async (buybackRequestId) => {
+		const response = await apiCall(API_ROUTES.rejectBuybackRequest, { id: buybackRequestId });
+		return response.buyback_request;
+	};
+
 	return {
 		createBuybackRequest,
 		getAllBuybackRequests,
 		getBuybackRequests,
-		getAllItemEntries
+		getAllItemEntries,
+		cancelBuybackRequest,
+		completeBuybackRequest,
+		rejectBuybackRequest
 	};
 };

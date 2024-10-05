@@ -1,6 +1,7 @@
 <script lang="ts">
 	import moment from 'moment';
 	import debounce from 'lodash/debounce';
+	import { toast } from 'svelte-sonner';
 
 	import { Button } from '$lib/components/ui/button';
 	import * as Select from '$lib/components/ui/select';
@@ -52,7 +53,6 @@
 	const onNewItemEntry = async () => {
 		if (newItemSelection) {
 			if (newItemSelection.type === SEARCH_TYPES.ITEM) {
-				console.log(newItemSelection);
 				await apiCall(API_ROUTES.createBuybackItem, {
 					eve_type_id: newItemSelection.id,
 					name: newItemSelection.name,
@@ -92,37 +92,91 @@
 			percentage: item.percentage
 		});
 	}, 300);
+
+	const getState = (buyback) => {
+		if (buyback.completed_at) {
+			return BUYBACK_STATES.completed;
+		} else if (buyback.rejected_at) {
+			return BUYBACK_STATES.canceled;
+		} else {
+			return BUYBACK_STATES.pending;
+		}
+	};
+
+	const getUpdatedAtDate = (buyback) => {
+		if (buyback.completed_at) {
+			return buyback.completed_at;
+		} else if (buyback.rejected_at) {
+			return buyback.rejected_at;
+		} else {
+			return buyback.created_at;
+		}
+	};
+
+	const onCopyBuybackID = (buyback) => {
+		navigator.clipboard.writeText(buyback.contract_id);
+		toast.success('Contract ID copied to clipboard.');
+	};
+
+	const onCopyBuybackPrice = (buyback) => {
+		navigator.clipboard.writeText(buyback.price_capture);
+		toast.success('Price copied to clipboard.');
+	};
 </script>
 
 <div class="flex flex-col p-3 overflow-y-auto h-full">
 	<div class="flex items-center gap-3 text-3xl">
 		Buyback System Admin View
-		<Button on:click={() => safeGoto(WEB_ROUTES.buyback)} class="text-xl">Personal view</Button>
+		<Button on:click={() => safeGoto(WEB_ROUTES.buyback)} class="text-xl">
+			Switch to member view
+		</Button>
 	</div>
 
 	<div class="flex flex-wrap gap-3">
-		<div class="flex flex-col flex-grow">
+		<div class="flex flex-col">
 			<div class="flex items-center justify-between bg-black px-2 mt-5 h-12">
 				<div class="text-xl">Admin List (All Buyback Requests)</div>
 			</div>
 
-			<div class="buyback-grid bg-background-900">
-				<div class="px-2">Buyback ID</div>
-				<div class="px-2">Price</div>
-				<div class="px-2"># Items</div>
+			<div
+				class="grid max-lg:grid-cols-[100px,100px,80px,120px,70px] lg:grid-cols-[320px,1fr,100px,180px,100px] bg-background-900"
+			>
+				<div class="ml-4">Contract ID</div>
+				<div class="ml-4">Price</div>
+				<!-- <div class="px-2"># Items</div> -->
 				<div class="px-2">Status</div>
-				<div class="px-2">Date</div>
-				<div class="flex px-2 justify-end">Actions</div>
+				<div class="px-2">Last Updated</div>
+				<div class="flex justify-end px-2">Actions</div>
 			</div>
 
 			{#each allBuybacks as buyback}
-				<div class="buyback-grid even:bg-background-700 odd:bg-background-600 py-2">
-					<div class="px-2">{buyback.contract_id}</div>
-					<div class="px-2">{buyback.total_price.toLocaleString()} ISK</div>
-					<div class="px-2">{buyback.items.length}</div>
-					<div class="px-2 capitalize">{buyback.state}</div>
-					<div class="px-2">{moment(buyback.created_at).format('Do MMM YYYY, h:mm a')}</div>
+				<div
+					class="grid max-lg:text-sm max-lg:grid-cols-[100px,100px,80px,120px,70px] lg:grid-cols-[320px,1fr,100px,180px,100px] items-center even:bg-background-700 odd:bg-background-800 py-2"
+				>
 					<div class="px-2">
+						<Button
+							on:click={() => onCopyBuybackID(buyback)}
+							variant="ghost"
+							class="flex items-center justify-start gap-2 text-sm px-2 py-0 hover:bg-background-900 hover:text-background-50 w-full"
+						>
+							<span class="truncate">{buyback.contract_id}</span>
+							<i class="far fa-copy" />
+						</Button>
+					</div>
+					<div class="px-2">
+						<Button
+							on:click={() => onCopyBuybackPrice(buyback)}
+							variant="ghost"
+							class="flex items-center justify-start gap-2 text-sm px-2 py-0 hover:bg-background-900 hover:text-background-50 w-full"
+						>
+							<span class="truncate">{buyback.price_capture.toLocaleString()} ISK</span>
+							<i class="far fa-copy" />
+						</Button>
+					</div>
+					<!-- <div class="px-2">{buyback.items.length}</div> -->
+					<div class="px-2 capitalize">{getState(buyback)}</div>
+					<div class="px-2">{moment(getUpdatedAtDate(buyback)).format('Do MMM YYYY, h:mm a')}</div>
+					<div class="flex justify-end px-2">
 						<Select.Root
 							selected={{ value: buyback.state, label: buyback.state }}
 							onSelectedChange={(event) => onChangeState(event, buyback)}
@@ -168,7 +222,7 @@
 				</div>
 			</div>
 
-			<div class="grid grid-cols-4 bg-background-900">
+			<div class="grid grid-cols-[80px,1fr,150px,100px] bg-background-900">
 				<div class="px-2">Item ID</div>
 				<div class="px-2">Item Name</div>
 				<div class="px-2">Price % We Pay</div>
@@ -177,7 +231,7 @@
 
 			{#each allItemEntries as item}
 				<div
-					class="grid grid-cols-4 items-center even:bg-background-800 odd:bg-background-700 py-2"
+					class="grid grid-cols-[80px,1fr,150px,100px] items-center even:bg-background-800 odd:bg-background-700 py-2"
 				>
 					<div class="px-2">{item.eve_type_id}</div>
 					<div class="px-2">{item.name}</div>

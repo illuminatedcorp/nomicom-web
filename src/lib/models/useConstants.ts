@@ -14,7 +14,10 @@ export const API_ROUTES = {
 	createBuybackItem: { method: 'POST', route: '/buyback_items' },
 	getBuybackItem: { method: 'GET', route: '/buyback_items/:id' },
 	updateBuybackItem: { method: 'PUT', route: '/buyback_items/:id' },
-	deleteBuybackItem: { method: 'DELETE', route: '/buyback_items/:id' }
+	deleteBuybackItem: { method: 'DELETE', route: '/buyback_items/:id' },
+	cancelBuybackRequest: { method: 'PUT', route: '/buyback_requests/:id/cancel' },
+	completeBuybackRequest: { method: 'PUT', route: '/buyback_requests/:id/complete' },
+	rejectBuybackRequest: { method: 'PUT', route: '/buyback_requests/:id/reject' }
 };
 
 export const WEB_ROUTES = {

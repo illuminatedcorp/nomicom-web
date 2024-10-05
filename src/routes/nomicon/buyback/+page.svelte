@@ -1,20 +1,20 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import moment from 'moment';
+	import { toast } from 'svelte-sonner';
 
 	import { Button } from '$lib/components/ui/button';
 	import { Textarea } from '$lib/components/ui/textarea';
 
 	import { userStore } from '@/stores/userStore';
 	import { BUYBACK_STATES, WEB_ROUTES } from '$lib/models/useConstants';
-	// import { useApi } from '$lib/models/useApi';
-	// const { apiCall } = useApi();
 
 	import { useAuth } from '@/models/useAuth';
 	const { safeGoto, hasAccessToRoute } = useAuth();
 
 	import { useBuybacks } from '@/models/useBuybacks';
-	const { createBuybackRequest, getAllItemEntries } = useBuybacks();
+	const { createBuybackRequest, getAllItemEntries, getBuybackRequests, cancelBuybackRequest } =
+		useBuybacks();
 
 	let pasteText = '';
 	let buybacks = [];
@@ -23,27 +23,22 @@
 	let hasInvalidItems = false;
 
 	onMount(async () => {
-		userStore.subscribe(async (data) => {
-			updateBuybacks();
+		userStore.subscribe(async () => {
+			updateData();
 		});
 
+		buybacks = await getBuybackRequests();
 		allItemEntries = await getAllItemEntries();
 	});
 
-	const updateBuybacks = async () => {
-		// let data = await get(userStore);
-		// if (data.id) {
-		// 	// buybacks = await apiCall(API_ROUTES.buybacksByUser, { id: data.id });
-		// }
+	const updateData = async () => {
+		buybacks = await getBuybackRequests();
+		allItemEntries = await getAllItemEntries();
 	};
 
 	const onCancel = (buyback) => async () => {
-		// await apiCall(API_ROUTES.saveBuyback, {
-		// 	id: buyback.id,
-		// 	state: BUYBACK_STATES.canceled
-		// });
-
-		updateBuybacks();
+		await cancelBuybackRequest(buyback.id);
+		updateData();
 	};
 
 	const onSubmitText = async () => {
@@ -59,10 +54,43 @@
 
 	const onSubmitBuyback = async () => {
 		await createBuybackRequest(parsedData);
+
+		updateData();
+		toast.success('Buyback request created.');
 	};
 
 	const isValidItem = (item) => {
 		return allItemEntries.find((entry) => entry.name === item.item_name);
+	};
+
+	const getState = (buyback) => {
+		if (buyback.completed_at) {
+			return BUYBACK_STATES.completed;
+		} else if (buyback.rejected_at) {
+			return BUYBACK_STATES.canceled;
+		} else {
+			return BUYBACK_STATES.pending;
+		}
+	};
+
+	const getUpdatedAtDate = (buyback) => {
+		if (buyback.completed_at) {
+			return buyback.completed_at;
+		} else if (buyback.rejected_at) {
+			return buyback.rejected_at;
+		} else {
+			return buyback.created_at;
+		}
+	};
+
+	const onCopyBuybackID = (buyback) => {
+		navigator.clipboard.writeText(buyback.contract_id);
+		toast.success('Contract ID copied to clipboard.');
+	};
+
+	const onCopyBuybackPrice = (buyback) => {
+		navigator.clipboard.writeText(buyback.price_capture);
+		toast.success('Price copied to clipboard.');
 	};
 
 	$: {
@@ -74,7 +102,9 @@
 	<div class="flex items-center gap-3 text-3xl">
 		Buyback System
 		{#if hasAccessToRoute(WEB_ROUTES.buybackAdmin)}
-			<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-xl">Admin view</Button>
+			<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-xl">
+				Switch to admin view
+			</Button>
 		{/if}
 	</div>
 	<div>If you encounter a bug or issue with this system, open an admin ticket on Discord.</div>
@@ -155,23 +185,45 @@
 				<div class="text-xl">Your Buyback Requests</div>
 			</div>
 
-			<div class="buyback-grid bg-background-900">
-				<div class="px-2">Contract ID</div>
-				<div class="px-2">Price</div>
-				<div class="px-2"># Items</div>
+			<div
+				class="grid max-lg:grid-cols-[100px,100px,80px,120px,70px] lg:grid-cols-[320px,1fr,100px,180px,100px] bg-background-900"
+			>
+				<div class="ml-4">Contract ID</div>
+				<div class="ml-4">Price</div>
+				<!-- <div class="px-2"># Items</div> -->
 				<div class="px-2">Status</div>
-				<div class="px-2">Date</div>
-				<div class="px-2">Actions</div>
+				<div class="px-2">Last Updated</div>
+				<div class="flex justify-end px-2">Actions</div>
 			</div>
 
 			{#each buybacks as buyback}
-				<div class="buyback-grid even:bg-background-700 odd:bg-background-600 py-2">
-					<div class="px-2">{buyback.contract_id}</div>
-					<div class="px-2">{buyback.total_price.toLocaleString()} ISK</div>
-					<div class="px-2">{buyback.items.length}</div>
-					<div class="px-2 capitalize">{buyback.state}</div>
-					<div class="px-2">{moment(buyback.created_at).format('Do MMM YYYY, h:mm a')}</div>
+				<div
+					class="grid max-lg:text-sm max-lg:grid-cols-[100px,100px,80px,120px,70px] lg:grid-cols-[320px,1fr,100px,180px,100px] items-center even:bg-background-700 odd:bg-background-800 py-2"
+				>
 					<div class="px-2">
+						<Button
+							on:click={() => onCopyBuybackID(buyback)}
+							variant="ghost"
+							class="flex items-center justify-start gap-2 text-sm px-2 py-0 hover:bg-background-900 hover:text-background-50 w-full"
+						>
+							<span class="truncate">{buyback.contract_id}</span>
+							<i class="far fa-copy" />
+						</Button>
+					</div>
+					<div class="px-2">
+						<Button
+							on:click={() => onCopyBuybackPrice(buyback)}
+							variant="ghost"
+							class="flex items-center justify-start gap-2 text-sm px-2 py-0 hover:bg-background-900 hover:text-background-50 w-full"
+						>
+							<span class="truncate">{buyback.price_capture.toLocaleString()} ISK</span>
+							<i class="far fa-copy" />
+						</Button>
+					</div>
+					<!-- <div class="px-2">{buyback.items.length}</div> -->
+					<div class="px-2 capitalize">{getState(buyback)}</div>
+					<div class="px-2">{moment(getUpdatedAtDate(buyback)).format('Do MMM YYYY, h:mm a')}</div>
+					<div class="flex justify-end px-2">
 						<Button
 							disabled={buyback.state === BUYBACK_STATES.canceled}
 							on:click={onCancel(buyback)}
@@ -185,12 +237,9 @@
 	</div>
 </div>
 
-<style>
-	.buyback-grid {
-		display: grid;
-		grid-template-columns: 120px 1fr 80px 100px 1fr 150px;
-	}
+<div class="buyback-grid-small hidden"></div>
 
+<style>
 	.hotkey {
 		font-family: monospace;
 		font-size: 1rem;

@@ -37,9 +37,9 @@
 		}
 	};
 
-	const onDeleteUser = () => {
-		console.log('Delete user');
-	};
+	// const onDeleteUser = () => {
+	// 	console.log('Delete user');
+	// };
 
 	const hasRole = (role) => {
 		const roleIds = selectedUser.roles.map((r) => r.id);

@@ -74,9 +74,10 @@
 				<Button
 					variant="outline"
 					on:click={onAddCharacter}
-					class="text-base hover:bg-background-800 hover:text-background-50 border-2 border-background-600"
+					class="flex items-center gap-2 text-base hover:bg-background-800 hover:text-background-50 border-2 border-background-600"
 				>
 					Add Character
+					<i class="text-xs fas fa-external-link-alt transition-none"></i>
 				</Button>
 			</div>
 

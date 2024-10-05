@@ -36,7 +36,6 @@ export const useCharacters = () => {
 	// const populateCharacterData = async (characters) => {
 	// 	let newCharacters = [];
 	// 	for (let character of characters) {
-	// 		console.log('character', character);
 	// 		let newCharacter = await getCharacterPublicData(character.eve_id);
 	// 		newCharacters.push(newCharacter);
 	// 	}
