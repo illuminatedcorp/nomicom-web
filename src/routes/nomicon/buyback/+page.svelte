@@ -217,7 +217,7 @@
 					<div class="px-2">{moment(getUpdatedAtDate(buyback)).format('Do MMM YYYY, h:mm a')}</div>
 					<div class="flex justify-end px-2">
 						<Button
-							disabled={buyback.state === BUYBACK_STATES.canceled}
+							disabled={getState(buyback) === BUYBACK_STATES.canceled}
 							on:click={onCancel(buyback)}
 						>
 							Cancel

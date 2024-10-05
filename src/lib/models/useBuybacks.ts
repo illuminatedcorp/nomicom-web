@@ -49,12 +49,12 @@ export const useBuybacks = () => {
 			{ date: buyback.canceled_at, state: BUYBACK_STATES.canceled }
 		];
 
-		// sort the dates in descending order
+		// sort the dates
 		stateDates.sort((a, b) => {
 			if (a.date > b.date) {
-				return 1;
-			} else if (a.date < b.date) {
 				return -1;
+			} else if (a.date < b.date) {
+				return 1;
 			} else {
 				return 0;
 			}
@@ -76,9 +76,9 @@ export const useBuybacks = () => {
 		// sort the dates
 		stateDates.sort((a, b) => {
 			if (a.date > b.date) {
-				return 1;
-			} else if (a.date < b.date) {
 				return -1;
+			} else if (a.date < b.date) {
+				return 1;
 			} else {
 				return 0;
 			}
