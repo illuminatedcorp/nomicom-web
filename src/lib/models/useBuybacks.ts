@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import { useApi } from './useApi';
 import { API_ROUTES, BUYBACK_STATES } from './useConstants';
 const { apiCall } = useApi();
@@ -42,18 +44,22 @@ export const useBuybacks = () => {
 	const getState = (buyback) => {
 		// so we want to determine which of the dates is the most recent
 		// and use that to determine the state
-		const stateDates = [
+		let stateDates = [
 			{ date: buyback.inserted_at, state: BUYBACK_STATES.pending },
 			{ date: buyback.completed_at, state: BUYBACK_STATES.completed },
 			{ date: buyback.rejected_at, state: BUYBACK_STATES.rejected },
 			{ date: buyback.canceled_at, state: BUYBACK_STATES.canceled }
 		];
 
-		// sort the dates
+		// sort the dates with most recent first. nulls will be at the end
+		// we use moment here for sanity
 		stateDates.sort((a, b) => {
-			if (a.date > b.date) {
-				return -1;
-			} else if (a.date < b.date) {
+			if (!a.date) return 1; // Move null dates to the end
+			if (!b.date) return -1; // Move null dates to the end
+
+			if (moment.utc(a.date).isAfter(moment.utc(b.date))) {
+				return -1; // Most recent first
+			} else if (moment.utc(a.date).isBefore(moment.utc(b.date))) {
 				return 1;
 			} else {
 				return 0;
@@ -66,18 +72,22 @@ export const useBuybacks = () => {
 	const getUpdatedAtDate = (buyback) => {
 		// so we want to determine which of the dates is the most recent
 		// and use that to determine the state
-		const stateDates = [
+		let stateDates = [
 			{ date: buyback.inserted_at, state: BUYBACK_STATES.pending },
 			{ date: buyback.completed_at, state: BUYBACK_STATES.completed },
 			{ date: buyback.rejected_at, state: BUYBACK_STATES.rejected },
 			{ date: buyback.canceled_at, state: BUYBACK_STATES.canceled }
 		];
 
-		// sort the dates
+		// sort the dates with most recent first. nulls will be at the end
+		// we use moment here for sanity
 		stateDates.sort((a, b) => {
-			if (a.date > b.date) {
-				return -1;
-			} else if (a.date < b.date) {
+			if (!a.date) return 1; // Move null dates to the end
+			if (!b.date) return -1; // Move null dates to the end
+
+			if (moment.utc(a.date).isAfter(moment.utc(b.date))) {
+				return -1; // Most recent first
+			} else if (moment.utc(a.date).isBefore(moment.utc(b.date))) {
 				return 1;
 			} else {
 				return 0;
