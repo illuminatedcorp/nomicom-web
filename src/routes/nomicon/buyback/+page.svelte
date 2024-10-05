@@ -48,11 +48,12 @@
 	};
 
 	const onSubmitText = async () => {
-		const regex = /^(.*?)\t(\d+)/gm;
+		const regex = /^([\w\s-]*?)(?=\t|\s{2,})(?:\t|\s{4})(\d+)?/gm;
 		let matches = pasteText.matchAll(regex);
+		console.log(matches);
 		let items = [];
 		for (const match of matches) {
-			items.push({ item_name: match[1], quantity: parseInt(match[2]) });
+			items.push({ item_name: match[1], quantity: parseInt(match[2]) || 1 });
 		}
 
 		parsedData = items;
