@@ -24,7 +24,19 @@
 		}
 
 		if (code && state) {
-			let response = await apiCall(API_ROUTES.login, { auth_code: code });
+			let response;
+
+			if (state.includes('login')) {
+				response = await apiCall(API_ROUTES.login, { auth_code: code });
+			} else if (state.includes('addCharacter')) {
+				response = await apiCall(API_ROUTES.addCharacter, { auth_code: code });
+			} else {
+				// we clear the stored api token from local storage
+				localStorage.removeItem('api_token');
+
+				toast.error('There was an error logging in. Please try again.');
+				goto(`${base}${WEB_ROUTES.login}`);
+			}
 
 			if (response) {
 				// we need to save the API token to local storage

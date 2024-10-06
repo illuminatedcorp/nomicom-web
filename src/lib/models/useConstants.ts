@@ -1,5 +1,6 @@
 export const API_ROUTES = {
 	login: { method: 'POST', route: '/characters' },
+	addCharacter: { method: 'POST', route: '/characters' },
 	users: { method: 'GET', route: '/users' },
 	userData: { method: 'GET', route: '/me' },
 	updateUserRoles: { method: 'PUT', route: '/users/:id' },

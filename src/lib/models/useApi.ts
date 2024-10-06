@@ -30,6 +30,19 @@ export const useApi = () => {
 						{
 							params,
 							headers: {
+								'Content-Type': 'application/json'
+								// Authorization: token ? `Bearer ${token}` : undefined // we do not want to send the token here
+							},
+							withCredentials: true // Include cookies with the request
+						}
+					);
+				} else if (apiRoute.route === API_ROUTES.addCharacter.route) {
+					// for a post we send the data via body
+					response = await axios.post(
+						import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route,
+						params,
+						{
+							headers: {
 								'Content-Type': 'application/json',
 								Authorization: token ? `Bearer ${token}` : undefined
 							},
