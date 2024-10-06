@@ -344,84 +344,93 @@
 </script>
 
 {#if ready}
-	<div class="flex flex-col w-full h-full">
-		<div class="flex flex-wrap gap-3 items-center justify-center background-gradient py-2">
-			<div class="flex items-center bg-slate-800 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2">
-				<div class="text-4xl mr-4 ml-1">{getTotalStrategicForMonth()}</div>
-				<div class="lg:text-xl max-lg:text-lg text-left">Strategic PAPs<br />this month</div>
-			</div>
-			<div class="flex items-center bg-orange-900 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2">
-				<div class="text-4xl mr-4 ml-1">{getTotalPeacetimeForMonth()}</div>
-
-				<div class="lg:text-xl max-lg:text-lg text-left">Peacetime PAPs<br />this month</div>
-			</div>
+	{#if papMetrics === null}
+		<div class="flex flex-col items-center justify-center h-full">
+			<div class="text-2xl">There was an issue getting the PAP data. Please try again later.</div>
 		</div>
+	{:else}
+		<div class="flex flex-col w-full h-full">
+			<div class="flex flex-wrap gap-3 items-center justify-center background-gradient py-2">
+				<div class="flex items-center bg-slate-800 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2">
+					<div class="text-4xl mr-4 ml-1">{getTotalStrategicForMonth()}</div>
+					<div class="lg:text-xl max-lg:text-lg text-left">Strategic PAPs<br />this month</div>
+				</div>
+				<div class="flex items-center bg-orange-900 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2">
+					<div class="text-4xl mr-4 ml-1">{getTotalPeacetimeForMonth()}</div>
 
-		<div class="flex flex-col flex-grow gap-3 px-3 pt-3 background-gradient bg-grad">
-			<div class="text-2xl">Time Range Data</div>
-			<div class="flex flex-col">
-				<div class="flex justify-between items-center px-3">
-					<div class="text-xl text-left">
-						PAPs per day from {moment(selectedDateRange.start).format('MM/DD/YYYY')} to {moment(
-							selectedDateRange.end
-						).format('MM/DD/YYYY')}
-					</div>
-					<Popover.Root openFocus>
-						<Popover.Trigger asChild let:builder>
-							<Button variant="outline" builders={[builder]}>
-								{#if selectedDateRange && selectedDateRange.start}
-									{#if selectedDateRange.end}
-										{moment(
-											selectedDateRange.start.year +
-												'-' +
-												selectedDateRange.start.month +
-												'-' +
-												selectedDateRange.start.day,
-											'YYYY-MM-DD'
-										).format('MM/DD/YYYY')} - {moment(
-											selectedDateRange.end.year +
-												'-' +
-												selectedDateRange.end.month +
-												'-' +
-												selectedDateRange.end.day,
-											'YYYY-MM-DD'
-										).format('MM/DD/YYYY')}
+					<div class="lg:text-xl max-lg:text-lg text-left">Peacetime PAPs<br />this month</div>
+				</div>
+			</div>
+
+			<div class="flex flex-col flex-grow gap-3 px-3 pt-3 background-gradient bg-grad">
+				<div class="text-2xl">Time Range Data</div>
+				<div class="flex flex-col">
+					<div class="flex justify-between items-center px-3">
+						<div class="text-xl text-left">
+							PAPs per day from {moment(selectedDateRange.start).format('MM/DD/YYYY')} to {moment(
+								selectedDateRange.end
+							).format('MM/DD/YYYY')}
+						</div>
+						<Popover.Root openFocus>
+							<Popover.Trigger asChild let:builder>
+								<Button variant="outline" builders={[builder]}>
+									{#if selectedDateRange && selectedDateRange.start}
+										{#if selectedDateRange.end}
+											{moment(
+												selectedDateRange.start.year +
+													'-' +
+													selectedDateRange.start.month +
+													'-' +
+													selectedDateRange.start.day,
+												'YYYY-MM-DD'
+											).format('MM/DD/YYYY')} - {moment(
+												selectedDateRange.end.year +
+													'-' +
+													selectedDateRange.end.month +
+													'-' +
+													selectedDateRange.end.day,
+												'YYYY-MM-DD'
+											).format('MM/DD/YYYY')}
+										{:else}
+											{moment(selectedDateRange.start).format('MM/DD/YYYY')}
+										{/if}
 									{:else}
-										{moment(selectedDateRange.start).format('MM/DD/YYYY')}
+										Select a date range
 									{/if}
-								{:else}
-									Select a date range
-								{/if}
-							</Button>
-						</Popover.Trigger>
-						<Popover.Content class="bg-background-800 text-background-50 w-auto p-0" align="start">
-							<RangeCalendar bind:value={selectedDateRange} initialFocus numberOfMonths={1} />
-						</Popover.Content>
-					</Popover.Root>
-				</div>
-				<div id="pap-bar-chart" class="w-full h-64"></div>
-			</div>
-
-			<div class="grid grid-cols-2 gap-5 justify-center flex-grow px-2 max-h-64 min-h-64">
-				<div class="flex flex-col flex-grow relative">
-					<div class="text-2xl">PAPs ship types</div>
-					<div id="pap-ship-types-pie-chart" class="flex-grow"></div>
-					<div
-						class="flex absolute items-center justify-center text-3xl w-full h-full mt-4 pointer-events-none"
-					>
-						{totalPapsByShipType}
+								</Button>
+							</Popover.Trigger>
+							<Popover.Content
+								class="bg-background-800 text-background-50 w-auto p-0"
+								align="start"
+							>
+								<RangeCalendar bind:value={selectedDateRange} initialFocus numberOfMonths={1} />
+							</Popover.Content>
+						</Popover.Root>
 					</div>
+					<div id="pap-bar-chart" class="w-full h-64"></div>
 				</div>
-				<div class="flex flex-col flex-grow relative">
-					<div class="text-2xl">PAPs by type</div>
-					<div id="pap-types-pie-chart" class="flex-grow"></div>
-					<div
-						class="flex absolute items-center justify-center text-3xl w-full h-full mt-4 pointer-events-none"
-					>
-						{totalPapsByType}
+
+				<div class="grid grid-cols-2 gap-5 justify-center flex-grow px-2 max-h-64 min-h-64">
+					<div class="flex flex-col flex-grow relative">
+						<div class="text-2xl">PAPs ship types</div>
+						<div id="pap-ship-types-pie-chart" class="flex-grow"></div>
+						<div
+							class="flex absolute items-center justify-center text-3xl w-full h-full mt-4 pointer-events-none"
+						>
+							{totalPapsByShipType}
+						</div>
+					</div>
+					<div class="flex flex-col flex-grow relative">
+						<div class="text-2xl">PAPs by type</div>
+						<div id="pap-types-pie-chart" class="flex-grow"></div>
+						<div
+							class="flex absolute items-center justify-center text-3xl w-full h-full mt-4 pointer-events-none"
+						>
+							{totalPapsByType}
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	{/if}
 {/if}
