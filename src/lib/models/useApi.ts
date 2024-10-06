@@ -23,7 +23,7 @@ export const useApi = () => {
 					withCredentials: true // Include cookies with the request
 				});
 			} else if (apiRoute.method === 'POST') {
-				if (apiRoute.route === API_ROUTES.login.route) {
+				if (apiRoute === API_ROUTES.login) {
 					response = await axios.post(
 						import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route,
 						null,
@@ -36,12 +36,13 @@ export const useApi = () => {
 							withCredentials: true // Include cookies with the request
 						}
 					);
-				} else if (apiRoute.route === API_ROUTES.addCharacter.route) {
+				} else if (apiRoute === API_ROUTES.addCharacter) {
 					// for a post we send the data via body
 					response = await axios.post(
 						import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route,
-						params,
+						null,
 						{
+							params,
 							headers: {
 								'Content-Type': 'application/json',
 								Authorization: token ? `Bearer ${token}` : undefined
