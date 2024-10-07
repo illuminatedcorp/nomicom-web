@@ -38,18 +38,22 @@
 	{@const week = Math.floor(moment.utc().date() / 7)}
 	<div class="flex flex-col items-center">
 		<div class="flex flex-wrap gap-3 items-center justify-center py-2">
-			<div class="flex items-center bg-slate-800 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2">
+			<div
+				class="flex items-center bg-slate-800 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2 shadow-sm shadow-black"
+			>
 				<div class="text-4xl mr-4 ml-1">{getTotalStrategicForMonth()}</div>
 				<div class="lg:text-xl max-lg:text-lg text-left">Strategic PAPs<br />this month</div>
 			</div>
-			<div class="flex items-center bg-orange-900 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2">
+			<div
+				class="flex items-center bg-orange-900 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2 shadow-sm shadow-black"
+			>
 				<div class="text-4xl mr-4 ml-1">{getTotalPeacetimeForMonth()}</div>
 
 				<div class="lg:text-xl max-lg:text-lg text-left">Peacetime PAPs<br />this month</div>
 			</div>
 		</div>
 
-		<div class="flex flex-col mt-3">
+		<div class="flex flex-col mt-3 shadow-sm shadow-black">
 			<div>
 				{#if getTotalStrategicForMonth() < 8}
 					<div class="flex flex-col items-center gap-2">
@@ -65,7 +69,7 @@
 					</div>
 				{/if}
 
-				<div class="flex gap-2 items-center text-2xl px-10">
+				<div class="flex gap-4 items-center text-4xl px-4 py-2 bg-background-900">
 					<span>0</span>
 					<Progress value={getTotalStrategicForMonth()} max={8} />
 					<span>8</span>
@@ -73,7 +77,7 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col items-start gap-2 mt-3 w-fit mt-3">
+		<div class="flex flex-col items-start gap-2 mt-3 w-fit shadow-sm shadow-black">
 			<div class="flex text-xl bg-black px-3 py-1">
 				Tournament Leaderboard (Week #{week}, {moment
 					.utc()

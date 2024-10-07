@@ -40,7 +40,7 @@
 {#if mainCharacter}
 	<div class="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-2 h-full overflow-y-auto">
 		<div class="flex flex-col max-lg:border-b-2 max-lg:h-fit background-gradient lg:h-full p-3">
-			<div class="flex items-center gap-1 bg-background-900">
+			<div class="flex items-center gap-1 bg-background-900 shadow-sm shadow-black">
 				<img
 					src="https://images.evetech.net/characters/{mainCharacter.eve_id}/portrait"
 					alt="portrait"
@@ -77,34 +77,36 @@
 				</div>
 			</div>
 
-			<div class="flex items-center justify-between bg-black px-2 py-1 mt-3">
-				<div class="text-xl">Your Characters</div>
-				<Button
-					variant="outline"
-					on:click={onAddCharacter}
-					class="flex items-center gap-2 text-base hover:bg-background-800 hover:text-background-50 border-2 border-background-600"
-				>
-					Add Character
-					<i class="text-xs fas fa-external-link-alt transition-none"></i>
-				</Button>
-			</div>
-
-			{#each $userStore.characters as character}
-				<div class="flex items-center gap-2 px-2 py-1 bg-background-900">
-					<div class="text-lg">{character.name} ({character.eve_id})</div>
-					<div class="flex-grow"></div>
-					{#if character.main}
-						<div class="text-base text-primary-50">Main</div>
-					{:else}
-						<div class="text-base text-background-300">Alt</div>
-					{/if}
-					<!-- <Button on:click={onRemoveCharacter}>Remove</Button> -->
+			<div class="flex flex-col shadow-sm shadow-black">
+				<div class="flex items-center justify-between bg-black px-2 py-1 mt-3">
+					<div class="text-xl">Your Characters</div>
+					<Button
+						variant="outline"
+						on:click={onAddCharacter}
+						class="flex items-center gap-2 text-base hover:bg-background-800 hover:text-background-50 border-2 border-background-600"
+					>
+						Add Character
+						<i class="text-xs fas fa-external-link-alt transition-none"></i>
+					</Button>
 				</div>
-			{/each}
+
+				{#each $userStore.characters as character}
+					<div class="flex items-center gap-2 px-2 py-1 bg-background-900">
+						<div class="text-lg">{character.name} ({character.eve_id})</div>
+						<div class="flex-grow"></div>
+						{#if character.main}
+							<div class="text-base text-primary-50">Main</div>
+						{:else}
+							<div class="text-base text-background-300">Alt</div>
+						{/if}
+						<!-- <Button on:click={onRemoveCharacter}>Remove</Button> -->
+					</div>
+				{/each}
+			</div>
 
 			<div class="flex-grow"></div>
 
-			<div class="flex flex-col bg-background-900 text-left">
+			<div class="flex flex-col bg-background-900 text-left shadow-sm shadow-black">
 				<div class="text-2xl bg-black px-2 py-1">Alliance Services</div>
 
 				<div class="px-2">
@@ -163,7 +165,7 @@
 		<div class="flex flex-col text-center items-center justify-center background-gradient h-full">
 			<Tabs.Root value="dashboard" class="flex flex-col w-full h-full" onValueChange={onTabChange}>
 				<Tabs.List
-					class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none py-2"
+					class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none px-3 py-2"
 				>
 					<Tabs.Trigger
 						value="dashboard"
