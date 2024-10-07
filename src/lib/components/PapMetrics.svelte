@@ -15,7 +15,7 @@
 	echarts.registerTheme('illuminated', echartsTheme);
 
 	import { useBirdhouse } from '@/models/useBirdhouse';
-	const { getCharacterPapMetrics } = useBirdhouse();
+	const { getCharacterPapMetrics, getCorporationTopPapMetrics } = useBirdhouse();
 
 	const papTypes = [
 		'beehive',
@@ -47,6 +47,7 @@
 	export let characterId: number;
 
 	let papMetrics = {};
+	let corpTopContributors = [];
 	let barChart;
 	let papTypesPieChart;
 	let shipTypesPieChart;
@@ -65,6 +66,23 @@
 
 	onMount(async () => {
 		papMetrics = await getCharacterPapMetrics(characterId);
+		corpTopContributors = await getCorporationTopPapMetrics(98718341);
+
+		// we set the initial date range to the date of the first PAP entry to the current date
+		if (papMetrics?.papsByDay?.length > 0) {
+			const firstEntryDate = moment(
+				papMetrics.papsByDay[papMetrics.papsByDay.length - 1].entryDate
+			);
+			selectedDateRange = {
+				start: new CalendarDate(
+					firstEntryDate.year(),
+					firstEntryDate.month() + 1,
+					firstEntryDate.date()
+				),
+				end: new CalendarDate(today.year(), today.month() + 1, today.date())
+			};
+		}
+
 		ready = true;
 
 		window.onresize = () => {
@@ -79,9 +97,62 @@
 			barChart = echarts.init(document.getElementById('pap-bar-chart'), 'illuminated');
 		}
 
+		// first up we need to fill in missing date entries with 0s
+		// earliest dates are at the end of the array
+		let byDayFilteredFilled = [];
+		const earliestDate = moment
+			.utc(byDayFiltered[byDayFiltered.length - 1].entryDate)
+			.subtract(1, 'days');
+		const today = moment.utc();
+
+		let currentDate = earliestDate;
+		while (currentDate.isSameOrBefore(today)) {
+			const entry = byDayFiltered.find((entry) => {
+				return moment.utc(entry.entryDate).isSame(currentDate);
+			});
+
+			if (entry) {
+				byDayFilteredFilled.push(entry);
+			} else {
+				byDayFilteredFilled.push({
+					characterId: characterId.toString(),
+					entryDate: currentDate.format('YYYY-MM-DD'),
+					updatedAt: currentDate.toISOString(),
+					total: 0,
+					beehive: 0,
+					corp: 0,
+					cricket: 0,
+					gsol: 0,
+					incursionHq: 0,
+					incursionVg: 0,
+					locust: 0,
+					peacetime: 0,
+					scouts: 0,
+					sigSquad: 0,
+					sigSquadStrategic: 0,
+					strategic: 0,
+					survey: 0,
+					assaultFrigate: 0,
+					capsule: 0,
+					combatBattlecruiser: 0,
+					combatReconShip: 0,
+					electronicAttackShip: 0,
+					interdictor: 0,
+					logisticsFrigate: 0,
+					stealthBomber: 0
+				});
+			}
+
+			currentDate = currentDate.add(1, 'days');
+		}
+
+		byDayFiltered.sort((a, b) => {
+			return moment.utc(a.entryDate).isAfter(moment.utc(b.entryDate)) ? 1 : -1;
+		});
+
 		let barChartDataByType = {};
-		byDayFiltered.forEach((dayEntry) => {
-			const { character_id, entry_date, updated_at, total, ...metrics } = dayEntry;
+		byDayFilteredFilled.forEach((dayEntry) => {
+			const { character_id, entryDate, updated_at, total, ...metrics } = dayEntry;
 
 			Object.keys(metrics).forEach((metricType) => {
 				if (papTypes.includes(metricType)) {
@@ -94,25 +165,11 @@
 			});
 		});
 
-		// then we get the totals for each type
-		let totals = Object.keys(barChartDataByType).map((metricType) => {
-			return barChartDataByType[metricType].reduce((acc, curr) => acc + curr, 0);
-		});
-
-		// then we want to filter out any types that have a total of 0
-		barChartDataByType = Object.keys(barChartDataByType).reduce((acc, curr, index) => {
-			if (totals[index] !== 0) {
-				acc[curr] = barChartDataByType[curr];
-			}
-
-			return acc;
-		}, {});
-
 		barChart.setOption({
 			tooltip: {
 				formatter: function (params) {
-					const { character_id, entry_date, total, updated_at, ...metrics } = byDayFiltered.find(
-						(entry) => entry.entry_date === params.name
+					const { character_id, entryDate, total, updated_at, ...metrics } = byDayFiltered.find(
+						(entry) => entry.entryDate === params.name
 					);
 
 					let returnText = `${params.name}<br/>`;
@@ -127,7 +184,7 @@
 				}
 			},
 			xAxis: {
-				data: byDayFiltered.map((metric) => metric.entry_date)
+				data: byDayFilteredFilled.map((metric) => metric.entryDate)
 			},
 			yAxis: {},
 			series: Object.keys(barChartDataByType).map((metricType) => ({
@@ -155,7 +212,7 @@
 
 		const sumsByType = {};
 		byDayFiltered.forEach((dayEntry) => {
-			const { character_id, entry_date, updated_at, total, ...metrics } = dayEntry;
+			const { character_id, entryDate, updated_at, total, ...metrics } = dayEntry;
 
 			Object.keys(metrics).forEach((metricType) => {
 				if (papTypes.includes(metricType)) {
@@ -210,7 +267,7 @@
 
 		const sumsByType = {};
 		byDayFiltered.forEach((dayEntry) => {
-			const { character_id, entry_date, updated_at, total, ...metrics } = dayEntry;
+			const { character_id, entryDate, updated_at, total, ...metrics } = dayEntry;
 
 			Object.keys(metrics).forEach((metricType) => {
 				if (shipTypes.includes(metricType)) {
@@ -255,20 +312,6 @@
 		});
 	};
 
-	const getTotalStrategicForMonth = () => {
-		// we want the current month formatted as mm/yyyy
-		let currentMonth = moment().format('MM/YYYY');
-		if (!papMetrics.monthlyTotals[currentMonth]) return 0;
-		return papMetrics.monthlyTotals[currentMonth].totalStrategic;
-	};
-
-	const getTotalPeacetimeForMonth = () => {
-		// we want the current month formatted as mm/yyyy
-		let currentMonth = moment().format('MM/YYYY');
-		if (!papMetrics.monthlyTotals[currentMonth]) return 0;
-		return papMetrics.monthlyTotals[currentMonth].totalPeacetime;
-	};
-
 	const onDateRangeChange = (newDateRange) => {
 		if (!papMetrics?.papsByDay) return;
 		if (!newDateRange?.start || !newDateRange?.end) return;
@@ -282,16 +325,19 @@
 			'YYYY-MM-DD'
 		);
 
+		console.log('start', start);
+		console.log('end', end);
+
 		if (start && end) {
 			byDayFiltered = papMetrics.papsByDay.filter((entry) => {
 				return (
-					moment(entry.entry_date).isSameOrAfter(start) &&
-					moment(entry.entry_date).isSameOrBefore(end)
+					moment(entry.entryDate).isSameOrAfter(start) &&
+					moment(entry.entryDate).isSameOrBefore(end)
 				);
 			});
 		} else if (start) {
 			byDayFiltered = papMetrics.papsByDay.filter((entry) => {
-				return moment(entry.entry_date).isSameOrAfter(start);
+				return moment(entry.entryDate).isSameOrAfter(start);
 			});
 		} else {
 			byDayFiltered = papMetrics.papsByDay;
@@ -305,7 +351,7 @@
 	const getTotalPapsByType = () => {
 		let totalPaps = 0;
 		byDayFiltered.forEach((dayEntry) => {
-			const { character_id, entry_date, updated_at, total, ...metrics } = dayEntry;
+			const { character_id, entryDate, updated_at, total, ...metrics } = dayEntry;
 
 			Object.keys(metrics).forEach((metricType) => {
 				if (papTypes.includes(metricType)) {
@@ -320,7 +366,7 @@
 	const getTotalPapsByShipType = () => {
 		let totalPaps = 0;
 		byDayFiltered.forEach((dayEntry) => {
-			const { character_id, entry_date, updated_at, total, ...metrics } = dayEntry;
+			const { character_id, entryDate, updated_at, total, ...metrics } = dayEntry;
 
 			Object.keys(metrics).forEach((metricType) => {
 				if (shipTypes.includes(metricType)) {
@@ -341,6 +387,19 @@
 			}, 700);
 		}
 	}
+
+	export const update = async () => {
+		papMetrics = await getCharacterPapMetrics(characterId);
+		corpTopContributors = await getCorporationTopPapMetrics(98718341);
+
+		onDateRangeChange(selectedDateRange);
+		totalPapsByShipType = getTotalPapsByShipType();
+		totalPapsByType = getTotalPapsByType();
+
+		barChart.resize();
+		papTypesPieChart.resize();
+		shipTypesPieChart.resize();
+	};
 </script>
 
 {#if ready}
@@ -350,19 +409,7 @@
 		</div>
 	{:else}
 		<div class="flex flex-col w-full h-full">
-			<div class="flex flex-wrap gap-3 items-center justify-center background-gradient py-2">
-				<div class="flex items-center bg-slate-800 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2">
-					<div class="text-4xl mr-4 ml-1">{getTotalStrategicForMonth()}</div>
-					<div class="lg:text-xl max-lg:text-lg text-left">Strategic PAPs<br />this month</div>
-				</div>
-				<div class="flex items-center bg-orange-900 lg:px-3 lg:py-2 max-lg:px-3 max-lg:py-2">
-					<div class="text-4xl mr-4 ml-1">{getTotalPeacetimeForMonth()}</div>
-
-					<div class="lg:text-xl max-lg:text-lg text-left">Peacetime PAPs<br />this month</div>
-				</div>
-			</div>
-
-			<div class="flex flex-col flex-grow gap-3 px-3 pt-3 background-gradient bg-grad">
+			<div class="flex flex-col flex-grow gap-3 px-3 pt-3 background-gradient">
 				<div class="text-2xl">Time Range Data</div>
 				<div class="flex flex-col">
 					<div class="flex justify-between items-center px-3">

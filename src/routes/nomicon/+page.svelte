@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 
 	import Button from '$lib/components/ui/button/button.svelte';
+	import * as Tabs from '$lib/components/ui/tabs/index.js';
 
 	import { userStore } from '@/stores/userStore';
 
@@ -10,8 +11,11 @@
 	const { getMainCharacter, redirectToAddCharacter } = useCharacters();
 
 	import PapMetrics from '@/components/PapMetrics.svelte';
+	import Dashboard from '@/components/Dashboard.svelte';
 
 	let mainCharacter = getMainCharacter(get(userStore));
+	let papMetrics;
+	let dashboard;
 
 	onMount(() => {
 		userStore.subscribe(async () => {
@@ -27,6 +31,10 @@
 	// const onRemoveCharacter = () => {
 	// 	console.log('remove character');
 	// };
+
+	const onTabChange = () => {
+		papMetrics.update();
+	};
 </script>
 
 {#if mainCharacter}
@@ -153,7 +161,30 @@
 		</div>
 
 		<div class="flex flex-col text-center items-center justify-center background-gradient h-full">
-			<PapMetrics characterId={mainCharacter.eve_id} />
+			<Tabs.Root value="dashboard" class="flex flex-col w-full h-full" onValueChange={onTabChange}>
+				<Tabs.List
+					class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none py-2"
+				>
+					<Tabs.Trigger
+						value="dashboard"
+						class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50"
+					>
+						Dashboard
+					</Tabs.Trigger>
+					<Tabs.Trigger
+						value="historic"
+						class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50"
+					>
+						Historic PAPs
+					</Tabs.Trigger>
+				</Tabs.List>
+				<Tabs.Content value="dashboard" class="overflow-hidden flex-grow">
+					<Dashboard bind:this={dashboard} characterId={mainCharacter.eve_id} />
+				</Tabs.Content>
+				<Tabs.Content value="historic" class="overflow-hidden flex-grow">
+					<PapMetrics bind:this={papMetrics} characterId={mainCharacter.eve_id} />
+				</Tabs.Content>
+			</Tabs.Root>
 		</div>
 	</div>
 {/if}
