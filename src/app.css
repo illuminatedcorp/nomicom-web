@@ -41,7 +41,7 @@
 
 @layer components {
   .background-gradient {
-    @apply from-black to-background-800/50;
+    @apply from-black/50 to-background-800/40;
     background-image: linear-gradient(160deg, var(--tw-gradient-stops));
   }
 }
