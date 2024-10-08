@@ -4,5 +4,6 @@ export const userStore = writable({
 	valid: false,
 	initialized: false,
 	characters: [],
-	roles: []
+	roles: [],
+	hasValidWardenCheck: false
 });

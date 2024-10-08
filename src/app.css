@@ -118,3 +118,7 @@ body {
   background-color: var(--color-primary-200);
   border-radius: 10px;
 }
+
+.markdown-body {
+  background: transparent !important;
+}

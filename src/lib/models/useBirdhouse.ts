@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { toast } from 'svelte-sonner';
 
 export const useBirdhouse = () => {
 	const getCharacterPapMetrics = async (characterId: number) => {
@@ -69,8 +70,78 @@ export const useBirdhouse = () => {
 		}
 	};
 
+	const getWikiIndex = async () => {
+		try {
+			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/wiki/index';
+
+			const response = await fetch(url, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			return response.json();
+		} catch (error) {
+			console.error('Error getting wiki index:', error);
+			return null;
+		}
+	};
+
+	const getWikiPage = async (slug: string) => {
+		try {
+			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/wiki/page/' + slug;
+
+			const response = await fetch(url, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			return response.json();
+		} catch (error) {
+			console.error('Error getting wiki page:', error);
+			return null;
+		}
+	};
+
+	const saveWikiPage = async (pageData) => {
+		try {
+			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/wiki/page';
+
+			const response = await fetch(url, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					id: pageData.id,
+					slug: pageData.slug,
+					title: pageData.title,
+					content: pageData.content,
+					status: pageData.status
+				})
+			});
+
+			if (response.status === 200) {
+				const data = await response.json();
+				return data;
+			} else {
+				toast.error('Error saving wiki page. Please try again.');
+				return null;
+			}
+		} catch (error) {
+			console.error('Error saving wiki page:', error);
+			return null;
+		}
+	};
+
 	return {
 		getCharacterPapMetrics,
-		getCorporationTopPapMetrics
+		getCorporationTopPapMetrics,
+		getWikiIndex,
+		getWikiPage,
+		saveWikiPage
 	};
 };

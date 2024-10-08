@@ -14,6 +14,7 @@ export const useUsers = () => {
 
 	const getUserData = async () => {
 		const user = await apiCall(API_ROUTES.userData, {});
+
 		if (user) {
 			// if (user.characters.length > 0) {
 			// 	// we want to go populate the character records with some ESI information to make our lives easier
@@ -25,14 +26,16 @@ export const useUsers = () => {
 				valid: true,
 				initialized: true,
 				characters: user.characters,
-				roles: user.roles
+				roles: user.roles,
+				hasValidWardenCheck: user.has_valid_warden_check
 			});
 		} else {
 			userStore.set({
 				valid: false,
 				initialized: true,
 				characters: [],
-				roles: []
+				roles: [],
+				hasValidWardenCheck: false
 			});
 		}
 	};
