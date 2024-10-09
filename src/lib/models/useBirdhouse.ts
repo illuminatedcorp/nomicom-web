@@ -31,7 +31,7 @@ export const useBirdhouse = () => {
 			// week 2 = 8th - 14th
 			// week 3 = 15th - 21st
 			// week 4 = 22nd - 28th
-			const week = Math.floor(moment.utc().date() / 7) - 1;
+			const week = Math.ceil(moment.utc().date() / 7) - 1;
 
 			// then we determine the start and date
 			// we want the start date to be at the beginning of day

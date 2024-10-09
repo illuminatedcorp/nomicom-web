@@ -35,7 +35,7 @@
 </script>
 
 {#if ready}
-	{@const week = Math.floor(moment.utc().date() / 7)}
+	{@const week = Math.ceil(moment.utc().date() / 7)}
 	<div class="flex flex-col items-center">
 		<div class="flex flex-wrap gap-3 items-center justify-center py-2">
 			<div
