@@ -244,10 +244,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.buyback-grid {
-		display: grid;
-		grid-template-columns: 110px 1fr 80px 100px 1fr 150px;
-	}
-</style>
