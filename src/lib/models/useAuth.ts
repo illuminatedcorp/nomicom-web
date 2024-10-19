@@ -149,9 +149,31 @@ export const useAuth = () => {
 		}
 	};
 
+	const hasPermission = (permission) => {
+		// get the user data
+		let userData = get(userStore);
+
+		if (userData.valid) {
+			let userPermissions = getPermissionList(userData);
+
+			if (userPermissions.includes('admin')) {
+				return true;
+			}
+
+			if (userPermissions.includes(permission)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	};
+
 	return {
 		onLoad,
 		safeGoto,
-		hasAccessToRoute
+		hasAccessToRoute,
+		hasPermission
 	};
 };

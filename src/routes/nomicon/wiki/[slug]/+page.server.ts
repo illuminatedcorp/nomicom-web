@@ -1,5 +1,5 @@
-import { useBirdhouse } from '@/models/useBirdhouse.js';
-const { getWikiIndex } = useBirdhouse();
+import { useWiki } from '@/models/useWiki.js';
+const { getWikiIndex } = useWiki();
 
 /** @type {import('./$types').EntryGenerator} */
 export async function entries() {

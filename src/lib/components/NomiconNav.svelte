@@ -20,7 +20,7 @@
 			</div>
 			<span class="max-md:hidden">Home</span>
 		</Button>
-		<!-- {#if hasAccessToRoute(WEB_ROUTES.wiki)}
+		{#if hasAccessToRoute(WEB_ROUTES.wiki)}
 			<Button
 				on:click={() => safeGoto(WEB_ROUTES.wiki)}
 				variant="ghost"
@@ -29,7 +29,7 @@
 			>
 				Wiki
 			</Button>
-		{/if} -->
+		{/if}
 		{#if hasAccessToRoute(WEB_ROUTES.buyback)}
 			<Button
 				on:click={() => safeGoto(WEB_ROUTES.buyback)}

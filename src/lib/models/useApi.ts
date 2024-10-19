@@ -13,8 +13,15 @@ export const useApi = () => {
 			let response;
 
 			if (apiRoute.method === 'GET') {
+				let url = import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route;
+
+				// if there is an ID in the route we need to replace it with the ID from the params
+				if (apiRoute.route.includes(':id')) {
+					url = url.replace(':id', params.id);
+				}
+
 				// for get data is sent via query params
-				response = await axios.get(import.meta.env.VITE_SERVER_HOST + '/api/v1' + apiRoute.route, {
+				response = await axios.get(url, {
 					params,
 					headers: {
 						'Content-Type': 'application/json',

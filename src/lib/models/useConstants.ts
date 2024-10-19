@@ -18,7 +18,12 @@ export const API_ROUTES = {
 	deleteBuybackItem: { method: 'DELETE', route: '/buyback_items/:id' },
 	cancelBuybackRequest: { method: 'PUT', route: '/buyback_requests/:id/cancel' },
 	completeBuybackRequest: { method: 'PUT', route: '/buyback_requests/:id/complete' },
-	rejectBuybackRequest: { method: 'PUT', route: '/buyback_requests/:id/reject' }
+	rejectBuybackRequest: { method: 'PUT', route: '/buyback_requests/:id/reject' },
+	getWikiIndex: { method: 'GET', route: '/wiki_pages' },
+	createWikiPage: { method: 'POST', route: '/wiki_pages' },
+	getWikiPage: { method: 'GET', route: '/wiki_pages/:id' },
+	updateWikiPage: { method: 'PUT', route: '/wiki_pages/:id' },
+	deleteWikiPage: { method: 'DELETE', route: '/wiki_pages/:id' }
 };
 
 export const WEB_ROUTES = {
@@ -52,7 +57,7 @@ export const ROUTE_PERMISSIONS = {
 	[WEB_ROUTES.nomicon]: [],
 	[WEB_ROUTES.buyback]: ['index_buyback_requests', 'create_buyback_request'],
 	[WEB_ROUTES.buybackAdmin]: ['admin'],
-	[WEB_ROUTES.wiki]: ['admin'],
+	[WEB_ROUTES.wiki]: ['index_wiki_pages'],
 	[WEB_ROUTES.admin]: ['admin'],
 	[WEB_ROUTES.api]: ['admin']
 };

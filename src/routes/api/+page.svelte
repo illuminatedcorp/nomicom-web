@@ -5,7 +5,7 @@
 	onMount(() => {
 		SwaggerUI({
 			dom_id: '#swagger-ui',
-			url: 'https://nomicon.illuminatedcorp.com/api/v1/openapi',
+			url: import.meta.env.VITE_SERVER_HOST + '/api/v1/openapi',
 			presets: [SwaggerUI.presets.apis],
 			plugins: [SwaggerUI.plugins.DownloadUrl],
 			layout: 'BaseLayout',
