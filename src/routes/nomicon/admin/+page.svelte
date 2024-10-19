@@ -38,7 +38,7 @@
 				Roles
 			</Tabs.Trigger>
 		</Tabs.List>
-		<Tabs.Content value="users" class="overflow-hidden flex-grow">
+		<Tabs.Content value="dashboard" class="overflow-hidden flex-grow">
 			<AdminDashboard bind:this={dashboard} />
 		</Tabs.Content>
 		<Tabs.Content value="users" class="overflow-hidden flex-grow">
