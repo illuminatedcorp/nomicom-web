@@ -24,7 +24,7 @@
 
 		if (path.includes(WEB_ROUTES.news)) {
 			// pattern is host/nomicon/wiki/slug
-			let slugRegex = /\/nomicon\/wiki\/(.*)/g;
+			let slugRegex = /\/nomicon\/news\/(.*)/g;
 			let slug = slugRegex.exec(path)[1];
 			if (slug) {
 				// we want to save the target slug in local storage
