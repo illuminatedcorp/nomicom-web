@@ -38,8 +38,10 @@
 </script>
 
 {#if mainCharacter}
-	<div class="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-2 h-full overflow-y-auto">
-		<div class="flex flex-col max-lg:border-b-2 max-lg:h-fit background-gradient lg:h-full p-3">
+	<div class="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-3 h-full overflow-y-auto">
+		<div
+			class="flex flex-col max-lg:mb-6 lg:col-span-1 max-lg:h-fit background-gradient lg:h-full p-3"
+		>
 			<div class="flex items-center gap-1 bg-background-900 shadow-sm shadow-black">
 				<img
 					src="https://images.evetech.net/characters/{mainCharacter.eve_id}/portrait"
@@ -162,7 +164,9 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col text-center items-center justify-center background-gradient h-full">
+		<div
+			class="flex flex-col lg:col-span-2 text-center items-center justify-center background-gradient h-full"
+		>
 			<Tabs.Root value="dashboard" class="flex flex-col w-full h-full" onValueChange={onTabChange}>
 				<Tabs.List
 					class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none px-3 py-2"

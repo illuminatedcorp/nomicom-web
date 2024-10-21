@@ -23,7 +23,12 @@ export const API_ROUTES = {
 	createWikiPage: { method: 'POST', route: '/wiki_pages' },
 	getWikiPage: { method: 'GET', route: '/wiki_pages/:id' },
 	updateWikiPage: { method: 'PUT', route: '/wiki_pages/:id' },
-	deleteWikiPage: { method: 'DELETE', route: '/wiki_pages/:id' }
+	deleteWikiPage: { method: 'DELETE', route: '/wiki_pages/:id' },
+	getNewsIndex: { method: 'GET', route: '/news_posts' },
+	createNewsPost: { method: 'POST', route: '/news_posts' },
+	getNewsPost: { method: 'GET', route: '/news_posts/:id' },
+	updateNewsPost: { method: 'PUT', route: '/news_posts/:id' },
+	deleteNewsPost: { method: 'DELETE', route: '/news_posts/:id' }
 };
 
 export const WEB_ROUTES = {
@@ -37,7 +42,8 @@ export const WEB_ROUTES = {
 	buybackAdmin: '/nomicon/buyback/admin',
 	wiki: '/nomicon/wiki',
 	admin: '/nomicon/admin',
-	api: '/api'
+	api: '/api',
+	news: '/nomicon/news'
 };
 
 export const BUYBACK_STATES = {
@@ -59,5 +65,6 @@ export const ROUTE_PERMISSIONS = {
 	[WEB_ROUTES.buybackAdmin]: ['admin'],
 	[WEB_ROUTES.wiki]: ['index_wiki_pages'],
 	[WEB_ROUTES.admin]: ['admin'],
-	[WEB_ROUTES.api]: ['admin']
+	[WEB_ROUTES.api]: ['admin'],
+	[WEB_ROUTES.news]: ['index_news_posts']
 };

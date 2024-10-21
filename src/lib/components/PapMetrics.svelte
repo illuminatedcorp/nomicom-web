@@ -15,7 +15,7 @@
 	echarts.registerTheme('illuminated', echartsTheme);
 
 	import { useBirdhouse } from '@/models/useBirdhouse';
-	const { getCharacterPapMetrics, getCorporationTopPapMetrics } = useBirdhouse();
+	const { getCharacterPapMetrics } = useBirdhouse();
 
 	const papTypes = [
 		'beehive',
@@ -324,9 +324,6 @@
 			newDateRange?.end?.year + '-' + newDateRange?.end?.month + '-' + newDateRange?.end?.day,
 			'YYYY-MM-DD'
 		);
-
-		console.log('start', start);
-		console.log('end', end);
 
 		if (start && end) {
 			byDayFiltered = papMetrics.papsByDay.filter((entry) => {

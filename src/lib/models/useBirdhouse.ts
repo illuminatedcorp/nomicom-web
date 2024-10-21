@@ -20,7 +20,46 @@ export const useBirdhouse = () => {
 		}
 	};
 
-	const getCorporationTopPapMetrics = async (corporationId: number) => {
+	const getCorporationTopContributorPapMetrics = async (corporationId: number) => {
+		try {
+			// first we get the current month
+			const currentMonth = moment.utc().month();
+
+			// we want the start of the month
+			const startDate = moment.utc().month(currentMonth).date(1).startOf('day');
+			// and the end the of the month, which should be the start of the first day of the next month
+			const endDate = moment
+				.utc()
+				.month(currentMonth + 1)
+				.date(1)
+				.startOf('day');
+
+			const url =
+				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
+				'/topPaps?corporationId=' +
+				corporationId +
+				'&startDate=' +
+				startDate.toISOString() +
+				'&endDate=' +
+				endDate.toISOString() +
+				'&minimumPaps=8' +
+				'&numResults=5';
+
+			const response = await fetch(url, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			return response.json();
+		} catch (error) {
+			console.error('Error getting corporation top PAP metrics:', error);
+			return null;
+		}
+	};
+
+	const getCorporationEventMetrics = async (corporationId: number) => {
 		try {
 			// first we get the current month
 			const currentMonth = moment.utc().month();
@@ -54,8 +93,8 @@ export const useBirdhouse = () => {
 				'&startDate=' +
 				startDate.toISOString() +
 				'&endDate=' +
-				endDate.toISOString();
-
+				endDate.toISOString() +
+				'&numResults=5';
 			const response = await fetch(url, {
 				method: 'GET',
 				headers: {
@@ -139,7 +178,8 @@ export const useBirdhouse = () => {
 
 	return {
 		getCharacterPapMetrics,
-		getCorporationTopPapMetrics,
+		getCorporationTopContributorPapMetrics,
+		getCorporationEventMetrics,
 		getWikiIndex,
 		getWikiPage,
 		saveWikiPage

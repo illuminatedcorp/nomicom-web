@@ -44,6 +44,11 @@
     @apply from-black/50 to-background-800/40;
     background-image: linear-gradient(160deg, var(--tw-gradient-stops));
   }
+
+  .input-underlined {
+    @apply !rounded-none !border-t-0 !border-r-0 !border-l-0 !border-background-50;
+    border-style: solid
+  }
 }
 
 @layer utilities {

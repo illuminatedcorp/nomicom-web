@@ -3,33 +3,33 @@
 	import { EventBus, Events } from '$lib/eventbus.js';
 
 	import Button from '$lib/components/ui/button/button.svelte';
-	import Separator from '@/components/ui/separator/separator.svelte';
 
-	import { useWiki } from '@/models/useWiki';
-	const { getWikiIndex, createWikiPage } = useWiki();
+	import { useNews } from '@/models/useNews';
+	const { getNewsIndex, createNewsPost } = useNews();
 
 	import { WEB_ROUTES } from '@/models/useConstants.js';
 	import { useAuth } from '@/models/useAuth.js';
+	import Separator from '@/components/ui/separator/separator.svelte';
 	const { safeGoto, hasPermission } = useAuth();
 
-	let wikiIndex = [];
+	let newsIndex = [];
 
 	onMount(async () => {
-		wikiIndex = await getWikiIndex();
+		newsIndex = await getNewsIndex();
 	});
 
-	const gotoPage = (slug) => {
-		safeGoto(WEB_ROUTES.wiki + '/' + slug);
+	const gotoPost = (slug) => {
+		safeGoto(WEB_ROUTES.news + '/' + slug);
 	};
 
-	const onNewWikiPage = async () => {
-		await createWikiPage();
-		wikiIndex = await getWikiIndex();
-		gotoPage('new-page');
+	const onNewNewsPost = async () => {
+		await createNewsPost();
+		newsIndex = await getNewsIndex();
+		gotoPost('new-post');
 	};
 
 	EventBus.on(Events.UPDATE_WIKI_INDEX, async () => {
-		wikiIndex = await getWikiIndex();
+		newsIndex = await getNewsIndex();
 	});
 </script>
 
@@ -37,27 +37,27 @@
 	<div class="flex flex-col items-start bg-background-900 pt-1 pb-3 px-3 max-w-48">
 		<div class="flex flex-col items-start flex-grow overflow-y-auto">
 			<Button
-				on:click={() => gotoPage('')}
+				on:click={() => gotoPost('')}
 				variant="link"
-				class="text-md text-background-50 hover:text-primary-50 p-0">Wiki Home</Button
+				class="text-md text-background-50 hover:text-primary-50 p-0">News Home</Button
 			>
 
 			<Separator class="my-2" />
 
-			{#each wikiIndex as page}
+			{#each newsIndex as post}
 				<Button
-					on:click={() => gotoPage(page.slug)}
+					on:click={() => gotoPost(post.slug)}
 					variant="link"
 					class="flex justify-start text-md text-background-50 hover:text-primary-50 p-0 w-full"
 				>
-					<span class="truncate transition-none">{page.name}</span>
+					<span class="truncate transition-none">{post.title}</span>
 				</Button>
 			{/each}
 		</div>
 
-		{#if hasPermission('create_wiki_page')}
+		{#if hasPermission('create_news_post')}
 			<!-- <Separator /> -->
-			<Button on:click={onNewWikiPage} class="w-full">+ New Page</Button>
+			<Button on:click={onNewNewsPost} class="w-full">+ New Post</Button>
 		{/if}
 	</div>
 

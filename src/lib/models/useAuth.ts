@@ -116,6 +116,10 @@ export const useAuth = () => {
 				permissions = ROUTE_PERMISSIONS[WEB_ROUTES.wiki];
 			}
 
+			if (route.includes(WEB_ROUTES.news)) {
+				permissions = ROUTE_PERMISSIONS[WEB_ROUTES.news];
+			}
+
 			if (permissions === undefined) {
 				// we tried to call this route without defined permissions, which is a bug
 				// we don't error out, but we don't let them through either

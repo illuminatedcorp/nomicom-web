@@ -16,7 +16,7 @@
 	import { WEB_ROUTES } from '@/models/useConstants.js';
 	import { useAuth } from '@/models/useAuth.js';
 	import Input from '@/components/ui/input/input.svelte';
-	const { safeGoto } = useAuth();
+	const { safeGoto, hasPermission } = useAuth();
 
 	let slug;
 	let pageData;
@@ -82,6 +82,12 @@
 			safeGoto(WEB_ROUTES.wiki);
 		}
 	};
+
+	const onCancelEdit = () => {
+		editMode = false;
+
+		content = pageData.body;
+	};
 </script>
 
 <div class="flex pl-8 w-full">
@@ -93,22 +99,28 @@
 				{/if}
 			</div>
 
-			<div class="flex gap-2">
-				{#if editMode}
-					<Button on:click={onSavePage} variant="ghost">
-						<i class="fas fa-save"></i>
-					</Button>
-				{:else}
-					<Button on:click={onEditPage} variant="ghost">
-						<i class="fas fa-edit"></i>
-					</Button>
+			{#if hasPermission('update_wiki_page') || hasPermission('delete_wiki_page')}
+				<div class="flex gap-2">
+					{#if editMode}
+						<Button on:click={onSavePage} variant="ghost">
+							<i class="fas fa-save"></i>
+						</Button>
 
-					<Button on:click={onDeletePage} variant="ghost">
-						<i class="fas fa-trash"></i>
-					</Button>
-				{/if}
-				<!-- <button class="btn btn-primary">History</button> -->
-			</div>
+						<Button on:click={onCancelEdit} variant="ghost">
+							<i class="fas fa-times"></i>
+						</Button>
+					{:else}
+						<Button on:click={onEditPage} variant="ghost">
+							<i class="fas fa-edit"></i>
+						</Button>
+
+						<Button on:click={onDeletePage} variant="ghost">
+							<i class="fas fa-trash"></i>
+						</Button>
+					{/if}
+					<!-- <button class="btn btn-primary">History</button> -->
+				</div>
+			{/if}
 		</div>
 
 		{#if editMode}
