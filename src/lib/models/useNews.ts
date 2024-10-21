@@ -18,6 +18,9 @@ export type NewsPost = {
 export const useNews = () => {
 	const getNewsIndex = async (): Promise<NewsPost[]> => {
 		const response = await apiCall(API_ROUTES.getNewsIndex, {});
+		if (!response) {
+			return [];
+		}
 
 		if (
 			hasPermission('admin') ||

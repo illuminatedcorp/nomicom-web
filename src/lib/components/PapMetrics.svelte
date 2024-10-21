@@ -47,7 +47,6 @@
 	export let characterId: number;
 
 	let papMetrics = {};
-	let corpTopContributors = [];
 	let barChart;
 	let papTypesPieChart;
 	let shipTypesPieChart;
@@ -66,7 +65,7 @@
 
 	onMount(async () => {
 		papMetrics = await getCharacterPapMetrics(characterId);
-		corpTopContributors = await getCorporationTopPapMetrics(98718341);
+		// corpTopContributors = await getCorporationTopPapMetrics(98718341);
 
 		// we set the initial date range to the date of the first PAP entry to the current date
 		if (papMetrics?.papsByDay?.length > 0) {
@@ -387,7 +386,7 @@
 
 	export const update = async () => {
 		papMetrics = await getCharacterPapMetrics(characterId);
-		corpTopContributors = await getCorporationTopPapMetrics(98718341);
+		// corpTopContributors = await getCorporationTopPapMetrics(98718341);
 
 		onDateRangeChange(selectedDateRange);
 		totalPapsByShipType = getTotalPapsByShipType();
