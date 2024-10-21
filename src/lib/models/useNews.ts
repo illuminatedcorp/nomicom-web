@@ -31,7 +31,7 @@ export const useNews = () => {
 			return response.news_posts;
 		} else {
 			const filteredPosts = response.news_posts.filter((post) => {
-				return post.published_at !== null || moment(post.published_at).isBefore(moment());
+				return post.published_at !== null && moment(post.published_at).isBefore(moment());
 			});
 			return filteredPosts;
 		}
@@ -42,7 +42,7 @@ export const useNews = () => {
 
 		// the feed should never return unpublished posts
 		const filteredPosts = index.filter((post) => {
-			return post.published_at !== null || moment(post.published_at).isBefore(moment());
+			return post.published_at !== null && moment(post.published_at).isBefore(moment());
 		});
 
 		// only return the first 5 posts
