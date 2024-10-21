@@ -18,7 +18,7 @@
 	import { useAuth } from '@/models/useAuth.js';
 	const { safeGoto } = useAuth();
 
-	export let characterId;
+	export let characterIds: number[];
 
 	let ready = false;
 	let papMetrics = {};
@@ -27,7 +27,7 @@
 	let newsFeed = [];
 
 	onMount(async () => {
-		papMetrics = await getCharacterPapMetrics(characterId);
+		papMetrics = await getCharacterPapMetrics(characterIds);
 		eventLeaderboard = await getCorporationEventMetrics(98718341);
 		corpTopContributors = await getCorporationTopContributorPapMetrics(98718341);
 		newsFeed = await getNewsFeed();

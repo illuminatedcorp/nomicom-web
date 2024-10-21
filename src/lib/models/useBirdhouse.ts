@@ -2,9 +2,12 @@ import moment from 'moment';
 import { toast } from 'svelte-sonner';
 
 export const useBirdhouse = () => {
-	const getCharacterPapMetrics = async (characterId: number) => {
+	const getCharacterPapMetrics = async (characterIds: number[]) => {
 		try {
-			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/paps?characterId=' + characterId;
+			const url =
+				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
+				'/paps?characterIds=' +
+				JSON.stringify(characterIds);
 
 			const response = await fetch(url, {
 				method: 'GET',

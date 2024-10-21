@@ -14,6 +14,8 @@
 	import Dashboard from '@/components/Dashboard.svelte';
 
 	let mainCharacter = getMainCharacter(get(userStore));
+	let characterIds = get(userStore).characters.map((c) => c.eve_id);
+
 	let papMetrics;
 	let dashboard;
 
@@ -21,6 +23,7 @@
 		userStore.subscribe(async () => {
 			let user = get(userStore);
 			mainCharacter = getMainCharacter(user);
+			characterIds = user.characters.map((c) => c.eve_id);
 		});
 	});
 
@@ -185,10 +188,10 @@
 					</Tabs.Trigger>
 				</Tabs.List>
 				<Tabs.Content value="dashboard" class="overflow-hidden flex-grow">
-					<Dashboard bind:this={dashboard} characterId={mainCharacter.eve_id} />
+					<Dashboard bind:this={dashboard} {characterIds} />
 				</Tabs.Content>
 				<Tabs.Content value="historic" class="overflow-hidden flex-grow">
-					<PapMetrics bind:this={papMetrics} characterId={mainCharacter.eve_id} />
+					<PapMetrics bind:this={papMetrics} {characterIds} />
 				</Tabs.Content>
 			</Tabs.Root>
 		</div>

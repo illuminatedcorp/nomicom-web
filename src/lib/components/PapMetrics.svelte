@@ -44,7 +44,7 @@
 		'stealth_bomber'
 	];
 
-	export let characterId: number;
+	export let characterIds: number[];
 
 	let papMetrics = {};
 	let barChart;
@@ -64,7 +64,7 @@
 	};
 
 	onMount(async () => {
-		papMetrics = await getCharacterPapMetrics(characterId);
+		papMetrics = await getCharacterPapMetrics(characterIds);
 		// corpTopContributors = await getCorporationTopPapMetrics(98718341);
 
 		// we set the initial date range to the date of the first PAP entry to the current date
@@ -385,7 +385,7 @@
 	}
 
 	export const update = async () => {
-		papMetrics = await getCharacterPapMetrics(characterId);
+		papMetrics = await getCharacterPapMetrics([characterId]);
 		// corpTopContributors = await getCorporationTopPapMetrics(98718341);
 
 		onDateRangeChange(selectedDateRange);
