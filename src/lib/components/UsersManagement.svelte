@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { toast } from 'svelte-sonner';
+	import debounce from 'lodash/debounce';
 
 	import { useRoles } from '@/models/useRoles';
 	const { getAllRoles } = useRoles();
@@ -9,16 +10,20 @@
 	const { getAllUsers, updateUserRoles } = useUsers();
 
 	import { useCharacters } from '@/models/useCharacters';
+	import Input from './ui/input/input.svelte';
 	const { getMainCharacter } = useCharacters();
 
 	let selectedUser = null;
+	let userSearchTerm = '';
 
 	let users = [];
+	let filteredUsers = [];
 	let allRoles = [];
 
 	onMount(async () => {
 		users = await getAllUsers();
 		allRoles = await getAllRoles();
+		filteredUsers = users;
 	});
 
 	const onChangeRoles = async (role) => {
@@ -46,6 +51,23 @@
 		return roleIds.includes(role.id);
 	};
 
+	const searchUsers = debounce(async () => {
+		if (userSearchTerm === '') {
+			filteredUsers = users;
+			return;
+		}
+
+		filteredUsers = users.filter((user) => {
+			const character = getMainCharacter(user);
+			return character.name.toLowerCase().includes(userSearchTerm.toLowerCase());
+		});
+	}, 300);
+
+	$: {
+		userSearchTerm;
+		searchUsers();
+	}
+
 	export const update = async () => {
 		users = await getAllUsers();
 		allRoles = await getAllRoles();
@@ -61,14 +83,21 @@
 			<div class="flex items-center min-w-48 border-b-4 border-black bg-black py-1 px-2">
 				<div>Users</div>
 			</div>
-			{#each users as user}
-				<button
-					on:click={() => (selectedUser = user)}
-					class="flex py-1 px-2 bg-background-800 hover:bg-background-700 border-b-2 border-background-600"
-				>
-					{getMainCharacter(user).name}
-				</button>
-			{/each}
+			<Input
+				bind:value={userSearchTerm}
+				class="border-background-600 my-1 p-2"
+				placeholder="Search users..."
+			/>
+			<div class="overflow-y-auto">
+				{#each filteredUsers as user}
+					<button
+						on:click={() => (selectedUser = user)}
+						class="flex py-1 px-2 bg-background-800 hover:bg-background-700 border-b-2 border-background-600 w-full"
+					>
+						{getMainCharacter(user).name}
+					</button>
+				{/each}
+			</div>
 		</div>
 
 		<div class="flex flex-col flex-grow border-2 border-black bg-background-900">
