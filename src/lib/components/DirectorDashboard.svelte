@@ -7,7 +7,7 @@
 		<iframe
 			bind:this={iframe}
 			title="PAP Metrics"
-			src="http://finance.birdhouse.ink/public/dashboard/e3ba0b98-b0bc-42d1-9095-f31a389958eb#theme=night&bordered=false&titled=false"
+			src="https://finance.birdhouse.ink/public/dashboard/e3ba0b98-b0bc-42d1-9095-f31a389958eb#theme=night&bordered=false&titled=false"
 			allowtransparency
 			class="testing-iframe"
 		></iframe>
