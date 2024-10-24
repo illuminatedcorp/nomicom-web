@@ -114,7 +114,7 @@
 				byDayFilteredFilled.push(entry);
 			} else {
 				byDayFilteredFilled.push({
-					characterId: characterId.toString(),
+					// characterId: characterId.toString(),
 					entryDate: currentDate.format('YYYY-MM-DD'),
 					updatedAt: currentDate.toISOString(),
 					total: 0,
@@ -385,7 +385,7 @@
 	}
 
 	export const update = async () => {
-		papMetrics = await getCharacterPapMetrics([characterId]);
+		papMetrics = await getCharacterPapMetrics(characterIds);
 		// corpTopContributors = await getCorporationTopPapMetrics(98718341);
 
 		onDateRangeChange(selectedDateRange);

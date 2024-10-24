@@ -174,10 +174,28 @@ export const useAuth = () => {
 		}
 	};
 
+	const hasRole = (role) => {
+		// get the user data
+		let userData = get(userStore);
+
+		if (userData.valid) {
+			let roleNames = userData.roles.map((role) => role.name.toLowerCase());
+
+			if (roleNames.includes(role)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	};
+
 	return {
 		onLoad,
 		safeGoto,
 		hasAccessToRoute,
-		hasPermission
+		hasPermission,
+		hasRole
 	};
 };

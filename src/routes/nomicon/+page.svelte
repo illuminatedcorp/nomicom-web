@@ -10,8 +10,12 @@
 	import { useCharacters } from '@/models/useCharacters';
 	const { getMainCharacter, redirectToAddCharacter } = useCharacters();
 
+	import { useAuth } from '@/models/useAuth';
+	const { hasRole } = useAuth();
+
 	import PapMetrics from '@/components/PapMetrics.svelte';
 	import Dashboard from '@/components/Dashboard.svelte';
+	import DirectorDashboard from '@/components/DirectorDashboard.svelte';
 
 	let mainCharacter = getMainCharacter(get(userStore));
 	let characterIds = get(userStore).characters.map((c) => c.eve_id);
@@ -186,6 +190,17 @@
 					>
 						Historic PAPs
 					</Tabs.Trigger>
+
+					<div class="flex-grow"></div>
+
+					{#if hasRole('director')}
+						<Tabs.Trigger
+							value="directors"
+							class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50"
+						>
+							Director Dashboard
+						</Tabs.Trigger>
+					{/if}
 				</Tabs.List>
 				<Tabs.Content value="dashboard" class="overflow-hidden flex-grow">
 					<Dashboard bind:this={dashboard} {characterIds} />
@@ -193,6 +208,11 @@
 				<Tabs.Content value="historic" class="overflow-hidden flex-grow">
 					<PapMetrics bind:this={papMetrics} {characterIds} />
 				</Tabs.Content>
+				{#if hasRole('director')}
+					<Tabs.Content value="directors" class="overflow-hidden flex-grow">
+						<DirectorDashboard />
+					</Tabs.Content>
+				{/if}
 			</Tabs.Root>
 		</div>
 	</div>
