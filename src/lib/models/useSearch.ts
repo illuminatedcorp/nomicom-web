@@ -65,9 +65,22 @@ export const useSearch = () => {
 		return items;
 	};
 
+	const getItemMarketGroup = (itemId: number) => {
+		const item = itemsDataArray.find((item: any) => {
+			return item.itemTypeID === itemId;
+		});
+
+		const marketGroup = marketGroupsDataArray.find((marketGroup: any) => {
+			return marketGroup.marketGroupID === item.marketGroupID;
+		});
+
+		return marketGroup;
+	};
+
 	return {
 		search,
 		searchLocations,
-		getItemsByMarketGroup
+		getItemsByMarketGroup,
+		getItemMarketGroup
 	};
 };
