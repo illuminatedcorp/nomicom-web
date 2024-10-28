@@ -94,7 +94,7 @@
 						on:click={() => (selectedUser = user)}
 						class="flex py-1 px-2 bg-background-800 hover:bg-background-700 border-b-2 border-background-600 w-full"
 					>
-						{getMainCharacter(user).name}
+						{getMainCharacter(user)?.name || 'No Main Character'}
 					</button>
 				{/each}
 			</div>
@@ -106,7 +106,9 @@
 			{#if selectedUser !== null}
 				<div class="flex flex-col px-2 pt-2 overflow-hidden">
 					<div class="flex gap-4 items-end justify-between">
-						<div class="text-2xl">{getMainCharacter(selectedUser).name}</div>
+						<div class="text-2xl">
+							{getMainCharacter(selectedUser)?.name || 'No Main Character'}
+						</div>
 
 						<!-- <Button
 							on:click={onDeleteUser}
@@ -139,7 +141,6 @@
 										<div class="flex items-center gap-2 py-1 px-2 border-b-2 border-background-800">
 											<input
 												type="checkbox"
-												disabled={role.name.toLowerCase() === 'admin'}
 												checked={hasRole(role)}
 												on:change={() => onChangeRoles(role)}
 											/>

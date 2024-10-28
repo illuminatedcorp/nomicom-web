@@ -267,13 +267,15 @@
 
 				<div class="flex-grow"></div>
 
-				<Button on:click={onEditPost} variant="ghost">
-					<i class="fas fa-edit"></i>
-				</Button>
+				{#if hasPermission('update_news_post') || hasPermission('delete_news_post')}
+					<Button on:click={onEditPost} variant="ghost">
+						<i class="fas fa-edit"></i>
+					</Button>
 
-				<Button on:click={onDeletePost} variant="ghost">
-					<i class="fas fa-trash"></i>
-				</Button>
+					<Button on:click={onDeletePost} variant="ghost">
+						<i class="fas fa-trash"></i>
+					</Button>
+				{/if}
 			</div>
 		{/if}
 

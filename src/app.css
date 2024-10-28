@@ -126,4 +126,8 @@ body {
 
 .markdown-body {
   background: transparent !important;
+
+  ul {
+    list-style-type: circle;
+  }
 }
