@@ -1,0 +1,35 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import moment from 'moment';
+
+	import { useBirdhouse } from '@/models/useBirdhouse';
+
+	const { getCorporationPapMetrics } = useBirdhouse();
+
+	let leaderboard = [];
+
+	// the date range should be from sunday to saturday of the current week
+	const startDate = moment.utc().startOf('week').toISOString();
+	const endDate = moment.utc().endOf('week').toISOString();
+
+	onMount(async () => {
+		leaderboard = await getCorporationPapMetrics(98718341, startDate, endDate, 10);
+	});
+</script>
+
+<div class="flex flex-col flex-grow items-start gap-2 w-fit shadow-sm shadow-black">
+	<div class="flex text-xl bg-black px-3 py-1 w-full">
+		Weekly PAP Leaders ({moment(startDate).format('MMM Do')} - {moment(endDate).format('MMM Do')})
+	</div>
+
+	<div class="flex flex-col flex-grow gap-1 w-full">
+		{#each leaderboard as contributor}
+			<div
+				class="grid grid-cols-2 items-center gap-3 px-3 even:bg-background-800 odd:bg-background-900"
+			>
+				<div class="text-left text-base">{contributor.name}</div>
+				<div class="text-right text-base">+{contributor.totalStrategic} PAPs</div>
+			</div>
+		{/each}
+	</div>
+</div>

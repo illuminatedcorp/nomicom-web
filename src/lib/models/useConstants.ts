@@ -28,7 +28,12 @@ export const API_ROUTES = {
 	createNewsPost: { method: 'POST', route: '/news_posts' },
 	getNewsPost: { method: 'GET', route: '/news_posts/:id' },
 	updateNewsPost: { method: 'PUT', route: '/news_posts/:id' },
-	deleteNewsPost: { method: 'DELETE', route: '/news_posts/:id' }
+	deleteNewsPost: { method: 'DELETE', route: '/news_posts/:id' },
+	getWikiCategories: { method: 'GET', route: '/wiki_categories' },
+	createWikiCategory: { method: 'POST', route: '/wiki_categories' },
+	getWikiCategory: { method: 'GET', route: '/wiki_categories/:id' },
+	updateWikiCategory: { method: 'PUT', route: '/wiki_categories/:id' },
+	deleteWikiCategory: { method: 'DELETE', route: '/wiki_categories/:id' }
 };
 
 export const WEB_ROUTES = {

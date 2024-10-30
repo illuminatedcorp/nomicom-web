@@ -46,11 +46,39 @@ export const useWiki = () => {
 		}
 	};
 
+	const getWikiCategories = async () => {
+		const response = await apiCall(API_ROUTES.getWikiCategories, {});
+		return response.wiki_categories;
+	};
+
+	const createWikiCategory = async (categoryData) => {
+		categoryData.sort_key = 1;
+		const response = await apiCall(API_ROUTES.createWikiCategory, categoryData);
+		console.log(response);
+		return response.wiki_category;
+	};
+
+	const updateWikiCategory = async (categoryData) => {
+		const response = await apiCall(API_ROUTES.updateWikiCategory, categoryData);
+		return response.wiki_category;
+	};
+
+	const deleteWikiCategory = async (id: string) => {
+		const response = await apiCall(API_ROUTES.deleteWikiCategory, { id });
+		if (!response) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
 	return {
 		getWikiIndex,
 		createWikiPage,
 		getWikiPage,
 		saveWikiPage,
-		deleteWikiPage
+		deleteWikiPage,
+		getWikiCategories,
+		createWikiCategory
 	};
 };

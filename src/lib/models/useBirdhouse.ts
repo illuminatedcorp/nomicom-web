@@ -23,6 +23,44 @@ export const useBirdhouse = () => {
 		}
 	};
 
+	const getCorporationPapMetrics = async (
+		corporationId: number,
+		startDate: string,
+		endDate: string,
+		numResults: number = 5,
+		allMembers: boolean = false
+	) => {
+		try {
+			const url =
+				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
+				'/topPaps?corporationId=' +
+				corporationId +
+				'&startDate=' +
+				startDate +
+				'&endDate=' +
+				endDate +
+				'&allMembers=' +
+				allMembers +
+				'&numResults=' +
+				numResults;
+
+			const response = await fetch(url, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			let data = await response.json();
+			console.log(data);
+
+			return data;
+		} catch (error) {
+			console.error('Error getting corporation PAP metrics:', error);
+			return null;
+		}
+	};
+
 	const getCorporationTopContributorPapMetrics = async (corporationId: number) => {
 		try {
 			// first we get the current month
@@ -46,7 +84,7 @@ export const useBirdhouse = () => {
 				'&endDate=' +
 				endDate.toISOString() +
 				'&minimumPaps=8' +
-				'&numResults=5';
+				'&numResults=10';
 
 			const response = await fetch(url, {
 				method: 'GET',
@@ -181,6 +219,7 @@ export const useBirdhouse = () => {
 
 	return {
 		getCharacterPapMetrics,
+		getCorporationPapMetrics,
 		getCorporationTopContributorPapMetrics,
 		getCorporationEventMetrics,
 		getWikiIndex,

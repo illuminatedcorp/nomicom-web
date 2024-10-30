@@ -91,7 +91,7 @@
 </script>
 
 <div class="flex pl-8 w-full">
-	<div class="flex flex-col w-full pt-4 {editMode ? 'overflow-visible' : 'overflow-y-auto'}">
+	<div class="flex flex-col w-full pt-4 pr-8 {editMode ? 'overflow-visible' : 'overflow-y-auto'}">
 		<div class="flex items-center justify-between">
 			<div class="text-base font-semibold text-background-200">
 				{#if pageData}

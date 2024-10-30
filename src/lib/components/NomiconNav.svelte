@@ -23,7 +23,33 @@
 			<span class="max-md:hidden">Home</span>
 		</Button>
 
-		<HoverCard.Root openDelay={0} closeDelay={100}>
+		{#if hasAccessToRoute(WEB_ROUTES.wiki)}
+			<Button
+				on:click={() => safeGoto(WEB_ROUTES.wiki)}
+				variant="ghost"
+				class="text-base hover:bg-background-800 hover:text-background-50 max-md:px-2 h-full"
+			>
+				<div class="md:hidden">
+					<i class="fas fa-book" />
+				</div>
+				<span class="max-md:hidden">Wiki</span>
+			</Button>
+		{/if}
+
+		{#if hasAccessToRoute(WEB_ROUTES.news)}
+			<Button
+				on:click={() => safeGoto(WEB_ROUTES.news)}
+				variant="ghost"
+				class="text-base hover:bg-background-800 hover:text-background-50 max-md:px-2 h-full"
+			>
+				<div class="md:hidden">
+					<i class="fas fa-newspaper" />
+				</div>
+				<span class="max-md:hidden">News</span>
+			</Button>
+		{/if}
+
+		<!-- <HoverCard.Root openDelay={0} closeDelay={100}>
 			<HoverCard.Trigger>
 				<Button
 					variant="ghost"
@@ -37,30 +63,9 @@
 				</Button>
 			</HoverCard.Trigger>
 			<HoverCard.Content class="w-28 bg-background-700 overflow-hidden p-0">
-				<div class="flex flex-col items-start">
-					{#if hasAccessToRoute(WEB_ROUTES.wiki)}
-						<Button
-							on:click={() => safeGoto(WEB_ROUTES.wiki)}
-							variant="ghost"
-							class="flex justify-start
-				text-base hover:bg-background-800 text-background-50 hover:text-background-50 rounded-none w-full"
-						>
-							Wiki
-						</Button>
-					{/if}
-					{#if hasAccessToRoute(WEB_ROUTES.news)}
-						<Button
-							on:click={() => safeGoto(WEB_ROUTES.news)}
-							variant="ghost"
-							class="flex justify-start
-				text-base hover:bg-background-800 text-background-50 hover:text-background-50 rounded-none w-full"
-						>
-							News
-						</Button>
-					{/if}
-				</div>
+				<div class="flex flex-col items-start"></div>
 			</HoverCard.Content>
-		</HoverCard.Root>
+		</HoverCard.Root> -->
 
 		{#if hasAccessToRoute(WEB_ROUTES.buyback)}
 			<Button
@@ -74,18 +79,6 @@
 				<span class="max-md:hidden">Buyback</span>
 			</Button>
 		{/if}
-		{#if hasAccessToRoute(WEB_ROUTES.admin)}
-			<Button
-				on:click={() => safeGoto(WEB_ROUTES.admin)}
-				variant="ghost"
-				class="text-base hover:bg-background-800 hover:text-background-50 max-md:px-2 h-full"
-			>
-				<div class="md:hidden">
-					<i class="fas fa-cogs" />
-				</div>
-				<span class="max-md:hidden">Admin</span></Button
-			>
-		{/if}
 	</div>
 
 	<a href="/" class="flex items-center text-2xl h-full" style="font-family: Garamond, sans-serif;">
@@ -98,6 +91,19 @@
 		>
 			Search bar TODO
 		</div> -->
+
+		{#if hasAccessToRoute(WEB_ROUTES.admin)}
+			<Button
+				on:click={() => safeGoto(WEB_ROUTES.admin)}
+				variant="ghost"
+				class="text-base hover:bg-background-800 hover:text-background-50 max-md:px-2 h-full"
+			>
+				<div class="md:hidden">
+					<i class="fas fa-cogs" />
+				</div>
+				<span class="max-md:hidden">Admin</span></Button
+			>
+		{/if}
 
 		{#if hasAccessToRoute(WEB_ROUTES.api)}
 			<Button

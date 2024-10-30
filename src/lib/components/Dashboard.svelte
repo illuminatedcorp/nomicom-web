@@ -6,29 +6,25 @@
 	import * as Tooltip from '$lib/components/ui/tooltip';
 
 	import { useBirdhouse } from '@/models/useBirdhouse';
-	const {
-		getCharacterPapMetrics,
-		getCorporationTopContributorPapMetrics,
-		getCorporationEventMetrics
-	} = useBirdhouse();
+	const { getCharacterPapMetrics, getCorporationTopContributorPapMetrics } = useBirdhouse();
 
 	import { useNews } from '@/models/useNews';
 	const { getNewsFeed } = useNews();
 
 	import { useAuth } from '@/models/useAuth.js';
+	// import PapEventLeaderboard from './PapEventLeaderboard.svelte';
+	import PapWeeklyLeaderboard from './PapWeeklyLeaderboard.svelte';
 	const { safeGoto } = useAuth();
 
-	export let characterIds: number[];
+	export let characterIds;
 
 	let ready = false;
 	let papMetrics = {};
-	let eventLeaderboard = [];
 	let corpTopContributors = [];
 	let newsFeed = [];
 
 	onMount(async () => {
 		papMetrics = await getCharacterPapMetrics(characterIds);
-		eventLeaderboard = await getCorporationEventMetrics(98718341);
 		corpTopContributors = await getCorporationTopContributorPapMetrics(98718341);
 		newsFeed = await getNewsFeed();
 		ready = true;
@@ -62,14 +58,13 @@
 </script>
 
 {#if ready}
-	{@const week = Math.ceil(moment.utc().date() / 7)}
 	<div class="flex gap-3 px-3 py-2">
 		<div class="flex flex-col gap-3 items-start justify-center">
 			<div
 				class="flex items-center bg-slate-800 lg:px-3 py-1 max-lg:px-3 shadow-sm shadow-black w-full"
 			>
 				<div class="text-4xl mr-4 ml-1">{getTotalStrategicForMonth()}</div>
-				<div class="lg:text-xl max-lg:text-lg text-left whitespace-nowrap">
+				<div class="lg:text-lg max-lg:text-lg text-left whitespace-nowrap">
 					Strategic PAPs<br />this month
 				</div>
 			</div>
@@ -78,7 +73,7 @@
 			>
 				<div class="text-4xl mr-4 ml-1">{getTotalPeacetimeForMonth()}</div>
 
-				<div class="lg:text-xl max-lg:text-lg text-left whitespace-nowrap">
+				<div class="lg:text-lg max-lg:text-lg text-left whitespace-nowrap">
 					Peacetime PAPs<br />this month
 				</div>
 			</div>
@@ -102,42 +97,20 @@
 	</div>
 
 	<div class="flex flex-wrap gap-3 px-3">
-		<div class="flex flex-col flex-grow items-start gap-2 mt-3 w-fit shadow-sm shadow-black">
-			<div class="flex text-xl bg-black px-3 py-1 w-full">
-				Event Leaderboard (Week #{week}, {moment
-					.utc()
-					.month(moment.utc().month())
-					.date((week - 1) * 7 + 1)
-					.startOf('day')
-					.format('Do')} - {moment
-					.utc()
-					.month(moment.utc().month())
-					.date((week - 1) * 7 + 7)
-					.endOf('day')
-					.format('Do')})
-			</div>
+		<!-- <PapEventLeaderboard /> -->
+		<PapWeeklyLeaderboard />
 
-			<div class="flex flex-col flex-grow gap-1 w-full">
-				{#each eventLeaderboard as contributor}
-					<div
-						class="grid grid-cols-2 items-center gap-3 px-3 even:bg-background-800 odd:bg-background-900"
-					>
-						<div class="text-left text-lg">{contributor.name}</div>
-						<div class="text-right text-lg">{contributor.totalStrategic} PAPs</div>
-					</div>
-				{/each}
-			</div>
-		</div>
-
-		<div class="flex flex-col flex-grow items-start gap-2 mt-3 w-fit shadow-sm shadow-black">
+		<div class="flex flex-col flex-grow items-start gap-2 w-fit shadow-sm shadow-black">
 			<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">
-				Top Contributors this Month
+				Top {moment.utc().format('MMMM')} 8+ Champions
 
 				<Tooltip.Root openDelay={0}>
 					<Tooltip.Trigger><i class="fas fa-question-circle text-base" /></Tooltip.Trigger>
 					<Tooltip.Content class="bg-background-800">
-						<div class="text-sm w-56">
-							Number of extra PAPs people have gotten over the required 8
+						<div class="text-sm">
+							<span class="text-green-500">+number over required 8 </span>
+							<span class="text-background-400">(total number)</span>
+							PAPs
 						</div>
 					</Tooltip.Content>
 				</Tooltip.Root>
@@ -148,15 +121,19 @@
 					<div
 						class="flex items-center justify-between gap-3 px-3 even:bg-background-800 odd:bg-background-900"
 					>
-						<div class="text-left text-lg">{contributor.name}</div>
-						<div class="text-right text-lg">{contributor.totalStrategic} PAPs</div>
+						<div class="text-left text-base">{contributor.name}</div>
+						<div class="text-right text-base">
+							<span class="text-green-500">+{contributor.totalStrategic} </span>
+							<span class="text-background-400">({contributor.totalStrategic + 8})</span>
+							PAPs
+						</div>
 					</div>
 				{/each}
 			</div>
 		</div>
 	</div>
 
-	<div class="flex flex-col w-full px-3 mt-3">
+	<div class="flex flex-col w-full px-3 mt-3 mb-3">
 		<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">
 			News Feed
 		</div>
