@@ -23,6 +23,7 @@ export const useUsers = () => {
 			// }
 
 			userStore.set({
+				id: user.id,
 				valid: true,
 				initialized: true,
 				characters: user.characters,
@@ -31,6 +32,7 @@ export const useUsers = () => {
 			});
 		} else {
 			userStore.set({
+				id: null,
 				valid: false,
 				initialized: true,
 				characters: [],

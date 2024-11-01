@@ -31,7 +31,8 @@ const config = {
 			white: colors.white,
 			black: colors.black,
 			green: colors.green,
-			orange: colors.orange
+			orange: colors.orange,
+			error: colors.red
 		},
 		extend: {
 			colors: {

@@ -18,7 +18,19 @@ export const useBuybacks = () => {
 	// this is identical for now incase we split the calls in the future for filtering purposes
 	const getAllBuybackRequests = async () => {
 		const response = await apiCall(API_ROUTES.buybackRequests, {});
-		return response.buyback_requests;
+		// we want to sort them by the most recent date
+
+		const sorted = response.buyback_requests.sort((a, b) => {
+			if (moment.utc(a.inserted_at).isAfter(moment.utc(b.inserted_at))) {
+				return -1;
+			} else if (moment.utc(a.inserted_at).isBefore(moment.utc(b.inserted_at))) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+
+		return sorted;
 	};
 
 	const getAllItemEntries = async () => {

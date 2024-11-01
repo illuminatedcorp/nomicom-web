@@ -3,6 +3,7 @@
 	import moment from 'moment';
 	import { toast } from 'svelte-sonner';
 	import debounce from 'lodash/debounce';
+	// import { get } from 'svelte/store';
 
 	import { Button } from '$lib/components/ui/button';
 	import { Textarea } from '$lib/components/ui/textarea';
@@ -38,7 +39,11 @@
 	});
 
 	const updateData = debounce(async () => {
-		buybacks = await getBuybackRequests();
+		let newBuybacks = await getBuybackRequests();
+		buybacks = newBuybacks;
+		// let userId = get(userStore);
+		// console.log('userId', userId);
+		// buybacks = newBuybacks.filter((buyback) => buyback.user_id === userId);
 		allItemEntries = await getAllItemEntries();
 	}, 100);
 
@@ -91,10 +96,10 @@
 </script>
 
 <div class="flex flex-col p-3 overflow-y-auto h-full">
-	<div class="flex items-center gap-3 text-3xl">
-		Buyback System
+	<div class="flex justify-between items-center gap-3 text-3xl">
+		<div>Buyback System</div>
 		{#if hasAccessToRoute(WEB_ROUTES.buybackAdmin)}
-			<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-xl">
+			<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-base">
 				Switch to admin view
 			</Button>
 		{/if}
@@ -177,20 +182,19 @@
 				<div class="text-xl">Your Buyback Requests</div>
 			</div>
 
-			<div
-				class="grid max-lg:grid-cols-[100px,100px,80px,120px,70px] lg:grid-cols-[320px,1fr,100px,180px,100px] bg-background-900"
-			>
+			<div class="grid grid-cols-[320px,1fr,190px,190px,100px,140px] bg-background-900">
 				<div class="ml-4">Contract ID</div>
 				<div class="ml-4">Price</div>
 				<!-- <div class="px-2"># Items</div> -->
-				<div class="px-2">Status</div>
+				<div class="px-2">Created At</div>
 				<div class="px-2">Last Updated</div>
+				<div class="px-2">Status</div>
 				<div class="flex justify-end px-2">Actions</div>
 			</div>
 
 			{#each buybacks as buyback}
 				<div
-					class="grid max-lg:text-sm max-lg:grid-cols-[100px,100px,80px,120px,70px] lg:grid-cols-[320px,1fr,100px,180px,100px] items-center even:bg-background-700 odd:bg-background-800 py-2"
+					class="grid text-sm grid-cols-[320px,1fr,190px,190px,100px,140px] items-center even:bg-background-700 odd:bg-background-800 py-2"
 				>
 					<div class="px-2">
 						<Button
@@ -212,9 +216,31 @@
 							<i class="far fa-copy" />
 						</Button>
 					</div>
-					<!-- <div class="px-2">{buyback.items.length}</div> -->
-					<div class="px-2 capitalize">{getState(buyback)}</div>
-					<div class="px-2">{moment(getUpdatedAtDate(buyback)).format('Do MMM YYYY, h:mm a')}</div>
+					<div class="px-2 text-sm">
+						{moment(buyback.inserted_at).format('Do MMM YYYY, h:mm a')}
+					</div>
+					<div class="px-2 text-sm">
+						{moment(getUpdatedAtDate(buyback)).format('Do MMM YYYY, h:mm a')}
+					</div>
+					<div class="px-2 text-sm capitalize">
+						{#if getState(buyback) === BUYBACK_STATES.pending}
+							<div class="bg-orange-700 px-2 py-1 rounded-sm">
+								{getState(buyback)}
+							</div>
+						{:else if getState(buyback) === BUYBACK_STATES.completed}
+							<div class="bg-green-800 px-2 py-1 rounded-sm">
+								{getState(buyback)}
+							</div>
+						{:else if getState(buyback) === BUYBACK_STATES.rejected}
+							<div class="bg-error-800 px-2 py-1 rounded-sm">
+								{getState(buyback)}
+							</div>
+						{:else if getState(buyback) === BUYBACK_STATES.canceled}
+							<div class="bg-background-600 px-2 py-1 rounded-sm">
+								{getState(buyback)}
+							</div>
+						{/if}
+					</div>
 					<div class="flex justify-end px-2">
 						<Button
 							disabled={getState(buyback) === BUYBACK_STATES.canceled}
