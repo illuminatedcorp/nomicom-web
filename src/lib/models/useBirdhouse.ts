@@ -4,10 +4,7 @@ import { toast } from 'svelte-sonner';
 export const useBirdhouse = () => {
 	const getCharacterPapMetrics = async (characterIds: number[]) => {
 		try {
-			const url =
-				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
-				'/paps?characterIds=' +
-				JSON.stringify(characterIds);
+			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/paps?characterIds=' + JSON.stringify(characterIds);
 
 			const response = await fetch(url, {
 				method: 'GET',
@@ -23,13 +20,7 @@ export const useBirdhouse = () => {
 		}
 	};
 
-	const getCorporationPapMetrics = async (
-		corporationId: number,
-		startDate: string,
-		endDate: string,
-		numResults: number = 5,
-		allMembers: boolean = false
-	) => {
+	const getCorporationPapMetrics = async (corporationId: number, startDate: string, endDate: string, numResults: number = 5, allMembers: boolean = false) => {
 		try {
 			const url =
 				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
@@ -42,7 +33,7 @@ export const useBirdhouse = () => {
 				'&allMembers=' +
 				allMembers +
 				'&numResults=' +
-				numResults;
+				(numResults ? numResults : 5);
 
 			const response = await fetch(url, {
 				method: 'GET',

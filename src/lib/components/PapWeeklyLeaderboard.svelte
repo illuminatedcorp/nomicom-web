@@ -17,18 +17,14 @@
 	});
 </script>
 
-<div class="flex flex-col flex-grow items-start gap-2 w-fit shadow-sm shadow-black">
+<div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
 	<div class="flex text-xl bg-black px-3 py-1 w-full">
-		Weekly PAP Leaders ({moment.utc(startDate).format('MMM Do')} - {moment
-			.utc(endDate)
-			.format('MMM Do')})
+		Weekly PAP Leaders ({moment.utc(startDate).format('MMM Do')} - {moment.utc(endDate).format('MMM Do')})
 	</div>
 
 	<div class="flex flex-col flex-grow gap-1 w-full">
 		{#each leaderboard as contributor}
-			<div
-				class="grid grid-cols-2 items-center gap-3 px-3 even:bg-background-800 odd:bg-background-900"
-			>
+			<div class="grid grid-cols-2 items-center gap-3 px-3 even:bg-background-800 odd:bg-background-700 !bg-opacity-50">
 				<div class="text-left text-base">{contributor.name}</div>
 				<div class="text-right text-base">+{contributor.totalStrategic} PAPs</div>
 			</div>

@@ -339,7 +339,7 @@
 			byDayFiltered = papMetrics.papsByDay;
 		}
 
-		setupBarChart();
+		// setupBarChart();
 		setupPapTypesPieChart();
 		setupShipTypesPieChart();
 	};
@@ -450,7 +450,7 @@
 							</Popover.Content>
 						</Popover.Root>
 					</div>
-					<div id="pap-bar-chart" class="w-full h-64"></div>
+					<!-- <div id="pap-bar-chart" class="w-full h-64"></div> -->
 				</div>
 
 				<div class="grid grid-cols-2 gap-5 justify-center flex-grow px-2 max-h-64 min-h-64">
