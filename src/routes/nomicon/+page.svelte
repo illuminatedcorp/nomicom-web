@@ -47,8 +47,8 @@
 </script>
 
 {#if mainCharacter}
-	<div class="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-3 h-full overflow-hidden">
-		<div class="flex flex-col lg:col-span-1 background-gradient h-full overflow-hidden p-3">
+	<div class="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-3 h-full lg:overflow-hidden overflow-y-auto">
+		<div class="flex flex-col lg:col-span-1 background-gradient h-full lg:overflow-hidden p-3">
 			<div class="flex items-center gap-1 bg-background-900 shadow-sm shadow-black">
 				<img src="https://images.evetech.net/characters/{mainCharacter.eve_id}/portrait" alt="portrait" width="100" />
 
@@ -159,8 +159,8 @@
 			</div>
 		</div>
 
-		<div class="lg:col-span-2 background-gradient h-full overflow-hidden">
-			<Tabs.Root value="dashboard" class="flex flex-col w-full max-lg:h-fit lg:h-full" onValueChange={onTabChange}>
+		<div class="lg:col-span-2 background-gradient h-fit lg:h-full lg:overflow-hidden">
+			<Tabs.Root value="dashboard" class="flex flex-col w-full  lg:h-full" onValueChange={onTabChange}>
 				<Tabs.List class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none px-3 py-2">
 					<Tabs.Trigger
 						value="dashboard"
