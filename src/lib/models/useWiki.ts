@@ -58,7 +58,7 @@ export const useWiki = () => {
 		return response.wiki_category;
 	};
 
-	const updateWikiCategory = async (categoryData) => {
+	const saveWikiCategory = async (categoryData) => {
 		const response = await apiCall(API_ROUTES.updateWikiCategory, categoryData);
 		return response.wiki_category;
 	};
@@ -85,6 +85,8 @@ export const useWiki = () => {
 		deleteWikiPage,
 		getWikiCategories,
 		createWikiCategory,
-		getWikiCategory
+		getWikiCategory,
+		saveWikiCategory,
+		deleteWikiCategory
 	};
 };
