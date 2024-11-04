@@ -111,11 +111,13 @@
 									<div class="flex flex-col gap-2">
 										<div class="flex items-center justify-between">
 											<div class="font-medium leading-none mb-3">Edit Category</div>
-											<Popover.Close>
-												<Button on:click={() => onDeleteCategory(category.id)} class="text-xs text-background-50 p-2 h-fit">
-													<i class="fas fa-trash"></i>
-												</Button>
-											</Popover.Close>
+											{#if hasPermission('delete_wiki_category')}
+												<Popover.Close>
+													<Button on:click={() => onDeleteCategory(category.id)} class="text-xs text-background-50 p-2 h-fit">
+														<i class="fas fa-trash"></i>
+													</Button>
+												</Popover.Close>
+											{/if}
 										</div>
 										<div class="flex gap-2 items-center">
 											<span>Name:</span>
