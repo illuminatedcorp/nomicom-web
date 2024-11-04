@@ -9,19 +9,26 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { toast } from 'svelte-sonner';
+	import Input from '@/components/ui/input/input.svelte';
+	import SearchSelect from '@/components/ui/SearchSelect.svelte';
 
 	import { useWiki } from '@/models/useWiki';
-	const { getWikiPage, saveWikiPage, deleteWikiPage } = useWiki();
+	const { getWikiPage, saveWikiPage, deleteWikiPage, getWikiCategories } = useWiki();
 
 	import { WEB_ROUTES } from '@/models/useConstants.js';
 	import { useAuth } from '@/models/useAuth.js';
-	import Input from '@/components/ui/input/input.svelte';
+
 	const { safeGoto, hasPermission } = useAuth();
+
+	import { SEARCH_TYPES } from '$lib/models/useSearch.js';
 
 	let slug;
 	let pageData;
 	let editMode = false;
 	let content = '';
+	let categories = [];
+	let selectedCategoryId = null;
+	let currentWikiCategory = null;
 
 	onMount(async () => {
 		slug = $page.params.slug;
@@ -31,6 +38,9 @@
 		}
 
 		content = pageData.body;
+		categories = await getWikiCategories();
+		selectedCategoryId = pageData.wiki_category_id;
+		currentWikiCategory = categories.find((category) => category.id === selectedCategoryId);
 	});
 
 	$: {
@@ -46,6 +56,8 @@
 		}
 
 		content = pageData.body;
+		selectedCategoryId = pageData.wiki_category_id;
+		currentWikiCategory = categories.find((category) => category.id === selectedCategoryId);
 	};
 
 	const onEditPage = () => {
@@ -55,13 +67,15 @@
 	const onSavePage = async () => {
 		const newPageData = {
 			...pageData,
-			body: content
+			body: content,
+			wiki_category_id: selectedCategoryId
 		};
 
 		const newSavedData = await saveWikiPage(newPageData);
 		if (newSavedData !== null) {
 			pageData = newSavedData;
 			content = newSavedData.body;
+			currentWikiCategory = categories.find((category) => category.id === selectedCategoryId);
 
 			toast.success('Page saved');
 
@@ -87,6 +101,11 @@
 		editMode = false;
 
 		content = pageData.body;
+		selectedCategoryId = pageData.wiki_category_id;
+	};
+
+	const onSelectCategory = (event) => {
+		selectedCategoryId = event.detail.id;
 	};
 </script>
 
@@ -95,7 +114,26 @@
 		<div class="flex items-center justify-between">
 			<div class="text-base font-semibold text-background-200">
 				{#if pageData}
-					/{pageData.slug}
+					{#if editMode}
+						<div class="flex items-center gap-5 mb-1">
+							<div class="w-48 -ml-3">
+								<SearchSelect
+									bind:value={pageData.category}
+									type={SEARCH_TYPES.WIKI_CATEGORY}
+									on:selected={(event) => onSelectCategory(event)}
+								></SearchSelect>
+							</div>
+
+							<div class="flex items-center gap-1 h-full">
+								<div>Slug:</div>
+								<Input bind:value={pageData.slug} class="text-base bg-background-800 flex-grow-0 w-fit  border-0"></Input>
+							</div>
+						</div>
+					{:else if currentWikiCategory}
+						{currentWikiCategory.name}
+					{:else}
+						Hidden page
+					{/if}
 				{/if}
 			</div>
 
@@ -124,23 +162,19 @@
 		</div>
 
 		{#if editMode}
-			<div class="flex items-center gap-5 mr-3 mb-1">
-				<Input bind:value={pageData.name} class="h-fit text-5xl -ml-3"></Input>
-				<div class="flex gap-1 items-center">
-					<div>Slug:</div>
-					<Input bind:value={pageData.slug} class="text-xl my-2 flex-grow-0 w-fit"></Input>
-				</div>
+			<div class="flex items-center gap-5 mb-1">
+				<Input bind:value={pageData.name} class="h-fit text-5xl -ml-3 my-0 border-0" style="padding-left: 9px"></Input>
 			</div>
 		{:else}
-			<div class="text-5xl my-2">
+			<div class="text-5xl my-2" style="margin-left: -3px">
 				{#if pageData}
-					<h1>{pageData.name}</h1>
+					<div>{pageData.name}</div>
 				{/if}
 			</div>
 		{/if}
 
 		{#if editMode}
-			<Textarea bind:value={content} class="flex-grow mb-5 -ml-3"></Textarea>
+			<Textarea bind:value={content} class="flex-grow mb-5 -ml-3 border-0"></Textarea>
 		{:else}
 			<div class="markdown-body">
 				{#if pageData}

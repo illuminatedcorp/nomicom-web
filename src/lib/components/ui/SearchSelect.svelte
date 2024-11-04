@@ -13,6 +13,7 @@
 	export let placeholder: string = 'Search...';
 	export let value: { id?: number; name?: string; type?: string };
 	export let type: string = SEARCH_TYPES.ITEM;
+	export let showResultType: boolean = false;
 
 	let searchTerm = '';
 	let selectedOption: { value: { id?: number; name?: string; type?: string }; label?: string };
@@ -31,11 +32,15 @@
 		dispatch('selected', event?.value);
 	};
 
-	onMount(() => {
+	onMount(async () => {
 		if (value) {
 			selectedOption = { value, label: value.name };
 		} else if (type === 'location') {
 			selectedOption = { value: null, label: 'Anywhere' };
+		}
+
+		if (type === SEARCH_TYPES.WIKI_CATEGORY) {
+			searchResults = await search(searchTerm, type);
 		}
 	});
 </script>
@@ -62,7 +67,9 @@
 						class="flex flex-col items-start cursor-pointer hover:!bg-background-900 hover:!text-background-50"
 					>
 						<div>{result.name}</div>
-						<div class="ml-2 text-xs text-background-200">{result.type}</div>
+						{#if showResultType}
+							<div class="ml-2 text-xs text-background-200">{result.type}</div>
+						{/if}
 					</Select.Item>
 				{/each}
 			</div>

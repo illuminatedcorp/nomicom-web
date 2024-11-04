@@ -72,6 +72,11 @@ export const useWiki = () => {
 		}
 	};
 
+	const getWikiCategory = async (id: string) => {
+		const response = await apiCall(API_ROUTES.getWikiCategory, { id });
+		return response.wiki_category;
+	};
+
 	return {
 		getWikiIndex,
 		createWikiPage,
@@ -79,6 +84,7 @@ export const useWiki = () => {
 		saveWikiPage,
 		deleteWikiPage,
 		getWikiCategories,
-		createWikiCategory
+		createWikiCategory,
+		getWikiCategory
 	};
 };

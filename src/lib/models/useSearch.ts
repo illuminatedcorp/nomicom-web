@@ -7,11 +7,15 @@ import marketGroupsData from '$lib/data/marketGroups.json' assert { type: 'json'
 const itemsDataArray = Object.values(itemsData);
 const marketGroupsDataArray = Object.values(marketGroupsData);
 
+import { useWiki } from '@/models/useWiki';
+const { getWikiCategories } = useWiki();
+
 export const SEARCH_TYPES = {
 	ITEM: 'item',
 	MARKET_GROUP: 'marketGroup',
 	ITEM_OR_MARKET_GROUP: 'itemOrMarketGroup',
-	LOCATION: 'location'
+	LOCATION: 'location',
+	WIKI_CATEGORY: 'wikiCategory'
 };
 
 export const useSearch = () => {
@@ -44,6 +48,24 @@ export const useSearch = () => {
 				});
 
 			results = [...marketGroupResults, ...itemResults];
+		}
+
+		if (type === SEARCH_TYPES.WIKI_CATEGORY) {
+			// first we get the wiki categories from the BE
+			const wikiCategories = await getWikiCategories();
+
+			// then we filter the categories based on the search term
+			results = wikiCategories
+				.filter((category: any) => {
+					return category.name.toLowerCase().includes(searchTerm.toLowerCase());
+				})
+				.map((category: any) => {
+					return {
+						name: category.name,
+						id: category.id,
+						type: SEARCH_TYPES.WIKI_CATEGORY
+					};
+				});
 		}
 
 		return results;

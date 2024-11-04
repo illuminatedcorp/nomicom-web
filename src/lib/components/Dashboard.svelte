@@ -32,7 +32,7 @@
 
 	const getTotalStrategicForMonth = () => {
 		// we want the current month formatted as mm/yyyy
-		let currentMonth = moment().format('MM/YYYY');
+		let currentMonth = moment.utc().format('MM/YYYY');
 		if (!papMetrics.monthlyTotals[currentMonth]) return 0;
 		return papMetrics.monthlyTotals[currentMonth].totalStrategic;
 	};
@@ -77,7 +77,7 @@
 			</div>
 
 			<div class="flex flex-col flex-grow shadow-sm shadow-black">
-				<div class="flex items-center justify-center flex-grow text-xl bg-black px-3 py-1">
+				<div class="flex text-center items-center justify-center flex-grow text-xl bg-black px-3 py-1">
 					{#if getTotalStrategicForMonth() < 8}
 						You still have PAPs to get for this month.<br />Keep at it!
 					{:else}
@@ -115,7 +115,9 @@
 
 				<div class="flex flex-col flex-grow gap-1 w-full">
 					{#if corpTopContributors.length === 0}
-						<div class="flex text-center items-center justify-center p-3 w-full">No one has gotten more than 8 PAPs yet this month.<br />Go be the first!</div>
+						<div class="flex text-center items-center justify-center p-3 w-full">
+							No one has gotten more than 8 PAPs yet this month.<br />Go be the first!
+						</div>
 					{:else}
 						{#each corpTopContributors as contributor}
 							<div class="flex items-center justify-between gap-3 px-3 even:bg-background-800 odd:bg-background-700 !bg-opacity-50">
