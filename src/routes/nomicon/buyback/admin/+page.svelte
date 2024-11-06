@@ -140,9 +140,7 @@
 		if (existingItemSearch) {
 			filteredItemEntries = allItemEntries.filter((item) => {
 				let matchesName = item.name.toLowerCase().includes(existingItemSearch.toLowerCase());
-				let matchesMarketGroup = getItemMarketGroup(item.eve_type_id)
-					.name.toLowerCase()
-					.includes(existingItemSearch.toLowerCase());
+				let matchesMarketGroup = getItemMarketGroup(item.eve_type_id).name.toLowerCase().includes(existingItemSearch.toLowerCase());
 				return matchesName || matchesMarketGroup;
 			});
 		} else {
@@ -160,16 +158,12 @@
 	<div class="flex justify-between items-center gap-3 text-3xl">
 		<div>Buyback System Admin View</div>
 
-		<Button on:click={() => safeGoto(WEB_ROUTES.buyback)} class="text-base">
-			Switch to member view
-		</Button>
+		<Button on:click={() => safeGoto(WEB_ROUTES.buyback)} class="text-base">Switch to member view</Button>
 	</div>
 
 	{#if ready}
 		<Tabs.Root value="buybackTable" class="flex flex-col flex-grow h-0 w-full">
-			<Tabs.List
-				class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none py-2"
-			>
+			<Tabs.List class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none py-2">
 				<Tabs.Trigger
 					value="buybackTable"
 					class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50"
@@ -255,14 +249,10 @@
 										selected={{ value: getState(buyback), label: getState(buyback) }}
 										onSelectedChange={(event) => onChangeState(event, buyback)}
 									>
-										<Select.Trigger
-											class="bg-background-900 text-white border-0 hover:bg-primary-900 capitalize w-28 h-fit py-1"
-										>
+										<Select.Trigger class="bg-background-900 text-white border-0 hover:bg-primary-900 capitalize w-28 h-fit py-1">
 											<Select.Value placeholder="State" />
 										</Select.Trigger>
-										<Select.Content
-											class="bg-background-900 text-background-50 border-background-800"
-										>
+										<Select.Content class="bg-background-900 text-background-50 border-background-800">
 											<!-- <Select.Item value={BUYBACK_STATES.pending}>Pending</Select.Item> -->
 											<Select.Item
 												value={BUYBACK_STATES.completed}
@@ -297,25 +287,15 @@
 								value={null}
 								type={SEARCH_TYPES.ITEM_OR_MARKET_GROUP}
 								on:selected={(value) => onChangeItemSelected(value)}
+								showResultType
 							/>
 						</div>
 						<div class="relative">
-							<Input
-								type="number"
-								bind:value={newItemPercentage}
-								step="0.01"
-								class="w-16 py-0 px-2"
-							/>
+							<Input type="number" bind:value={newItemPercentage} step="0.01" class="w-16 py-0 px-2" />
 							<div class="text-xl absolute" style="right: 10px; top: 2px">%</div>
 						</div>
 						<div class="flex justify-end px-2">
-							<Button
-								on:click={onNewItemEntry}
-								class="text-base py-0 px-2 h-fit"
-								disabled={!newItemSelection}
-							>
-								Add Entry
-							</Button>
+							<Button on:click={onNewItemEntry} class="text-base py-0 px-2 h-fit" disabled={!newItemSelection}>Add Entry</Button>
 						</div>
 					</div>
 
@@ -326,17 +306,11 @@
 						<div class="flex px-2 justify-end">Actions</div>
 					</div>
 
-					<Input
-						bind:value={existingItemSearch}
-						placeholder="Search for item"
-						class="border-background-600 my-1 w-full"
-					/>
+					<Input bind:value={existingItemSearch} placeholder="Search for item" class="border-background-600 my-1 w-full" />
 
 					<div class="overflow-y-auto">
 						{#each filteredItemEntries as item}
-							<div
-								class="grid grid-cols-[80px,1fr,95px,100px] items-center even:bg-background-800 odd:bg-background-700 py-1"
-							>
+							<div class="grid grid-cols-[80px,1fr,95px,100px] items-center even:bg-background-800 odd:bg-background-700 py-1">
 								<div class="px-2">{item.eve_type_id}</div>
 								<div class="px-2">
 									{item.name} ({getItemMarketGroup(item.eve_type_id).name})
@@ -353,9 +327,7 @@
 									<div class="text-base absolute" style="right: 5px; top: -1px">%</div>
 								</div>
 								<div class="flex justify-end px-2">
-									<Button on:click={() => onDeleteItemEntry(item)} class="text-base py-0 px-2 h-fit"
-										>Delete</Button
-									>
+									<Button on:click={() => onDeleteItemEntry(item)} class="text-base py-0 px-2 h-fit">Delete</Button>
 								</div>
 							</div>
 						{/each}
