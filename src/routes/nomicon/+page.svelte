@@ -115,7 +115,7 @@
 
 					<div class="mt-4">For links to useful services, check out this wiki page:</div>
 					<a
-						href="http://localhost:3000/nomicon/wiki/external-resources"
+						href="https://www.illuminatedcorp.com/nomicon/wiki/external-resources"
 						rel="noopener noreferrer"
 						class="flex items-center gap-2 hover:text-primary-50 transition-none"
 					>
