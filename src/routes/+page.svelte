@@ -53,7 +53,7 @@
 			onSetSiteMode(SITE_MODES.neutral);
 		}}
 		on:click={() => onDarkClick()}
-		class="dark-button text-center text-4xl border-0 outline-none shadow-0 bg-transparent hover:bg-transparent hover:text-background-600 lg:mb-16 xl:mb-28 whitespace-nowrap"
+		class="dark-button text-center text-4xl border-0 outline-none shadow-0 bg-transparent hover:bg-transparent hover:text-background-600 lg:py-12 lg:mb-16 xl:mb-28 whitespace-nowrap"
 	>
 		{#if $styleStore.selectedMode === SITE_MODES.dark}
 			dwell in the dark
@@ -65,16 +65,8 @@
 	</button>
 
 	<div class="flex flex-col items-center justify-center relative lg:mt-16 lg:my-10 w-full">
-		<div
-			class="absolute text-5xl lg:-top-14 max-lg:top-28 max-lg:text-2xl max-lg:mt-4 z-20 whitespace-nowrap"
-		>
-			Which way capsuleer?
-		</div>
-		<img
-			src="{base}/images/Illuminated-Logo.svg"
-			alt="Logo"
-			class="logo-image max-lg:max-h-96 w-full"
-		/>
+		<div class="absolute text-5xl lg:-top-14 max-lg:top-28 max-lg:text-2xl max-lg:mt-4 z-20 whitespace-nowrap">Which way capsuleer?</div>
+		<img src="{base}/images/Illuminated-Logo.svg" alt="Logo" class="logo-image max-lg:max-h-96 w-full" />
 	</div>
 
 	<button
@@ -91,7 +83,7 @@
 			onSetSiteMode(SITE_MODES.neutral);
 		}}
 		on:click={() => onLightClick()}
-		class="light-button text-center text-4xl border-0 outline-none bg-transparent hover:bg-transparent hover:text-background-50 lg:mb-16 xl:mb-28 whitespace-nowrap"
+		class="light-button text-center text-4xl border-0 outline-none bg-transparent hover:bg-transparent hover:text-background-50 lg:py-12 lg:mb-16 xl:mb-28 whitespace-nowrap"
 	>
 		{#if $styleStore.selectedMode === SITE_MODES.dark}
 			seek redemption

@@ -23,7 +23,7 @@
 
 	<div class="text-xl mt-5">Do you have ideas on what we could do with this home page?</div>
 	<div class="text-xl mt-1">
-		Let Fryke know on Discord in the
+		Let us know on Discord in the
 		<span class="text-primary-50 bg-background-900 px-2 rounded-sm">#programming</span>
 		channel.
 	</div>
