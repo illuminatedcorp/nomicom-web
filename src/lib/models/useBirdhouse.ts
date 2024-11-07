@@ -15,12 +15,18 @@ export const useBirdhouse = () => {
 
 			return response.json();
 		} catch (error) {
-			console.error('Error getting character PAP metrics:', error);
+			// console.error('Error getting character PAP metrics:', error);
 			return null;
 		}
 	};
 
-	const getCorporationPapMetrics = async (corporationId: number, startDate: string, endDate: string, numResults: number = 5, allMembers: boolean = false) => {
+	const getCorporationPapMetrics = async (
+		corporationId: number,
+		startDate: string,
+		endDate: string,
+		numResults: number = 5,
+		allMembers: boolean = false
+	) => {
 		try {
 			const url =
 				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
@@ -47,7 +53,7 @@ export const useBirdhouse = () => {
 
 			return data;
 		} catch (error) {
-			console.error('Error getting corporation PAP metrics:', error);
+			// console.error('Error getting corporation PAP metrics:', error);
 			return null;
 		}
 	};
@@ -86,7 +92,7 @@ export const useBirdhouse = () => {
 
 			return response.json();
 		} catch (error) {
-			console.error('Error getting corporation top PAP metrics:', error);
+			// console.error('Error getting corporation top PAP metrics:', error);
 			return null;
 		}
 	};
@@ -136,7 +142,7 @@ export const useBirdhouse = () => {
 
 			return response.json();
 		} catch (error) {
-			console.error('Error getting corporation top PAP metrics:', error);
+			// console.error('Error getting corporation top PAP metrics:', error);
 			return null;
 		}
 	};
@@ -154,7 +160,7 @@ export const useBirdhouse = () => {
 
 			return response.json();
 		} catch (error) {
-			console.error('Error getting wiki index:', error);
+			// console.error('Error getting wiki index:', error);
 			return null;
 		}
 	};
@@ -172,7 +178,7 @@ export const useBirdhouse = () => {
 
 			return response.json();
 		} catch (error) {
-			console.error('Error getting wiki page:', error);
+			// console.error('Error getting wiki page:', error);
 			return null;
 		}
 	};
@@ -199,11 +205,11 @@ export const useBirdhouse = () => {
 				const data = await response.json();
 				return data;
 			} else {
-				toast.error('Error saving wiki page. Please try again.');
+				// toast.error('Error saving wiki page. Please try again.');
 				return null;
 			}
 		} catch (error) {
-			console.error('Error saving wiki page:', error);
+			// console.error('Error saving wiki page:', error);
 			return null;
 		}
 	};
