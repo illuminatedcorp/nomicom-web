@@ -6,7 +6,21 @@
 	export let startDate;
 	export let endDate;
 
-	const papTypes = ['strategic', 'beehive', 'sigSquadStrategic', 'locust', 'incursionHq', 'scouts', 'corp', 'cricket', 'gsol', 'incursionVg', 'peacetime', 'sigSquad', 'survey'];
+	const papTypes = [
+		'strategic',
+		'beehive',
+		'sigSquadStrategic',
+		'locust',
+		'incursionHq',
+		'scouts',
+		'corp',
+		'cricket',
+		'gsol',
+		'incursionVg',
+		'peacetime',
+		'sigSquad',
+		'survey'
+	];
 
 	const uuid = crypto.randomUUID();
 	let barChart;
@@ -14,7 +28,7 @@
 
 	$: {
 		// if we have metrics
-		if (metrics.length) {
+		if (metrics?.length) {
 			targetHeight = metrics.length * 15 + 100;
 			console.log(targetHeight);
 

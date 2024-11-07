@@ -208,5 +208,7 @@
 		{/if}
 	</div>
 
-	<slot />
+	<div class="w-0 flex-grow h-full overflow-y-auto">
+		<slot />
+	</div>
 </div>

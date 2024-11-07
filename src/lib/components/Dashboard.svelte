@@ -31,6 +31,7 @@
 	});
 
 	const getTotalStrategicForMonth = () => {
+		if (!papMetrics) return 0;
 		// we want the current month formatted as mm/yyyy
 		let currentMonth = moment.utc().format('MM/YYYY');
 		if (!papMetrics.monthlyTotals[currentMonth]) return 0;
@@ -38,6 +39,7 @@
 	};
 
 	const getTotalPeacetimeForMonth = () => {
+		if (!papMetrics) return 0;
 		// we want the current month formatted as mm/yyyy
 		let currentMonth = moment().format('MM/YYYY');
 		if (!papMetrics.monthlyTotals[currentMonth]) return 0;
@@ -97,41 +99,43 @@
 			<!-- <PapEventLeaderboard /> -->
 			<PapWeeklyLeaderboard />
 
-			<div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
-				<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">
-					Top {moment.utc().format('MMMM')} 8+ Champions
+			{#if corpTopContributors}
+				<div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
+					<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">
+						Top {moment.utc().format('MMMM')} 8+ Champions
 
-					<Tooltip.Root openDelay={0}>
-						<Tooltip.Trigger><i class="fas fa-question-circle text-base" /></Tooltip.Trigger>
-						<Tooltip.Content class="bg-background-800">
-							<div class="text-sm">
-								<span class="text-green-500">+number over required 8 </span>
-								<span class="text-background-400">(total number)</span>
-								PAPs
-							</div>
-						</Tooltip.Content>
-					</Tooltip.Root>
-				</div>
-
-				<div class="flex flex-col flex-grow gap-1 w-full">
-					{#if corpTopContributors.length === 0}
-						<div class="flex text-center items-center justify-center p-3 w-full">
-							No one has gotten more than 8 PAPs yet this month.<br />Go be the first!
-						</div>
-					{:else}
-						{#each corpTopContributors as contributor}
-							<div class="flex items-center justify-between gap-3 px-3 even:bg-background-800 odd:bg-background-700 !bg-opacity-50">
-								<div class="text-left text-base">{contributor.name}</div>
-								<div class="text-right text-base">
-									<span class="text-green-500">+{contributor.totalStrategic} </span>
-									<span class="text-background-400">({contributor.totalStrategic + 8})</span>
+						<Tooltip.Root openDelay={0}>
+							<Tooltip.Trigger><i class="fas fa-question-circle text-base" /></Tooltip.Trigger>
+							<Tooltip.Content class="bg-background-800">
+								<div class="text-sm">
+									<span class="text-green-500">+number over required 8 </span>
+									<span class="text-background-400">(total number)</span>
 									PAPs
 								</div>
+							</Tooltip.Content>
+						</Tooltip.Root>
+					</div>
+
+					<div class="flex flex-col flex-grow gap-1 w-full">
+						{#if corpTopContributors.length === 0}
+							<div class="flex text-center items-center justify-center p-3 w-full">
+								No one has gotten more than 8 PAPs yet this month.<br />Go be the first!
 							</div>
-						{/each}
-					{/if}
+						{:else}
+							{#each corpTopContributors as contributor}
+								<div class="flex items-center justify-between gap-3 px-3 even:bg-background-800 odd:bg-background-700 !bg-opacity-50">
+									<div class="text-left text-base">{contributor.name}</div>
+									<div class="text-right text-base">
+										<span class="text-green-500">+{contributor.totalStrategic} </span>
+										<span class="text-background-400">({contributor.totalStrategic + 8})</span>
+										PAPs
+									</div>
+								</div>
+							{/each}
+						{/if}
+					</div>
 				</div>
-			</div>
+			{/if}
 		</div>
 
 		<div class="flex flex-col w-full px-3 mt-3 mb-3">

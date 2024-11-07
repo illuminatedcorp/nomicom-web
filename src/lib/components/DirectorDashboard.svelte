@@ -56,14 +56,18 @@
 
 	export const update = async () => {
 		thisMonthMetrics = await getCorporationPapMetrics(98718341, thisMonthStartDate, thisMonthEndDate, -1, true);
-		thisMonthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
+		if (thisMonthMetrics) {
+			thisMonthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
 
-		thisMonthPapsBarChart.update();
+			thisMonthPapsBarChart.update();
+		}
 
 		lastMonthMetrics = await getCorporationPapMetrics(98718341, lastMonthStartDate, lastMonthEndDate, -1, true);
-		lastMonthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
+		if (lastMonthMetrics) {
+			lastMonthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
 
-		lastMonthPapsBarChart.update();
+			lastMonthPapsBarChart.update();
+		}
 	};
 </script>
 
@@ -95,12 +99,22 @@
 	<div class="flex flex-col h-full w-full overflow-y-auto">
 		<div class="flex flex-col background-gradient px-3 h-fit">
 			<div class="text-xl">This month's PAPs</div>
-			<PapsBarChart bind:this={thisMonthPapsBarChart} metrics={thisMonthMetrics} startDate={thisMonthStartDate} endDate={thisMonthEndDate} />
+			<PapsBarChart
+				bind:this={thisMonthPapsBarChart}
+				metrics={thisMonthMetrics}
+				startDate={thisMonthStartDate}
+				endDate={thisMonthEndDate}
+			/>
 		</div>
 
 		<div class="flex flex-col background-gradient px-3 h-fit">
 			<div class="text-xl">Last month's PAPs</div>
-			<PapsBarChart bind:this={lastMonthPapsBarChart} metrics={lastMonthMetrics} startDate={lastMonthStartDate} endDate={lastMonthEndDate} />
+			<PapsBarChart
+				bind:this={lastMonthPapsBarChart}
+				metrics={lastMonthMetrics}
+				startDate={lastMonthStartDate}
+				endDate={lastMonthEndDate}
+			/>
 		</div>
 	</div>
 </div>

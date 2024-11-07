@@ -69,15 +69,9 @@
 
 		// we set the initial date range to the date of the first PAP entry to the current date
 		if (papMetrics?.papsByDay?.length > 0) {
-			const firstEntryDate = moment(
-				papMetrics.papsByDay[papMetrics.papsByDay.length - 1].entryDate
-			);
+			const firstEntryDate = moment(papMetrics.papsByDay[papMetrics.papsByDay.length - 1].entryDate);
 			selectedDateRange = {
-				start: new CalendarDate(
-					firstEntryDate.year(),
-					firstEntryDate.month() + 1,
-					firstEntryDate.date()
-				),
+				start: new CalendarDate(firstEntryDate.year(), firstEntryDate.month() + 1, firstEntryDate.date()),
 				end: new CalendarDate(today.year(), today.month() + 1, today.date())
 			};
 		}
@@ -85,9 +79,9 @@
 		ready = true;
 
 		window.onresize = () => {
-			barChart.resize();
-			papTypesPieChart.resize();
-			shipTypesPieChart.resize();
+			barChart?.resize();
+			papTypesPieChart?.resize();
+			shipTypesPieChart?.resize();
 		};
 	});
 
@@ -99,9 +93,7 @@
 		// first up we need to fill in missing date entries with 0s
 		// earliest dates are at the end of the array
 		let byDayFilteredFilled = [];
-		const earliestDate = moment
-			.utc(byDayFiltered[byDayFiltered.length - 1].entryDate)
-			.subtract(1, 'days');
+		const earliestDate = moment.utc(byDayFiltered[byDayFiltered.length - 1].entryDate).subtract(1, 'days');
 		const today = moment.utc();
 
 		let currentDate = earliestDate;
@@ -167,9 +159,7 @@
 		barChart.setOption({
 			tooltip: {
 				formatter: function (params) {
-					const { character_id, entryDate, total, updated_at, ...metrics } = byDayFiltered.find(
-						(entry) => entry.entryDate === params.name
-					);
+					const { character_id, entryDate, total, updated_at, ...metrics } = byDayFiltered.find((entry) => entry.entryDate === params.name);
 
 					let returnText = `${params.name}<br/>`;
 
@@ -203,10 +193,7 @@
 
 	const setupPapTypesPieChart = () => {
 		if (!papTypesPieChart) {
-			papTypesPieChart = echarts.init(
-				document.getElementById('pap-types-pie-chart'),
-				'illuminated'
-			);
+			papTypesPieChart = echarts.init(document.getElementById('pap-types-pie-chart'), 'illuminated');
 		}
 
 		const sumsByType = {};
@@ -258,10 +245,7 @@
 
 	const setupShipTypesPieChart = () => {
 		if (!shipTypesPieChart) {
-			shipTypesPieChart = echarts.init(
-				document.getElementById('pap-ship-types-pie-chart'),
-				'illuminated'
-			);
+			shipTypesPieChart = echarts.init(document.getElementById('pap-ship-types-pie-chart'), 'illuminated');
 		}
 
 		const sumsByType = {};
@@ -315,21 +299,12 @@
 		if (!papMetrics?.papsByDay) return;
 		if (!newDateRange?.start || !newDateRange?.end) return;
 
-		let start = moment(
-			newDateRange?.start?.year + '-' + newDateRange?.start?.month + '-' + newDateRange?.start?.day,
-			'YYYY-MM-DD'
-		);
-		let end = moment(
-			newDateRange?.end?.year + '-' + newDateRange?.end?.month + '-' + newDateRange?.end?.day,
-			'YYYY-MM-DD'
-		);
+		let start = moment(newDateRange?.start?.year + '-' + newDateRange?.start?.month + '-' + newDateRange?.start?.day, 'YYYY-MM-DD');
+		let end = moment(newDateRange?.end?.year + '-' + newDateRange?.end?.month + '-' + newDateRange?.end?.day, 'YYYY-MM-DD');
 
 		if (start && end) {
 			byDayFiltered = papMetrics.papsByDay.filter((entry) => {
-				return (
-					moment(entry.entryDate).isSameOrAfter(start) &&
-					moment(entry.entryDate).isSameOrBefore(end)
-				);
+				return moment(entry.entryDate).isSameOrAfter(start) && moment(entry.entryDate).isSameOrBefore(end);
 			});
 		} else if (start) {
 			byDayFiltered = papMetrics.papsByDay.filter((entry) => {
@@ -392,9 +367,9 @@
 		totalPapsByShipType = getTotalPapsByShipType();
 		totalPapsByType = getTotalPapsByType();
 
-		barChart.resize();
-		papTypesPieChart.resize();
-		shipTypesPieChart.resize();
+		barChart?.resize();
+		papTypesPieChart?.resize();
+		shipTypesPieChart?.resize();
 	};
 </script>
 
@@ -410,9 +385,9 @@
 				<div class="flex flex-col">
 					<div class="flex justify-between items-center px-3">
 						<div class="text-xl text-left">
-							PAPs per day from {moment(selectedDateRange.start).format('MM/DD/YYYY')} to {moment(
-								selectedDateRange.end
-							).format('MM/DD/YYYY')}
+							PAPs per day from {moment(selectedDateRange.start).format('MM/DD/YYYY')} to {moment(selectedDateRange.end).format(
+								'MM/DD/YYYY'
+							)}
 						</div>
 						<Popover.Root openFocus>
 							<Popover.Trigger asChild let:builder>
@@ -420,18 +395,10 @@
 									{#if selectedDateRange && selectedDateRange.start}
 										{#if selectedDateRange.end}
 											{moment(
-												selectedDateRange.start.year +
-													'-' +
-													selectedDateRange.start.month +
-													'-' +
-													selectedDateRange.start.day,
+												selectedDateRange.start.year + '-' + selectedDateRange.start.month + '-' + selectedDateRange.start.day,
 												'YYYY-MM-DD'
 											).format('MM/DD/YYYY')} - {moment(
-												selectedDateRange.end.year +
-													'-' +
-													selectedDateRange.end.month +
-													'-' +
-													selectedDateRange.end.day,
+												selectedDateRange.end.year + '-' + selectedDateRange.end.month + '-' + selectedDateRange.end.day,
 												'YYYY-MM-DD'
 											).format('MM/DD/YYYY')}
 										{:else}
@@ -442,10 +409,7 @@
 									{/if}
 								</Button>
 							</Popover.Trigger>
-							<Popover.Content
-								class="bg-background-800 text-background-50 w-auto p-0"
-								align="start"
-							>
+							<Popover.Content class="bg-background-800 text-background-50 w-auto p-0" align="start">
 								<RangeCalendar bind:value={selectedDateRange} initialFocus numberOfMonths={1} />
 							</Popover.Content>
 						</Popover.Root>
@@ -457,18 +421,14 @@
 					<div class="flex flex-col flex-grow relative">
 						<div class="text-2xl">PAPs ship types</div>
 						<div id="pap-ship-types-pie-chart" class="flex-grow"></div>
-						<div
-							class="flex absolute items-center justify-center text-3xl w-full h-full mt-4 pointer-events-none"
-						>
+						<div class="flex absolute items-center justify-center text-3xl w-full h-full mt-4 pointer-events-none">
 							{totalPapsByShipType}
 						</div>
 					</div>
 					<div class="flex flex-col flex-grow relative">
 						<div class="text-2xl">PAPs by type</div>
 						<div id="pap-types-pie-chart" class="flex-grow"></div>
-						<div
-							class="flex absolute items-center justify-center text-3xl w-full h-full mt-4 pointer-events-none"
-						>
+						<div class="flex absolute items-center justify-center text-3xl w-full h-full mt-4 pointer-events-none">
 							{totalPapsByType}
 						</div>
 					</div>

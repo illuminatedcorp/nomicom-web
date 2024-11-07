@@ -108,51 +108,18 @@
 			<div class="flex-grow"></div>
 
 			<div class="flex flex-col bg-background-900 text-left shadow-sm shadow-black">
-				<div class="text-2xl bg-black px-2 py-1">Alliance Services</div>
+				<div class="text-2xl bg-black px-2 py-1">Looking for answers?</div>
 
 				<div class="px-2">
+					<div>The best place is our wiki here on the site.<br /> You can access it at the top of the page.</div>
+
+					<div class="mt-4">For links to useful services, check out this wiki page:</div>
 					<a
-						href="https://esi.goonfleet.com/"
+						href="http://localhost:3000/nomicon/wiki/external-resources"
 						rel="noopener noreferrer"
 						class="flex items-center gap-2 hover:text-primary-50 transition-none"
 					>
-						Goonswarm ESI Auth Website
-						<i class="text-xs fas fa-external-link-alt transition-none"></i>
-					</a>
-					<a href="https://goonfleet.com/" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-primary-50 transition-none">
-						Goonswarm Forums
-						<i class="text-xs fas fa-external-link-alt transition-none"></i>
-					</a>
-					<a
-						href="https://wiki.goonswarm.org/w/Main_Page"
-						rel="noopener noreferrer"
-						class="flex items-center gap-2 hover:text-primary-50 transition-none"
-					>
-						Goonswarm Wiki
-						<i class="text-xs fas fa-external-link-alt transition-none"></i>
-					</a>
-					<a
-						href="https://fleets.gnf.lt/dashboard"
-						rel="noopener noreferrer"
-						class="flex items-center gap-2 hover:text-primary-50 transition-none"
-					>
-						Dankfleet Dashboard
-						<i class="text-xs fas fa-external-link-alt transition-none"></i>
-					</a>
-					<a
-						href="https://affordablecare.goonfleet.com/home"
-						rel="noopener noreferrer"
-						class="flex items-center gap-2 hover:text-primary-50 transition-none"
-					>
-						Affordable Care - Goonswarm SRP
-						<i class="text-xs fas fa-external-link-alt transition-none"></i>
-					</a>
-					<a
-						href="https://skills.apps.gnf.lt/"
-						rel="noopener noreferrer"
-						class="flex items-center gap-2 hover:text-primary-50 transition-none"
-					>
-						Imperium Skill Checker
+						External Resources
 						<i class="text-xs fas fa-external-link-alt transition-none"></i>
 					</a>
 				</div>
