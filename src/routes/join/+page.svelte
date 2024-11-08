@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="flex flex-col items-center gap-8 w-full h-full justify-start sm:mt-5 pt-7 pb-12 overflow-auto"
+	class="flex flex-col items-center gap-8 w-full h-full justify-start sm:mt-5 pt-12 pb-12 overflow-auto"
 	style="font-family: Garamond, sans-serif;"
 >
 	<div class="relative mx-3 h-fit">
