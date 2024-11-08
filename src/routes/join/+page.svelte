@@ -3,53 +3,109 @@
 </script>
 
 <div
-	class="flex justify-center sm:items-center gap-16 w-full max-sm:h-fit sm:h-full"
+	class="flex flex-col items-center gap-8 w-full h-full justify-start sm:mt-5 pt-7 pb-12 overflow-auto"
 	style="font-family: Garamond, sans-serif;"
 >
-	<div class="relative mx-3">
+	<div class="relative mx-3 h-fit">
 		<div class="background-border"></div>
-		<div class="flex flex-col items-center justify-center relative z-10 max-sm:p-6 sm:p-6">
-			<div class="max-sm:text-2xl lg:text-5xl text-center">Interested in joining?</div>
-			<div
-				class="flex flex-col max-lg:gap-3 lg:gap-1 max-sm:text-base sm:text-2xl text-center mt-5"
-			>
-				<div>Illuminated is not only an EVE Online corporation, but also a community.</div>
-				<div>We use Discord as our primary communication platform.</div>
-				<div>If you are interested in joining, Discord is your first step.</div>
+		<div class="flex flex-col items-center justify-center relative z-10 px-6 pt-6 max-sm:max-w-xl sm:max-w-4xl">
+			<div class="max-sm:text-4xl sm:text-5xl text-center">Interested in joining?</div>
+			<div class="flex flex-col max-lg:gap-3 text-lg lg:gap-1 text-center mt-5 mb-3">
+				That's wonderful. Frankly, it's probably one of the better ideas you've had, so hats off to you for making good decisions.
 			</div>
 
-			<Button
-				on:click={() => {
-					window.open('https://discord.gg/illuminated', '_blank');
-				}}
-				class="flex items-center text-xl py-5 px-8 mt-4"
+			<div class="separator" />
+
+			<div
+				class="grid max-sm:grid-cols-1 sm:grid-cols-[150px,1fr] items-center justify-center max-sm:gap-3 sm:gap-12 w-full max-sm:my-3 sm:my-8 px-2"
 			>
-				Join Discord <i class="fab fa-discord ml-2" />
-			</Button>
+				<div class="step-header">Step #1</div>
+				<Button
+					on:click={() => {
+						window.open('https://discord.gg/illuminated', '_blank');
+					}}
+					class="flex items-center text-xl py-5 px-8"
+				>
+					Join the Discord server <i class="fab fa-discord ml-2" />
+				</Button>
+			</div>
 
-			<div class="separator mt-3" />
+			<div class="separator" />
 
-			<div class="text-center mt-3">
-				<div class="flex flex-col max-lg:gap-3 lg:gap-1 max-sm:text-base sm:text-2xl text-center">
-					<div>
-						Once in Discord, look for the <span
-							class="text-primary-50 font-bold bg-background-900 px-1 rounded-sm"
-						>
-							#onboarding-info
-						</span> channel for instructions.
-					</div>
-					<div>To join, you must follow the instructions on our Wiki page to the letter.</div>
+			<div class="step-section">
+				<div class="step-header">Step #2</div>
+				<div class="text-xl">
+					Add any and all characters you have access to our
+					<a href="https://auth.illuminatedcorp.com/auth/login" class="text-primary-50 underline hover:text-primary-200"
+						>SeAT auth website</a
+					><br />
+					We require this for background checks.
 				</div>
+			</div>
 
-				<div class="flex justify-center">
-					<Button
-						on:click={() => {
-							window.open('https://wiki.illuminatedcorp.com/en/public/how-to-join', '_blank');
-						}}
-						class="flex items-center text-xl py-5 px-8 mt-4"
-					>
-						Illuminated Wiki
-					</Button>
+			<div class="separator" />
+
+			<div class="step-section">
+				<div class="step-header">Step #3</div>
+				<div class="text-xl">
+					Create an application in Discord by clicking the "Apply to Illuminated" button found in the
+					<span class="text-primary-50">#onboarding-info</span> channel.
+				</div>
+			</div>
+
+			<div class="separator" />
+
+			<div class="step-section">
+				<div class="step-header">Step #4</div>
+				<div class="text-xl">
+					Ping the <span class="text-primary-50">@Director</span> role for a voice interview. We just want to make sure you're a good fit for
+					us, and we're a good fit for you.
+				</div>
+			</div>
+
+			<div class="separator" />
+
+			<div class="step-section">
+				<div class="step-header">Step #5</div>
+				<div class="text-xl">If the interview goes well, we'll run you through a background check.</div>
+			</div>
+
+			<div class="separator" />
+
+			<div class="step-section max-sm:pb-6">
+				<div class="step-header">Step #6</div>
+				<div class="text-xl">Once everything checks out you'll be invited to join the corporation.</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="relative mx-3 h-fit">
+		<div class="background-border"></div>
+		<div class="flex flex-col items-center justify-center relative z-10 px-6 pt-6 max-sm:max-w-xl sm:max-w-4xl">
+			<div class="max-sm:text-4xl sm:text-5xl text-center">After joining</div>
+			<div class="flex flex-col text-lg max-lg:gap-3 lg:gap-1 text-center mt-5 mb-3">
+				It takes about an hour for our systems to recognize you are in the corporation. Once that happens, you will have access to the rest
+				of the Discord server and our wiki that has more instructions.
+			</div>
+
+			<div class="separator" />
+
+			<div class="flex flex-col mt-3 mb-6 px-3">
+				<div class="step-header">Mandatory Requirements</div>
+				<div class="text-xl mt-3">
+					<div class="text-lg mb-2">
+						We have mandatory requirements for our members. An interviewer will go over these with you and you will be given instructions on
+						how to fufill these requirements as needed, but they are here for your reference:
+					</div>
+
+					<div class="ml-2"><span class="text-primary-50">•</span> You must have a working microphone.</div>
+					<div class="ml-2">
+						<span class="text-primary-50">•</span> All characters and alts must be registered on both our corp and the Goonswarm auth websites.
+					</div>
+					<div class="ml-2"><span class="text-primary-50">•</span> You must have Jabber set up to recieve pings.</div>
+					<div class="ml-2"><span class="text-primary-50">•</span> You must have Mumble set up.</div>
+					<div class="ml-2"><span class="text-primary-50">•</span> You must get 8 Strategic PAPs per month.</div>
+					<div class="ml-2"><span class="text-primary-50">•</span> You must have an alpha alt character set up in Control Alt Delve.</div>
 				</div>
 			</div>
 		</div>
@@ -85,5 +141,13 @@
 		background-repeat: no-repeat;
 		width: 100%;
 		filter: brightness(2) sepia(1) hue-rotate(0deg) saturate(0.5);
+	}
+
+	.step-section {
+		@apply grid max-sm:grid-cols-1 sm:grid-cols-[150px,1fr] items-center justify-center max-sm:gap-3 sm:gap-12 w-full max-sm:mb-3 max-sm:mt-1 sm:mb-8 sm:mt-6 px-2;
+	}
+
+	.step-header {
+		@apply text-5xl max-sm:text-4xl whitespace-nowrap;
 	}
 </style>
