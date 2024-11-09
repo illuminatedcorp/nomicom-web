@@ -11,6 +11,7 @@
 	import { toast } from 'svelte-sonner';
 	import Input from '@/components/ui/input/input.svelte';
 	import SearchSelect from '@/components/ui/SearchSelect.svelte';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 
 	import { useWiki } from '@/models/useWiki';
 	const { getWikiPage, saveWikiPage, deleteWikiPage, getWikiCategories } = useWiki();
@@ -29,6 +30,7 @@
 	let categories = [];
 	let selectedCategoryId = null;
 	let currentWikiCategory = null;
+	let scrollArea = null;
 
 	onMount(async () => {
 		slug = $page.params.slug;
@@ -58,6 +60,8 @@
 		content = pageData.body;
 		selectedCategoryId = pageData.wiki_category_id;
 		currentWikiCategory = categories.find((category) => category.id === selectedCategoryId);
+
+		scrollArea.scrollTop = 0;
 	};
 
 	const onEditPage = () => {
@@ -111,7 +115,7 @@
 </script>
 
 <div class="flex pl-8 h-full">
-	<div class="flex flex-col w-full pt-4 pr-8 {editMode ? 'overflow-visible' : 'overflow-y-auto'}">
+	<div bind:this={scrollArea} class="flex flex-col w-full pt-4 pr-8 {editMode ? 'overflow-visible' : 'overflow-y-auto'}">
 		<div class="flex items-center justify-between">
 			<div class="text-base font-semibold text-background-200">
 				{#if pageData}
@@ -158,9 +162,25 @@
 							<i class="fas fa-edit"></i>
 						</Button>
 
-						<Button on:click={onDeletePage} variant="ghost">
-							<i class="fas fa-trash"></i>
-						</Button>
+						<AlertDialog.Root>
+							<AlertDialog.Trigger>
+								<Button variant="ghost">
+									<i class="fas fa-trash"></i>
+								</Button>
+							</AlertDialog.Trigger>
+							<AlertDialog.Content class="bg-background-900">
+								<AlertDialog.Header>
+									<AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
+									<AlertDialog.Description>
+										This action cannot be undone. This will permanently delete the wiki page.
+									</AlertDialog.Description>
+								</AlertDialog.Header>
+								<AlertDialog.Footer>
+									<AlertDialog.Cancel>No</AlertDialog.Cancel>
+									<AlertDialog.Action on:click={onDeletePage}>Yes</AlertDialog.Action>
+								</AlertDialog.Footer>
+							</AlertDialog.Content>
+						</AlertDialog.Root>
 					{/if}
 					<!-- <button class="btn btn-primary">History</button> -->
 				</div>
