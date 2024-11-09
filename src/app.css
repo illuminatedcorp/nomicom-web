@@ -134,10 +134,4 @@ body {
   code {
     white-space: break-spaces !important;
   }
-
-  img {
-    object-fit: cover;
-    width: 100%;
-    max-height: 200px;
-  }
 }
