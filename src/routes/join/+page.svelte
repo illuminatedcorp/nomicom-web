@@ -9,9 +9,10 @@
 	<div class="relative mx-3 h-fit">
 		<div class="background-border"></div>
 		<div class="flex flex-col items-center justify-center relative z-10 px-6 pt-6 max-sm:max-w-xl sm:max-w-4xl">
-			<div class="max-sm:text-4xl sm:text-5xl text-center">Interested in joining?</div>
+			<div class="max-sm:text-4xl sm:text-5xl text-center">Join us today</div>
 			<div class="flex flex-col max-lg:gap-3 text-lg lg:gap-1 text-center mt-5 mb-3">
-				That's wonderful. Frankly, it's probably one of the better ideas you've had, so hats off to you for making good decisions.
+				Below is a step-by-step guide to join the Illuminated family. Following this guide accurately is important. Follow this exactly as
+				stated and if all goes well, you will be invited to join.
 			</div>
 
 			<div class="separator" />
@@ -129,7 +130,7 @@
 		inset: -16px; /* Optional: Adjust this value to control how far the background extends */
 		z-index: 0; /* Ensure the background is behind the border */
 		background: var(--color-background-800); /* Background color or image */
-		opacity: 0.5;
+		opacity: 0.7;
 		filter: brightness(0.2);
 	}
 
