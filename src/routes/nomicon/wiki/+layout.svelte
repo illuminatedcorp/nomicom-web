@@ -44,11 +44,13 @@
 
 		wikiCategories.forEach((category) => {
 			if (!sidebar[category.id]) {
+				const sortedPages = category.wiki_pages?.sort((a, b) => a.sort_key - b.sort_key);
+
 				sidebar[category.id] = {
 					id: category.id,
 					name: category.name,
 					sort_key: category.sort_key,
-					pages: category.wiki_pages || []
+					pages: sortedPages || []
 				};
 			}
 		});

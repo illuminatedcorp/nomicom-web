@@ -5,7 +5,8 @@ const { apiCall } = useApi();
 export const useWiki = () => {
 	const getWikiIndex = async () => {
 		const response = await apiCall(API_ROUTES.getWikiIndex, {});
-		return response.wiki_pages;
+		const sorted = response.wiki_pages.sort((a, b) => a.sort_key - b.sort_key);
+		return sorted;
 	};
 
 	const getWikiPage = async (slug: string) => {

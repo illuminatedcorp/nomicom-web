@@ -68,6 +68,7 @@
 		const newPageData = {
 			...pageData,
 			body: content,
+			sort_key: pageData.sort_key || 0,
 			wiki_category_id: selectedCategoryId
 		};
 
@@ -127,6 +128,11 @@
 							<div class="flex items-center gap-1 h-full">
 								<div>Slug:</div>
 								<Input bind:value={pageData.slug} class="text-base bg-background-800 flex-grow-0 w-fit  border-0"></Input>
+							</div>
+
+							<div class="flex items-center gap-1 h-full">
+								<div>Sort Order:</div>
+								<Input bind:value={pageData.sort_key} type="number" class="text-base bg-background-800 flex-grow-0 w-fit  border-0"></Input>
 							</div>
 						</div>
 					{:else if currentWikiCategory}
