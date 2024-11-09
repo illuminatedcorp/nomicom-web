@@ -10,12 +10,7 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { toast } from 'svelte-sonner';
-	import {
-		type DateValue,
-		CalendarDate,
-		DateFormatter,
-		getLocalTimeZone
-	} from '@internationalized/date';
+	import { type DateValue, CalendarDate, DateFormatter, getLocalTimeZone } from '@internationalized/date';
 	import { cn } from '$lib/utils.js';
 	import { Calendar } from '$lib/components/ui/calendar';
 	import * as Popover from '$lib/components/ui/popover';
@@ -94,7 +89,8 @@
 	const onSavePost = async () => {
 		const newPostData = {
 			...postData,
-			body: content
+			body: content,
+			primary_image_url: postData.primary_image_url || null
 		};
 
 		if (publishedAt !== undefined) {
@@ -176,16 +172,22 @@
 	};
 </script>
 
-<div class="flex px-8 w-full">
+<div class="flex px-8 w-full h-full">
 	<div class="flex flex-col w-full pt-4 {editMode ? 'overflow-visible' : 'overflow-y-auto'}">
 		<div class="flex items-center justify-between">
 			<div class="flex gap-3">
 				{#if editMode}
 					<div class="flex gap-2 items-center">
 						<div>Slug:</div>
+						<Input bind:value={postData.slug} class="input-underlined text-base my-2 flex-grow-0 w-fit"></Input>
+					</div>
+
+					<div class="flex gap-2 items-center">
+						<div>Image URL:</div>
 						<Input
-							bind:value={postData.slug}
+							bind:value={postData.primary_image_url}
 							class="input-underlined text-base my-2 flex-grow-0 w-fit"
+							placeholder="Using corp logo"
 						></Input>
 					</div>
 
@@ -201,24 +203,15 @@
 									)}
 									builders={[builder]}
 								>
-									{publishedAt
-										? df.format(publishedAt.toDate(getLocalTimeZone()))
-										: 'Select a date'}
+									{publishedAt ? df.format(publishedAt.toDate(getLocalTimeZone())) : 'Select a date'}
 								</Button>
 							</Popover.Trigger>
-							<Popover.Content
-								class="bg-background-800 text-background-50 w-auto p-0"
-								align="start"
-							>
+							<Popover.Content class="bg-background-800 text-background-50 w-auto p-0" align="start">
 								<Calendar bind:value={publishedAt} initialFocus />
 							</Popover.Content>
 						</Popover.Root>
 
-						<Input
-							type="time"
-							bind:value={publishedAtTime}
-							class="input-underlined text-base my-2 flex-grow-0 w-fit"
-						></Input>
+						<Input type="time" bind:value={publishedAtTime} class="input-underlined text-base my-2 flex-grow-0 w-fit"></Input>
 
 						<Button on:click={onUnPublish} class="">Unpublish</Button>
 					</div>
@@ -246,24 +239,10 @@
 				<Input bind:value={postData.title} class="h-fit text-5xl"></Input>
 			</div>
 		{:else}
-			<div class="flex items-center gap-2 mb-8">
-				<div class="flex items-end relative text-5xl my-2">
-					{#if postData}
-						<div>{postData.title}</div>
-
-						{#if postData.published_at}
-							<div class="absolute -bottom-7 text-sm text-background-300 whitespace-nowrap">
-								Published on {moment(postData.published_at).format('MMMM Do YYYY, h:mm a')}
-							</div>
-						{:else}
-							<div
-								class="absolute -bottom-7 text-sm text-background-200 bg-primary-800 px-2 rounded-sm"
-							>
-								Not published yet
-							</div>
-						{/if}
-					{/if}
-				</div>
+			<div class="flex items-center">
+				<Button on:click={() => safeGoto(WEB_ROUTES.news)} variant="ghost" class="-ml-3 hover:bg-transparent hover:text-primary-50">
+					<i class="fas fa-arrow-left mr-3 transition-none"></i> Back
+				</Button>
 
 				<div class="flex-grow"></div>
 
@@ -276,6 +255,22 @@
 						<i class="fas fa-trash"></i>
 					</Button>
 				{/if}
+			</div>
+
+			<div class="flex items-center gap-2 mb-8">
+				<div class="flex items-end relative text-5xl my-2">
+					{#if postData}
+						<div>{postData.title}</div>
+
+						{#if postData.published_at}
+							<div class="absolute -bottom-7 text-sm text-background-300 whitespace-nowrap">
+								Published on {moment(postData.published_at).format('MMMM Do YYYY, h:mm a')}
+							</div>
+						{:else}
+							<div class="absolute -bottom-7 text-sm text-background-200 bg-primary-800 px-2 rounded-sm">Not published yet</div>
+						{/if}
+					{/if}
+				</div>
 			</div>
 		{/if}
 
