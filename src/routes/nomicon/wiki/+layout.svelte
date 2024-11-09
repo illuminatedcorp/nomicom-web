@@ -7,6 +7,7 @@
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import * as Popover from '$lib/components/ui/popover/index.js';
 	import Input from '@/components/ui/input/input.svelte';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 
 	import { useWiki } from '@/models/useWiki';
 	const { getWikiIndex, createWikiPage, getWikiCategories, createWikiCategory, saveWikiCategory, deleteWikiCategory } = useWiki();
@@ -111,14 +112,31 @@
 								</Popover.Trigger>
 								<Popover.Content class="bg-background-800 text-background-50" side="right">
 									<div class="flex flex-col gap-2">
-										<div class="flex items-center justify-between">
+										<div class="flex items-center">
 											<div class="font-medium leading-none mb-3">Edit Category</div>
+											<div class="flex-grow"></div>
 											{#if hasPermission('delete_wiki_category')}
-												<Popover.Close>
-													<Button on:click={() => onDeleteCategory(category.id)} class="text-xs text-background-50 p-2 h-fit">
-														<i class="fas fa-trash"></i>
-													</Button>
-												</Popover.Close>
+												<AlertDialog.Root>
+													<AlertDialog.Trigger>
+														<Button class="text-xs text-background-50 p-2 h-fit">
+															<i class="fas fa-trash"></i>
+														</Button>
+													</AlertDialog.Trigger>
+													<AlertDialog.Content class="bg-background-900">
+														<AlertDialog.Header>
+															<AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
+															<AlertDialog.Description>
+																This action cannot be undone. This will permanently delete the category and orphan any pages under it.
+															</AlertDialog.Description>
+														</AlertDialog.Header>
+														<AlertDialog.Footer>
+															<AlertDialog.Cancel>No</AlertDialog.Cancel>
+															<Popover.Close>
+																<AlertDialog.Action on:click={() => onDeleteCategory(category.id)}>Yes</AlertDialog.Action>
+															</Popover.Close>
+														</AlertDialog.Footer>
+													</AlertDialog.Content>
+												</AlertDialog.Root>
 											{/if}
 										</div>
 										<div class="flex gap-2 items-center">
