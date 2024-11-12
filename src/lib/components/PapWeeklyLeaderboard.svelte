@@ -2,9 +2,8 @@
 	import { onMount } from 'svelte';
 	import moment from 'moment';
 
-	import { useBirdhouse } from '@/models/useBirdhouse';
-
-	const { getCorporationPapMetrics } = useBirdhouse();
+	import { usePapService } from '@/models/usePapService';
+	const { getCorporationPaps } = usePapService();
 
 	let leaderboard = [];
 
@@ -13,7 +12,7 @@
 	const endDate = moment.utc().endOf('week').toISOString();
 
 	onMount(async () => {
-		leaderboard = await getCorporationPapMetrics(98718341, startDate, endDate, 10);
+		leaderboard = await getCorporationPaps(98718341, startDate, endDate, 10);
 	});
 </script>
 

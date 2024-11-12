@@ -14,8 +14,8 @@
 	import echartsTheme from './echartsTheme.json';
 	echarts.registerTheme('illuminated', echartsTheme);
 
-	import { useBirdhouse } from '@/models/useBirdhouse';
-	const { getCharacterPapMetrics } = useBirdhouse();
+	import { usePapService } from '@/models/usePapService';
+	const { getCharacterPapMetrics } = usePapService();
 
 	const papTypes = [
 		'beehive',

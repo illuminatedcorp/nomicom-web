@@ -6,8 +6,8 @@
 	import Separator from './ui/separator/separator.svelte';
 	import Button from './ui/button/button.svelte';
 
-	import { useBirdhouse } from '@/models/useBirdhouse';
-	const { getCorporationPapMetrics } = useBirdhouse();
+	import { usePapService } from '@/models/usePapService';
+	const { getCorporationPaps } = usePapService();
 
 	import { useUsers } from '@/models/useUsers';
 	const { getAllUsers } = useUsers();
@@ -55,14 +55,14 @@
 	};
 
 	export const update = async () => {
-		thisMonthMetrics = await getCorporationPapMetrics(98718341, thisMonthStartDate, thisMonthEndDate, -1, true);
+		thisMonthMetrics = await getCorporationPaps(98718341, thisMonthStartDate, thisMonthEndDate, -1, true);
 		if (thisMonthMetrics) {
 			thisMonthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
 
 			thisMonthPapsBarChart.update();
 		}
 
-		lastMonthMetrics = await getCorporationPapMetrics(98718341, lastMonthStartDate, lastMonthEndDate, -1, true);
+		lastMonthMetrics = await getCorporationPaps(98718341, lastMonthStartDate, lastMonthEndDate, -1, true);
 		if (lastMonthMetrics) {
 			lastMonthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
 
@@ -85,16 +85,6 @@
 			{/each}
 		</div>
 	</div>
-
-	<!-- <div class="testing">
-		<iframe
-			bind:this={iframe}
-			title="PAP Metrics"
-			src="https://finance.birdhouse.ink/public/dashboard/e3ba0b98-b0bc-42d1-9095-f31a389958eb#theme=night&bordered=false&titled=false"
-			allowtransparency
-			class="testing-iframe"
-		></iframe>
-	</div> -->
 
 	<div class="flex flex-col h-full w-full overflow-y-auto">
 		<div class="flex flex-col background-gradient px-3 h-fit">

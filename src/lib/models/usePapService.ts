@@ -1,10 +1,10 @@
 import moment from 'moment';
 import { toast } from 'svelte-sonner';
 
-export const useBirdhouse = () => {
+export const usePapService = () => {
 	const getCharacterPapMetrics = async (characterIds: number[]) => {
 		try {
-			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/paps?characterIds=' + JSON.stringify(characterIds);
+			const url = import.meta.env.VITE_PAP_SERVICE_DOMAIN + '/paps/character?characterIds=' + JSON.stringify(characterIds);
 
 			const response = await fetch(url, {
 				method: 'GET',
@@ -20,7 +20,7 @@ export const useBirdhouse = () => {
 		}
 	};
 
-	const getCorporationPapMetrics = async (
+	const getCorporationPaps = async (
 		corporationId: number,
 		startDate: string,
 		endDate: string,
@@ -29,8 +29,8 @@ export const useBirdhouse = () => {
 	) => {
 		try {
 			const url =
-				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
-				'/topPaps?corporationId=' +
+				import.meta.env.VITE_PAP_SERVICE_DOMAIN +
+				'/paps/corporation?corporationId=' +
 				corporationId +
 				'&startDate=' +
 				startDate +
@@ -73,8 +73,8 @@ export const useBirdhouse = () => {
 				.startOf('day');
 
 			const url =
-				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
-				'/topPaps?corporationId=' +
+				import.meta.env.VITE_PAP_SERVICE_DOMAIN +
+				'/paps/corporation?corporationId=' +
 				corporationId +
 				'&startDate=' +
 				startDate.toISOString() +
@@ -125,8 +125,8 @@ export const useBirdhouse = () => {
 				.endOf('day');
 
 			const url =
-				import.meta.env.VITE_BIRDHOUSE_DOMAIN +
-				'/topPaps?corporationId=' +
+				import.meta.env.VITE_PAP_SERVICE_DOMAIN +
+				'/paps/corporation?corporationId=' +
 				corporationId +
 				'&startDate=' +
 				startDate.toISOString() +
@@ -147,9 +147,9 @@ export const useBirdhouse = () => {
 		}
 	};
 
-	const getWikiIndex = async () => {
+	const getCorporationPapMetrics = async (corporationId: number, startDate: string, endDate: string) => {
 		try {
-			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/wiki/index';
+			const url = import.meta.env.VITE_PAP_SERVICE_DOMAIN + '/paps/corporation/metrics?corporationId=' + corporationId;
 
 			const response = await fetch(url, {
 				method: 'GET',
@@ -160,67 +160,16 @@ export const useBirdhouse = () => {
 
 			return response.json();
 		} catch (error) {
-			// console.error('Error getting wiki index:', error);
-			return null;
-		}
-	};
-
-	const getWikiPage = async (slug: string) => {
-		try {
-			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/wiki/page/' + slug;
-
-			const response = await fetch(url, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-
-			return response.json();
-		} catch (error) {
-			// console.error('Error getting wiki page:', error);
-			return null;
-		}
-	};
-
-	const saveWikiPage = async (pageData) => {
-		try {
-			const url = import.meta.env.VITE_BIRDHOUSE_DOMAIN + '/wiki/page';
-
-			const response = await fetch(url, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					id: pageData.id,
-					slug: pageData.slug,
-					title: pageData.title,
-					content: pageData.content,
-					status: pageData.status
-				})
-			});
-
-			if (response.status === 200) {
-				const data = await response.json();
-				return data;
-			} else {
-				// toast.error('Error saving wiki page. Please try again.');
-				return null;
-			}
-		} catch (error) {
-			// console.error('Error saving wiki page:', error);
+			// console.error('Error getting corporation PAP metrics:', error);
 			return null;
 		}
 	};
 
 	return {
 		getCharacterPapMetrics,
-		getCorporationPapMetrics,
+		getCorporationPaps,
 		getCorporationTopContributorPapMetrics,
 		getCorporationEventMetrics,
-		getWikiIndex,
-		getWikiPage,
-		saveWikiPage
+		getCorporationPapMetrics
 	};
 };

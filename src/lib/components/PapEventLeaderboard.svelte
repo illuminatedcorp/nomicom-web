@@ -2,9 +2,9 @@
 	import { onMount } from 'svelte';
 	import moment from 'moment';
 
-	import { useBirdhouse } from '@/models/useBirdhouse';
+	import { usePapService } from '@/models/usePapService';
 
-	const { getCorporationEventMetrics } = useBirdhouse();
+	const { getCorporationEventMetrics } = usePapService();
 
 	let week = Math.ceil(moment.utc().date() / 7);
 	let eventLeaderboard = [];
@@ -31,9 +31,7 @@
 
 	<div class="flex flex-col flex-grow gap-1 w-full">
 		{#each eventLeaderboard as contributor}
-			<div
-				class="grid grid-cols-2 items-center gap-3 px-3 even:bg-background-800 odd:bg-background-900"
-			>
+			<div class="grid grid-cols-2 items-center gap-3 px-3 even:bg-background-800 odd:bg-background-900">
 				<div class="text-left text-lg">{contributor.name}</div>
 				<div class="text-right text-lg">{contributor.totalStrategic} PAPs</div>
 			</div>

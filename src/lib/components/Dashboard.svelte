@@ -5,8 +5,8 @@
 	import { Progress } from '$lib/components/ui/progress';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 
-	import { useBirdhouse } from '@/models/useBirdhouse';
-	const { getCharacterPapMetrics, getCorporationTopContributorPapMetrics } = useBirdhouse();
+	import { usePapService } from '@/models/usePapService';
+	const { getCharacterPapMetrics, getCorporationTopContributorPapMetrics, getCorporationPapMetrics } = usePapService();
 
 	import { useNews } from '@/models/useNews';
 	const { getNewsFeed } = useNews();
@@ -24,6 +24,9 @@
 	let newsFeed = [];
 
 	onMount(async () => {
+		const testing = await getCorporationPapMetrics(98718341);
+		console.log(testing);
+
 		papMetrics = await getCharacterPapMetrics(characterIds);
 		corpTopContributors = await getCorporationTopContributorPapMetrics(98718341);
 		newsFeed = await getNewsFeed();
