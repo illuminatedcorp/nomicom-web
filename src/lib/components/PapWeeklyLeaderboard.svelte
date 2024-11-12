@@ -5,7 +5,7 @@
 	import { usePapService } from '@/models/usePapService';
 	const { getCorporationPaps } = usePapService();
 
-	let leaderboard = [];
+	let leaderboard = null;
 
 	// the date range should be from sunday to saturday of the current week
 	const startDate = moment.utc().startOf('week').toISOString();
@@ -16,12 +16,14 @@
 	});
 </script>
 
-{#if leaderboard}
-	<div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
-		<div class="flex text-xl bg-black px-3 py-1 w-full">
-			Weekly PAP Leaders ({moment.utc(startDate).format('MMM Do')} - {moment.utc(endDate).format('MMM Do')})
-		</div>
+<div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
+	<div class="flex text-xl bg-black px-3 py-1 w-full">
+		Weekly PAP Leaders ({moment.utc(startDate).format('MMM Do')} - {moment.utc(endDate).format('MMM Do')})
+	</div>
 
+	{#if !leaderboard}
+		<div class="flex justify-center items-center w-full h-32">Loading...</div>
+	{:else}
 		<div class="flex flex-col flex-grow gap-1 w-full">
 			{#each leaderboard as contributor}
 				<div class="grid grid-cols-2 items-center gap-3 px-3 even:bg-background-800 odd:bg-background-700 !bg-opacity-50">
@@ -30,5 +32,5 @@
 				</div>
 			{/each}
 		</div>
-	</div>
-{/if}
+	{/if}
+</div>
