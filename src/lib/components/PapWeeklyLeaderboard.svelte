@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import moment from 'moment';
 
+	import { Skeleton } from '$lib/components/ui/skeleton';
+
 	import { usePapService } from '@/models/usePapService';
 	const { getCorporationPaps } = usePapService();
 
@@ -22,7 +24,11 @@
 	</div>
 
 	{#if !leaderboard}
-		<div class="flex justify-center items-center w-full h-32">Loading...</div>
+		<div class="flex flex-col gap-1 w-full">
+			{#each Array(10) as _}
+				<Skeleton class="h-6 w-full rounded-sm even:bg-background-800 odd:bg-background-700" />
+			{/each}
+		</div>
 	{:else}
 		<div class="flex flex-col flex-grow gap-1 w-full">
 			{#each leaderboard as contributor}

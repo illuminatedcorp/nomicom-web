@@ -4,6 +4,7 @@
 
 	import { Progress } from '$lib/components/ui/progress';
 	import * as Tooltip from '$lib/components/ui/tooltip';
+	import { Skeleton } from '$lib/components/ui/skeleton';
 
 	import { usePapService } from '@/models/usePapService';
 	const { getCharacterPapMetrics, getCorporationTopContributorPapMetrics, getCorporationPapMetrics } = usePapService();
@@ -20,7 +21,7 @@
 
 	let papMetrics = {};
 	let corpTopContributors = null;
-	let newsFeed = [];
+	let newsFeed = null;
 
 	let totalStrategicForMonth = 0;
 	let totalPeacetimeForMonth = 0;
@@ -92,7 +93,7 @@
 				{#if totalStrategicForMonth > -1}
 					<div class="text-4xl mr-4 ml-1">{totalStrategicForMonth}</div>
 				{:else}
-					<div class="text-4xl mr-4 ml-1">S</div>
+					<Skeleton class="h-8 w-5 rounded-full bg-background-400 mr-4 ml-1" />
 				{/if}
 				<div class="lg:text-lg max-lg:text-lg text-left whitespace-nowrap">
 					Strategic PAPs<br />this month
@@ -102,7 +103,7 @@
 				{#if totalPeacetimeForMonth > -1}
 					<div class="text-4xl mr-4 ml-1">{totalPeacetimeForMonth}</div>
 				{:else}
-					<div class="text-4xl mr-4 ml-1">S</div>
+					<Skeleton class="h-8 w-5 rounded-full bg-background-400 mr-4 ml-1" />
 				{/if}
 
 				<div class="lg:text-lg max-lg:text-lg text-left whitespace-nowrap">
@@ -114,7 +115,10 @@
 		<div class="flex flex-col flex-grow shadow-sm shadow-black">
 			<div class="flex text-center items-center justify-center flex-grow text-xl bg-black px-3 py-1">
 				{#if totalStrategicForMonth === -1}
-					Loading...
+					<div class="flex flex-col gap-2 items-center w-full">
+						<Skeleton class="h-3 w-1/3 rounded-full bg-background-400" />
+						<Skeleton class="h-4 w-3/4 rounded-full bg-background-400" />
+					</div>
 				{:else if totalStrategicForMonth < 8}
 					You still have PAPs to get for this month.<br />Keep at it!
 				{:else}
@@ -123,7 +127,11 @@
 			</div>
 
 			{#if totalStrategicForMonth === -1}
-				<div class="flex justify-center items-center flex-grow p-3">Loading...</div>
+				<div class="flex gap-4 items-center justify-center w-full py-4">
+					<Skeleton class="h-8 w-8 rounded-full bg-background-400" />
+					<Skeleton class="h-4 w-3/4 rounded-full bg-background-400" />
+					<Skeleton class="h-8 w-8 rounded-full bg-background-400" />
+				</div>
 			{:else}
 				<div class="flex flex-grow gap-4 items-center text-4xl px-4 py-1 bg-background-900">
 					<span>0</span>
@@ -156,7 +164,11 @@
 
 			<div class="flex flex-col flex-grow gap-1 w-full">
 				{#if corpTopContributors === null}
-					<div class="flex text-center items-center justify-center p-3 w-full">Loading...</div>
+					<div class="flex flex-col gap-1 w-full">
+						{#each Array(10) as _}
+							<Skeleton class="h-6 w-full rounded-sm even:bg-background-800 odd:bg-background-700" />
+						{/each}
+					</div>
 				{:else if corpTopContributors.length === 0}
 					<div class="flex text-center items-center justify-center p-3 w-full">
 						No one has gotten more than 8 PAPs yet this month.<br />Go be the first!
@@ -180,25 +192,35 @@
 	<div class="flex flex-col w-full px-3 mt-3 mb-3">
 		<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">News Feed</div>
 
-		<div class="flex flex-col gap-3 w-full">
-			{#each newsFeed as post}
-				<button
-					on:click={() => gotoNewsPost(post)}
-					class="flex justify-between gap-12 hover:bg-background-800 bg-background-900 shadow-sm shadow-black p-3 w-full overflow-hidden"
-				>
-					<div class="flex flex-col items-start whitespace-nowrap">
-						<div class="text-xl">{post.title}</div>
-						<div class="text-sm text-background-300">
-							Published {moment(post.published_at).fromNow()}
+		{#if newsFeed === null}
+			<div class="flex flex-col gap-1 w-full">
+				{#each Array(3) as _}
+					<Skeleton class="h-16 w-full rounded-sm even:bg-background-800 odd:bg-background-700" />
+				{/each}
+			</div>
+		{:else if newsFeed.length === 0}
+			<div class="flex text-center items-center justify-center p-3 w-full">No news posts yet. Check back later!</div>
+		{:else}
+			<div class="flex flex-col gap-3 w-full">
+				{#each newsFeed as post}
+					<button
+						on:click={() => gotoNewsPost(post)}
+						class="flex justify-between gap-12 hover:bg-background-800 bg-background-900 shadow-sm shadow-black p-3 w-full overflow-hidden"
+					>
+						<div class="flex flex-col items-start whitespace-nowrap">
+							<div class="text-xl">{post.title}</div>
+							<div class="text-sm text-background-300">
+								Published {moment(post.published_at).fromNow()}
+							</div>
 						</div>
-					</div>
-					<div class="flex justify-end">
-						<div class="text-base text-right text-background-400">
-							{truncateString(post.body, 160)}
+						<div class="flex justify-end">
+							<div class="text-base text-right text-background-400">
+								{truncateString(post.body, 160)}
+							</div>
 						</div>
-					</div>
-				</button>
-			{/each}
-		</div>
+					</button>
+				{/each}
+			</div>
+		{/if}
 	</div>
 </div>
