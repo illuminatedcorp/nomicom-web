@@ -15,14 +15,7 @@
 	const { safeGoto, hasAccessToRoute } = useAuth();
 
 	import { useBuybacks } from '@/models/useBuybacks';
-	const {
-		createBuybackRequest,
-		getAllItemEntries,
-		getBuybackRequests,
-		cancelBuybackRequest,
-		getState,
-		getUpdatedAtDate
-	} = useBuybacks();
+	const { createBuybackRequest, getAllItemEntries, getBuybackRequests, cancelBuybackRequest, getState, getUpdatedAtDate } = useBuybacks();
 
 	let pasteText = '';
 	let buybacks = [];
@@ -53,7 +46,7 @@
 	};
 
 	const onSubmitText = async () => {
-		const regex = /^([\w -]*?)(?=\t| {2,}|\n|$| x)(?:\t| {4}|)?(\d+)?(?: x(\d+))?/gm;
+		const regex = /^([\w -]*?)(?=\t| {2,}|\n|$| x)(?:\t| {4}|)?(\d+,?\.?\d*)?(?: x(\d+))?/gm;
 		let matches = pasteText.matchAll(regex);
 
 		let items = [];
@@ -99,9 +92,7 @@
 	<div class="flex justify-between items-center gap-3 text-3xl">
 		<div>Buyback System</div>
 		{#if hasAccessToRoute(WEB_ROUTES.buybackAdmin)}
-			<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-base">
-				Switch to admin view
-			</Button>
+			<Button on:click={() => safeGoto(WEB_ROUTES.buybackAdmin)} class="text-base">Switch to admin view</Button>
 		{/if}
 	</div>
 	<div>If you encounter a bug or issue with this system, open an admin ticket on Discord.</div>
@@ -124,9 +115,7 @@
 				<div class="overflow-auto max-lg:h-32 lg:h-0 flex-grow">
 					{#each parsedData as item}
 						<div
-							class="grid grid-cols-[1fr,100px] text-sm even:bg-background-800 odd:bg-background-700 px-2 py-1 {isValidItem(
-								item
-							)
+							class="grid grid-cols-[1fr,100px] text-sm even:bg-background-800 odd:bg-background-700 px-2 py-1 {isValidItem(item)
 								? ''
 								: 'even:bg-red-800 odd:bg-red-700 text-red-50'}"
 						>
@@ -153,8 +142,8 @@
 					<br />
 					<br />
 					You can copy your inventory data from the game by clicking
-					<span class="hotkey">Ctrl+A</span>, <span class="hotkey">Ctrl+C</span>, and then pasting
-					it here with <span class="hotkey">Ctrl+V</span>.
+					<span class="hotkey">Ctrl+A</span>, <span class="hotkey">Ctrl+C</span>, and then pasting it here with
+					<span class="hotkey">Ctrl+V</span>.
 				</div>
 			{/if}
 		</div>
@@ -167,9 +156,7 @@
 				<div>3. Review the items and click "Submit Buyback Request".</div>
 				<div>4. Set up the contract in-game.</div>
 				<div class="ml-3">• Assign your contract to our corporation "Illuminated".</div>
-				<div class="ml-3">
-					• Your contract description must have the "Contract ID" from the list below.
-				</div>
+				<div class="ml-3">• Your contract description must have the "Contract ID" from the list below.</div>
 				<div class="ml-3">• Make sure the price for the contract is correct.</div>
 				<div>5. Click "Cancel" if you need to cancel a buyback request.</div>
 			</div>
@@ -242,12 +229,7 @@
 						{/if}
 					</div>
 					<div class="flex justify-end px-2">
-						<Button
-							disabled={getState(buyback) === BUYBACK_STATES.canceled}
-							on:click={onCancel(buyback)}
-						>
-							Cancel
-						</Button>
+						<Button disabled={getState(buyback) === BUYBACK_STATES.canceled} on:click={onCancel(buyback)}>Cancel</Button>
 					</div>
 				</div>
 			{/each}
