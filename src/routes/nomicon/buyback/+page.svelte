@@ -46,12 +46,16 @@
 	};
 
 	const onSubmitText = async () => {
-		const regex = /^([\w -]*?)(?=\t| {2,}|\n|$| x)(?:\t| {4}|)?(\d+,?\.?\d*)?(?: x(\d+))?/gm;
+		const regex = /^([\w -]*?)(?=\t| {2,}|\n|$| x)(?:\t| {4}|)?(\d+,?\.?\d*)?(?: x(\d+,?\.?\d*))?/gm;
 		let matches = pasteText.matchAll(regex);
 
 		let items = [];
 		for (const match of matches) {
-			items.push({ item_name: match[1], quantity: parseInt(match[2]) || parseInt(match[3]) || 1 });
+			items.push({
+				item_name: match[1],
+				quantity:
+					parseInt(match[2].replaceAll('.', '').replaceAll(',', '')) || parseInt(match[3].replaceAll('.', '').replaceAll(',', '')) || 1
+			});
 		}
 
 		if (items.length === 0) {
