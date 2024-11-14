@@ -3,24 +3,24 @@
 	import moment from 'moment';
 
 	import { Progress } from '$lib/components/ui/progress';
-	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { Skeleton } from '$lib/components/ui/skeleton';
+	// import PapEventLeaderboard from './PapEventLeaderboard.svelte';
+	// import PapWeeklyLeaderboard from './PapWeeklyLeaderboard.svelte';
+	import CorpPapBoard from './CorpPapBoard.svelte';
+	import MonthlyRewardBreakdown from './MonthlyRewardBreakdown.svelte';
 
 	import { usePapService } from '@/models/usePapService';
-	const { getCharacterPapMetrics, getCorporationTopContributorPapMetrics, getCorporationPapMetrics } = usePapService();
+	const { getCharacterPapMetrics, getCorporationPapMetrics } = usePapService();
 
 	import { useNews } from '@/models/useNews';
 	const { getNewsFeed } = useNews();
 
 	import { useAuth } from '@/models/useAuth.js';
-	// import PapEventLeaderboard from './PapEventLeaderboard.svelte';
-	import PapWeeklyLeaderboard from './PapWeeklyLeaderboard.svelte';
 	const { safeGoto } = useAuth();
 
 	export let characterIds;
 
 	let papMetrics = {};
-	let corpTopContributors = null;
 	let newsFeed = null;
 
 	let totalStrategicForMonth = 0;
@@ -32,7 +32,6 @@
 		// so we can update the UI as they come in
 		// so we make them all async functions and we do NOT await them. they await internally
 		updateNewsFeed();
-		updateTopContributors();
 		updatePapMetrics();
 
 		const testing = await getCorporationPapMetrics(98718341);
@@ -41,10 +40,6 @@
 
 	const updatePapMetrics = async () => {
 		papMetrics = await getCharacterPapMetrics(characterIds);
-	};
-
-	const updateTopContributors = async () => {
-		corpTopContributors = await getCorporationTopContributorPapMetrics(98718341);
 	};
 
 	const updateNewsFeed = async () => {
@@ -144,49 +139,10 @@
 
 	<div class="flex flex-wrap gap-3 px-3">
 		<!-- <PapEventLeaderboard /> -->
-		<PapWeeklyLeaderboard />
+		<!-- <PapWeeklyLeaderboard /> -->
+		<CorpPapBoard />
 
-		<div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
-			<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">
-				Top {moment.utc().format('MMMM')} 8+ Champions
-
-				<Tooltip.Root openDelay={0}>
-					<Tooltip.Trigger><i class="fas fa-question-circle text-base" /></Tooltip.Trigger>
-					<Tooltip.Content class="bg-background-800">
-						<div class="text-sm">
-							<span class="text-green-500">+number over required 8 </span>
-							<span class="text-background-400">(total number)</span>
-							PAPs
-						</div>
-					</Tooltip.Content>
-				</Tooltip.Root>
-			</div>
-
-			<div class="flex flex-col flex-grow gap-1 w-full">
-				{#if corpTopContributors === null}
-					<div class="flex flex-col gap-1 w-full">
-						{#each Array(10) as _}
-							<Skeleton class="h-6 w-full rounded-sm even:bg-background-800 odd:bg-background-700" />
-						{/each}
-					</div>
-				{:else if corpTopContributors.length === 0}
-					<div class="flex text-center items-center justify-center p-3 w-full">
-						No one has gotten more than 8 PAPs yet this month.<br />Go be the first!
-					</div>
-				{:else}
-					{#each corpTopContributors as contributor}
-						<div class="flex items-center justify-between gap-3 px-3 even:bg-background-800 odd:bg-background-700 !bg-opacity-50">
-							<div class="text-left text-base">{contributor.name}</div>
-							<div class="text-right text-base">
-								<span class="text-green-500">+{contributor.totalStrategic} </span>
-								<span class="text-background-400">({contributor.totalStrategic + 8})</span>
-								PAPs
-							</div>
-						</div>
-					{/each}
-				{/if}
-			</div>
-		</div>
+		<MonthlyRewardBreakdown {characterIds} />
 	</div>
 
 	<div class="flex flex-col w-full px-3 mt-3 mb-3">

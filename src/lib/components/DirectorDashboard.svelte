@@ -55,14 +55,14 @@
 	};
 
 	export const update = async () => {
-		thisMonthMetrics = await getCorporationPaps(98718341, thisMonthStartDate, thisMonthEndDate, -1, true);
+		thisMonthMetrics = await getCorporationPaps(98718341, thisMonthStartDate, thisMonthEndDate, null, true);
 		if (thisMonthMetrics) {
 			thisMonthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
 
 			thisMonthPapsBarChart.update();
 		}
 
-		lastMonthMetrics = await getCorporationPaps(98718341, lastMonthStartDate, lastMonthEndDate, -1, true);
+		lastMonthMetrics = await getCorporationPaps(98718341, lastMonthStartDate, lastMonthEndDate, null, true);
 		if (lastMonthMetrics) {
 			lastMonthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
 

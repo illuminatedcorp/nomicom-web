@@ -38,8 +38,7 @@ export const usePapService = () => {
 				endDate +
 				'&allMembers=' +
 				allMembers +
-				'&numResults=' +
-				(numResults ? numResults : 5);
+				(numResults ? '&numResults=' + numResults : '');
 
 			const response = await fetch(url, {
 				method: 'GET',
@@ -49,7 +48,6 @@ export const usePapService = () => {
 			});
 
 			let data = await response.json();
-			console.log(data);
 
 			return data;
 		} catch (error) {

@@ -30,7 +30,6 @@
 		// if we have metrics
 		if (metrics?.length) {
 			targetHeight = metrics.length * 15 + 100;
-			console.log(targetHeight);
 
 			// we want to format the data for the bar chart
 
@@ -73,8 +72,6 @@
 			});
 		});
 
-		console.log(barChartDataByType);
-
 		barChart.setOption({
 			tooltip: {
 				trigger: 'axis',
@@ -82,7 +79,6 @@
 				formatter: function (params) {
 					const characterName = params[0].name;
 					const { totals } = metrics.find((entry) => entry.name === characterName);
-					console.log(totals);
 
 					let returnText = `${characterName}<br/>`;
 

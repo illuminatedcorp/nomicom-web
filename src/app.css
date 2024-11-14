@@ -5,64 +5,64 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
- 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
- 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
- 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
- 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
- 
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
- 
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
- 
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
- 
-    --destructive: 0 72.2% 50.6%;
-    --destructive-foreground: 0 0% 98%;
- 
-    /* --ring: 0 0% 3.9%; */
- 
-    --radius: 0.5rem;
-  }
+	:root {
+		--background: 0 0% 100%;
+		--foreground: 0 0% 3.9%;
+
+		--muted: 0 0% 96.1%;
+		--muted-foreground: 0 0% 45.1%;
+
+		--popover: 0 0% 100%;
+		--popover-foreground: 0 0% 3.9%;
+
+		--card: 0 0% 100%;
+		--card-foreground: 0 0% 3.9%;
+
+		--border: 0 0% 89.8%;
+		--input: 0 0% 89.8%;
+
+		--primary: 0 0% 9%;
+		--primary-foreground: 0 0% 98%;
+
+		--secondary: 0 0% 96.1%;
+		--secondary-foreground: 0 0% 9%;
+
+		--accent: 0 0% 96.1%;
+		--accent-foreground: 0 0% 9%;
+
+		--destructive: 0 72.2% 50.6%;
+		--destructive-foreground: 0 0% 98%;
+
+		/* --ring: 0 0% 3.9%; */
+
+		--radius: 0.5rem;
+	}
 }
 
 @layer components {
-  .background-gradient {
-    @apply from-black/50 to-background-800/40;
-    background-image: linear-gradient(160deg, var(--tw-gradient-stops));
-  }
+	.background-gradient {
+		@apply from-black/50 to-background-800/40;
+		background-image: linear-gradient(160deg, var(--tw-gradient-stops));
+	}
 
-  .input-underlined {
-    @apply !rounded-none !border-t-0 !border-r-0 !border-l-0 !border-background-50;
-    border-style: solid
-  }
+	.input-underlined {
+		@apply !rounded-none !border-t-0 !border-r-0 !border-l-0 !border-background-50;
+		border-style: solid;
+	}
 }
 
 @layer utilities {
-  .text-glow {
-    text-shadow:
-      0 0 10px #9b7f3c,
-      0 0 10px #9b7f3c,
-      0 0 20px #9b7f3c,
-      0 0 20px #fff;
-  }
+	.text-glow {
+		text-shadow:
+			0 0 10px #9b7f3c,
+			0 0 10px #9b7f3c,
+			0 0 20px #9b7f3c,
+			0 0 20px #fff;
+	}
 
-  * {
-    @apply transition-all duration-100 ease-in-out;
-  }
+	* {
+		@apply transition-all duration-100 ease-in-out;
+	}
 }
 
 html {
@@ -80,58 +80,62 @@ body {
 }
 
 .text-glow {
-  text-shadow:
-    0 0 10px #9b7f3c,
-    0 0 10px #9b7f3c,
-    0 0 20px #9b7f3c,
-    0 0 20px #fff;
+	text-shadow:
+		0 0 10px #9b7f3c,
+		0 0 10px #9b7f3c,
+		0 0 20px #9b7f3c,
+		0 0 20px #fff;
 }
 
 .nomicon-toast {
-  background-color: var(--color-background-800);
-  color: var(--color-background-50);
-  border-color: var(--color-background-700);
+	background-color: var(--color-background-800);
+	color: var(--color-background-50);
+	border-color: var(--color-background-700);
 }
 
 .nomicon-toast[data-type='error'] {
-  background-color: var(--color-red-900);
-  color: var(--color-background-50);
-  border-color: var(--color-background-700);
+	background-color: var(--color-red-900);
+	color: var(--color-background-50);
+	border-color: var(--color-background-700);
 }
 
 .nomicon-toast[data-type='success'] {
-  background-color: var(--color-green-900);
-  color: var(--color-background-50);
-  border-color: var(--color-background-700);
+	background-color: var(--color-green-900);
+	color: var(--color-background-50);
+	border-color: var(--color-background-700);
 }
 
 .truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
+	width: 10px;
 }
 
 *::-webkit-scrollbar-track {
-  background-color: transparent;
+	background-color: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary-200);
-  border-radius: 10px;
+	background-color: var(--color-primary-200);
+	border-radius: 10px;
 }
 
 .markdown-body {
-  background: transparent !important;
+	background: transparent !important;
 
-  ul {
-    list-style-type: circle;
-  }
+	ul {
+		list-style-type: circle;
+	}
 
-  code {
-    white-space: break-spaces !important;
-  }
+	code {
+		white-space: break-spaces !important;
+	}
+}
+
+.triglavian {
+	font-family: 'Triglavian', sans-serif;
 }
