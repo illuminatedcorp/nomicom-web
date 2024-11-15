@@ -35,7 +35,6 @@
 		updatePapMetrics();
 
 		const testing = await getCorporationPapMetrics(98718341);
-		console.log(testing);
 	});
 
 	const updatePapMetrics = async () => {
@@ -142,7 +141,7 @@
 		<!-- <PapWeeklyLeaderboard /> -->
 		<CorpPapBoard />
 
-		<!-- <MonthlyRewardBreakdown {characterIds} /> -->
+		<MonthlyRewardBreakdown {characterIds} />
 	</div>
 
 	<div class="flex flex-col w-full px-3 mt-3 mb-3">

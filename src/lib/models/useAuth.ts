@@ -50,18 +50,27 @@ export const useAuth = () => {
 					return {};
 				}
 
-				if (
-					permissions?.length > 0 &&
-					permissions.some((permission) => userPermissions.includes(permission))
-				) {
+				if (permissions?.length > 0 && permissions.some((permission) => userPermissions.includes(permission))) {
 					return {};
 				} else {
 					// we want to redirect them to the base nomicon page
-					goto(WEB_ROUTES.nomicon);
+
+					// if they were trying to go to another page, we get it from localstorage
+					let redirect = localStorage.getItem('loginRedirect');
+
+					if (redirect) {
+						localStorage.removeItem('loginRedirect');
+						goto(redirect);
+					} else {
+						goto(WEB_ROUTES.nomicon);
+					}
+
 					return {};
 				}
 			} else {
-				// we want to redirect them to the login page
+				// we want to save the current route so we can redirect them back after login
+				localStorage.setItem('loginRedirect', route);
+
 				goto(WEB_ROUTES.login);
 				return {};
 			}
@@ -86,9 +95,7 @@ export const useAuth = () => {
 				return;
 			} else {
 				// otherwise we want to redirect them to the base nomicon page
-				toast.error(
-					'You do not have permission to access that page. If you believe this to be in error, please contact an administrator.'
-				);
+				toast.error('You do not have permission to access that page. If you believe this to be in error, please contact an administrator.');
 				return;
 			}
 		} else {

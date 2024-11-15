@@ -47,7 +47,14 @@
 
 				// we may need to check local storage here eventually if the character management section is under a different route
 
-				goto(`${base}${WEB_ROUTES.nomicon}`);
+				// if they were trying to go to another page, we send them there
+				const redirect = localStorage.getItem('loginRedirect');
+				if (redirect) {
+					localStorage.removeItem('loginRedirect');
+					goto(`${base}${redirect}`);
+				} else {
+					goto(`${base}${WEB_ROUTES.nomicon}`);
+				}
 			} else {
 				// we clear the stored api token from local storage
 				localStorage.removeItem('api_token');

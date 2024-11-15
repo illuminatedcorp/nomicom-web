@@ -130,7 +130,6 @@
 	};
 
 	const getUserName = (buyback) => {
-		console.log(allUsers);
 		let user = allUsers.find((user) => user.id === buyback.user_id);
 		const mainCharacter = getMainCharacter(user);
 		return mainCharacter ? mainCharacter.name : 'Unknown';

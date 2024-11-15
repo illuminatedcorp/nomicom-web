@@ -18,7 +18,7 @@
 	import DirectorDashboard from '@/components/DirectorDashboard.svelte';
 
 	let mainCharacter = getMainCharacter(get(userStore));
-	let characterIds = get(userStore).characters.map((c) => c.eve_id);
+	let characterIds = [2119400938]; // get(userStore).characters.map((c) => c.eve_id);
 
 	let papMetrics;
 	let dashboard;
@@ -28,7 +28,7 @@
 		userStore.subscribe(async () => {
 			let user = get(userStore);
 			mainCharacter = getMainCharacter(user);
-			characterIds = user.characters.map((c) => c.eve_id);
+			characterIds = [2119400938]; //user.characters.map((c) => c.eve_id);
 		});
 	});
 

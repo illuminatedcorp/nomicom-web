@@ -55,7 +55,6 @@ export const useWiki = () => {
 	const createWikiCategory = async (categoryData) => {
 		categoryData.sort_key = 1;
 		const response = await apiCall(API_ROUTES.createWikiCategory, categoryData);
-		console.log(response);
 		return response.wiki_category;
 	};
 

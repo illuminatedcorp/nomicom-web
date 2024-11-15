@@ -27,9 +27,6 @@
 	const previewMode = true;
 
 	onMount(async () => {
-		console.log('currentPoolAmount', currentPoolAmount);
-		console.log('minimumPaps', minimumPaps);
-
 		if (previewMode) {
 			for (let randomTextElement of randomTextElements) {
 				// we pause for a moment before starting the randomization to space them out
@@ -101,23 +98,23 @@
 
 {#if previewMode}
 	<div class="flex flex-col items-start gap-1 w-fit min-w-[430px] bg-background-900 shadow-sm shadow-black">
-		<div bind:this={randomTextElements[0]} class="flex text-xl bg-black px-3 py-1 w-full triglavian">Monthly Reward Breakdown</div>
+		<div bind:this={randomTextElements[0]} class="flex text-xl bg-black px-3 py-1 w-full triglavian">tlhynMo ewrRda kdBrenowa</div>
 
 		<div class="flex flex-col flex-grow gap-1 w-full">
 			<div class="flex flex-col items-center py-1 px-3 bg-primary-800 bg-opacity-50">
-				<div bind:this={randomTextElements[1]} class="text-xl triglavian">Reward Pool</div>
-				<div bind:this={randomTextElements[2]} class="text-3xl triglavian">{currentPoolAmount.toLocaleString()} ISK</div>
+				<div bind:this={randomTextElements[1]} class="text-xl triglavian">erdawR Polo</div>
+				<div bind:this={randomTextElements[2]} class="text-3xl triglavian">{currentPoolAmount.toLocaleString()} SIK</div>
 			</div>
 
 			<div class="flex flex-col justify-center items-center py-1 px-3 bg-slate-800">
-				<div bind:this={randomTextElements[3]} class="text-2xl triglavian">You have <span class="text-error-500">0</span> bonus PAPs</div>
+				<div bind:this={randomTextElements[3]} class="text-2xl triglavian">uYo aehv <span class="text-error-500">0</span> osubn PPsA</div>
 			</div>
 
 			<div class="flex flex-col flex-grow justify-center items-center py-1 px-3 bg-background-800">
-				<div bind:this={randomTextElements[4]} class="text-xl triglavian">If you got <span class="text-green-500">+??</span> PAPs,</div>
-				<div bind:this={randomTextElements[5]} class="text-xl triglavian">your reward would be</div>
+				<div bind:this={randomTextElements[4]} class="text-xl triglavian">fI ouy gto <span class="text-green-500">+??</span> sAPP,</div>
+				<div bind:this={randomTextElements[5]} class="text-xl triglavian">ryuo rrwead ouwld eb</div>
 
-				<div bind:this={randomTextElements[6]} class="text-3xl text-green-500 triglavian">??,???,??? ISK</div>
+				<div bind:this={randomTextElements[6]} class="text-3xl text-green-500 triglavian">??,???,??? KIS</div>
 			</div>
 		</div>
 	</div>
