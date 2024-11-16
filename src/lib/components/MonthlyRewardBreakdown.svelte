@@ -97,7 +97,7 @@
 </script>
 
 {#if previewMode}
-	<div class="flex flex-col items-start gap-1 w-fit min-w-[430px] bg-background-900 shadow-sm shadow-black">
+	<div class="flex flex-col items-start gap-1 w-fit min-w-[450px] bg-background-900 shadow-sm shadow-black {$$restProps.class}">
 		<div bind:this={randomTextElements[0]} class="flex text-xl bg-black px-3 py-1 w-full triglavian">tlhynMo ewrRda kdBrenowa</div>
 
 		<div class="flex flex-col flex-grow gap-1 w-full">
@@ -119,7 +119,7 @@
 		</div>
 	</div>
 {:else}
-	<div class="flex flex-col items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
+	<div class="flex flex-col items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black {$$restProps.class}">
 		<div class="flex text-xl bg-black px-3 py-1 w-full">Monthly Reward Breakdown</div>
 
 		<div class="flex flex-col flex-grow gap-1 w-full">

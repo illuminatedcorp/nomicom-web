@@ -19,3 +19,17 @@ export const startRandomizing = (textElement, interval = 100) => {
 
 	setInterval(randomize, interval);
 };
+
+export const stripMarkdown = (str) => {
+	// we want to strip all markdown and html tags from the string
+	// we can do this by using a regular expression
+	let finalText = str;
+
+	const htmlRegex = /<.*?>/g;
+	finalText = finalText.replace(htmlRegex, '');
+
+	const markdownRegex = /(?:__|[*#])|\[(.*?)\]\(.*?\)/g;
+	finalText = finalText.replace(markdownRegex, '');
+
+	return finalText.trim();
+};

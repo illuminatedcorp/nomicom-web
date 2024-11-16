@@ -92,7 +92,7 @@
 </script>
 
 <div class="flex h-full">
-	<div class="flex flex-col items-start bg-background-900 pt-1 pb-3 max-w-56">
+	<div class="flex flex-col items-start bg-background-900 pt-1 pb-3 max-w-64">
 		<div class="flex flex-col items-start flex-grow overflow-y-auto overflow-x-hidden px-3 w-full">
 			<Button on:click={() => gotoPage('')} variant="link" class="text-md text-background-50 hover:text-primary-50 p-0">Wiki Home</Button>
 

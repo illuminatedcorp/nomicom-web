@@ -32,7 +32,9 @@ const config = {
 			black: colors.black,
 			green: colors.green,
 			orange: colors.orange,
-			error: colors.red
+			error: colors.red,
+			blue: colors.blue,
+			sky: colors.sky
 		},
 		extend: {
 			colors: {
@@ -42,25 +44,13 @@ const config = {
 				background: generateBackgroundColors(baseBackgroundColor),
 				foreground: 'hsl(var(--foreground) / <alpha-value>)',
 				primary: {
-					DEFAULT: generateColors(
-						baseBackgroundColor,
-						basePrimaryColor,
-						primaryOverlayOpacity
-					)[500],
+					DEFAULT: generateColors(baseBackgroundColor, basePrimaryColor, primaryOverlayOpacity)[500],
 					foreground: generateColors(baseBackgroundColor, basePrimaryColor, primaryOverlayOpacity),
 					...generateColors(baseBackgroundColor, basePrimaryColor, primaryOverlayOpacity)
 				},
 				secondary: {
-					DEFAULT: generateColors(
-						baseBackgroundColor,
-						baseSecondaryColor,
-						secondaryOverlayOpacity
-					)[500],
-					foreground: generateColors(
-						baseBackgroundColor,
-						baseSecondaryColor,
-						secondaryOverlayOpacity
-					),
+					DEFAULT: generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity)[500],
+					foreground: generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity),
 					...generateColors(baseBackgroundColor, baseSecondaryColor, secondaryOverlayOpacity)
 				},
 				destructive: {
@@ -94,7 +84,7 @@ const config = {
 			}
 		}
 	},
-	safelist: ['logo-button', 'dark', 'neutral', 'light', 'nav-button'],
+	safelist: ['logo-button', 'dark', 'neutral', 'light', 'nav-button', 'tab-button'],
 	plugins: [
 		function ({ addBase, theme }) {
 			function extractColorVars(colorObj, colorGroup = '') {
@@ -102,9 +92,7 @@ const config = {
 					const value = colorObj[colorKey];
 
 					const newVars =
-						typeof value === 'string'
-							? { [`--color${colorGroup}-${colorKey}`]: value }
-							: extractColorVars(value, `-${colorKey}`);
+						typeof value === 'string' ? { [`--color${colorGroup}-${colorKey}`]: value } : extractColorVars(value, `-${colorKey}`);
 
 					return { ...vars, ...newVars };
 				}, {});

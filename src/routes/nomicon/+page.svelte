@@ -11,7 +11,7 @@
 	const { getMainCharacter, redirectToAddCharacter } = useCharacters();
 
 	import { useAuth } from '@/models/useAuth';
-	const { hasRole } = useAuth();
+	const { hasRole, safeGoto } = useAuth();
 
 	import PapMetrics from '@/components/PapMetrics.svelte';
 	import Dashboard from '@/components/Dashboard.svelte';
@@ -43,6 +43,10 @@
 	const onTabChange = () => {
 		papMetrics.update();
 		directorDashboard.update();
+	};
+
+	const onGotoPage = (path) => () => {
+		safeGoto(path);
 	};
 </script>
 
@@ -84,7 +88,7 @@
 					<Button
 						variant="outline"
 						on:click={onAddCharacter}
-						class="flex items-center gap-2 text-base hover:bg-background-800 hover:text-background-50 border-2 border-background-600"
+						class="flex items-center gap-2 text-base hover:bg-background-800 hover:text-background-50 border-2 border-background-800"
 					>
 						Add Character
 						<i class="text-xs fas fa-external-link-alt transition-none"></i>
@@ -111,53 +115,61 @@
 				<div class="text-2xl bg-black px-2 py-1">Looking for answers?</div>
 
 				<div class="px-2">
-					<div>The best place is our wiki here on the site.<br /> You can access it at the top of the page.</div>
+					<div class="flex gap-1">
+						The best place is our <button
+							on:click={onGotoPage('/nomicon/wiki')}
+							class="text-primary-50 underline hover:text-primary-300 transition-none"
+						>
+							Wiki
+						</button> here on the site.
+					</div>
 
 					<div class="mt-4">For links to useful services, check out this wiki page:</div>
-					<a
-						href="https://www.illuminatedcorp.com/nomicon/wiki/external-resources"
-						rel="noopener noreferrer"
-						class="flex items-center gap-2 hover:text-primary-50 transition-none"
+					<button
+						on:click={onGotoPage('/nomicon/wiki/external-resources')}
+						class="flex items-center gap-2 text-primary-50 hover:text-primary-300 underline transition-none text-xl"
 					>
 						External Resources
 						<i class="text-xs fas fa-external-link-alt transition-none"></i>
-					</a>
+					</button>
 				</div>
 			</div>
 		</div>
 
 		<div class="lg:col-span-2 background-gradient h-fit lg:h-full lg:overflow-hidden">
-			<Tabs.Root value="dashboard" class="flex flex-col w-full  lg:h-full" onValueChange={onTabChange}>
-				<Tabs.List class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 rounded-none px-3 py-2">
-					<Tabs.Trigger
-						value="dashboard"
-						class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50"
-					>
-						Dashboard
-					</Tabs.Trigger>
-					<!-- <Tabs.Trigger value="historic" class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50">
+			<Tabs.Root value="dashboard" class="flex flex-col w-full lg:h-full" onValueChange={onTabChange}>
+				{#if hasRole('director')}
+					<Tabs.List class="flex gap-3 justify-start bg-transparent h-fit w-full border-b-2 border-background-700 rounded-none px-3 py-0">
+						<Tabs.Trigger
+							value="dashboard"
+							class="text-xl data-[state=active]:border-b-2 data-[state=active]:bg-primary-900 data-[state=active]:bg-opacity-10 data-[state=active]:border-primary-500 data-[state=active]:-mb-[2px] text-background-50 bg-background-900 data-[state=active]:text-primary-50 rounded-none"
+						>
+							Dashboard
+						</Tabs.Trigger>
+						<!-- <Tabs.Trigger value="historic" class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50">
 						Historic PAPs
 					</Tabs.Trigger> -->
 
-					<div class="flex-grow"></div>
+						<div class="flex-grow"></div>
 
-					{#if hasRole('director')}
-						<Tabs.Trigger
-							value="directors"
-							class="text-xl bg-background-800 text-background-50 data-[state=active]:bg-primary-600 data-[state=active]:text-background-50"
-						>
-							Director Dashboard
-						</Tabs.Trigger>
-					{/if}
-				</Tabs.List>
-				<Tabs.Content value="dashboard" class="overflow-hidden flex-grow">
+						{#if hasRole('director')}
+							<Tabs.Trigger
+								value="directors"
+								class="text-xl data-[state=active]:border-b-2 data-[state=active]:bg-primary-900 data-[state=active]:bg-opacity-10 data-[state=active]:border-primary-500 data-[state=active]:-mb-[2px] text-background-50 bg-background-900 data-[state=active]:text-primary-50 rounded-none"
+							>
+								Director Dashboard
+							</Tabs.Trigger>
+						{/if}
+					</Tabs.List>
+				{/if}
+				<Tabs.Content value="dashboard" class="overflow-hidden flex-grow mt-1">
 					<Dashboard bind:this={dashboard} {characterIds} />
 				</Tabs.Content>
-				<Tabs.Content value="historic" class="overflow-hidden flex-grow">
+				<Tabs.Content value="historic" class="overflow-hidden flex-grow mt-1">
 					<PapMetrics bind:this={papMetrics} {characterIds} />
 				</Tabs.Content>
 				{#if hasRole('director')}
-					<Tabs.Content value="directors" class="overflow-hidden flex-grow">
+					<Tabs.Content value="directors" class="overflow-hidden flex-grow mt-1">
 						<DirectorDashboard bind:this={directorDashboard} />
 					</Tabs.Content>
 				{/if}
