@@ -28,7 +28,7 @@
 
 <div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
 	<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">
-		Corporation {moment.utc().format('MMMM')} PAP Board
+		Corp {moment.utc().format('MMMM')} Strategic PAP Board
 
 		<Tooltip.Root openDelay={0}>
 			<Tooltip.Trigger><i class="fas fa-question-circle text-base" /></Tooltip.Trigger>

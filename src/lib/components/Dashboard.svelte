@@ -82,7 +82,7 @@
 					<Skeleton class="h-8 w-5 rounded-full bg-background-400 mr-4 ml-1" />
 				{/if}
 				<div class="lg:text-lg max-lg:text-lg text-left whitespace-nowrap">
-					Strategic PAPs<br />this month
+					Your Strategic PAPs<br />this month
 				</div>
 			</div>
 			<div class="flex items-center bg-background-800 lg:px-3 py-1 max-lg:px-3 shadow-sm shadow-black w-full">
@@ -93,7 +93,7 @@
 				{/if}
 
 				<div class="lg:text-lg max-lg:text-lg text-left whitespace-nowrap">
-					Peacetime PAPs<br />this month
+					Your Peacetime PAPs<br />this month
 				</div>
 			</div>
 		</div>

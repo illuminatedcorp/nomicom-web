@@ -28,7 +28,7 @@
 
 <div class="flex flex-col flex-grow bg-background-900 pb-2 {$$restProps.class}">
 	<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">
-		Corp Average PAPs per Member for {moment.utc().format('MMMM')}
+		Corp {moment.utc().format('MMMM')} Average Strategic PAPs
 
 		<Tooltip.Root openDelay={0}>
 			<Tooltip.Trigger><i class="fas fa-question-circle text-base" /></Tooltip.Trigger>
