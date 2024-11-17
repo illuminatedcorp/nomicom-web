@@ -36,11 +36,10 @@
 			<div class="step-section">
 				<div class="step-header">Step #2</div>
 				<div class="text-xl">
-					Add any and all characters you have access to our
+					Add all of your characters to our
 					<a href="https://auth.illuminatedcorp.com/auth/login" class="text-primary-50 underline hover:text-primary-200"
 						>SeAT auth website</a
-					><br />
-					We require this for background checks.
+					><br /> You can add alts via the gear at icon at the top right of the site. We require this for background checks.
 				</div>
 			</div>
 
