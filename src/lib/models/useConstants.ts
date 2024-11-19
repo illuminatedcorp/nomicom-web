@@ -67,7 +67,7 @@ export const SITE_MODES = {
 export const ROUTE_PERMISSIONS = {
 	[WEB_ROUTES.nomicon]: [],
 	[WEB_ROUTES.buyback]: ['index_buyback_requests', 'create_buyback_request'],
-	[WEB_ROUTES.buybackAdmin]: ['admin'],
+	[WEB_ROUTES.buybackAdmin]: ['buyback_request_admin'],
 	[WEB_ROUTES.wiki]: ['index_wiki_pages'],
 	[WEB_ROUTES.admin]: ['admin'],
 	[WEB_ROUTES.api]: ['admin'],
