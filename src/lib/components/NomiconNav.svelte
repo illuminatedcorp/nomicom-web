@@ -67,7 +67,7 @@
 			</HoverCard.Content>
 		</HoverCard.Root> -->
 
-		{#if hasAccessToRoute(WEB_ROUTES.buyback)}
+		<!-- {#if hasAccessToRoute(WEB_ROUTES.buyback)}
 			<Button
 				on:click={() => safeGoto(WEB_ROUTES.buyback)}
 				variant="ghost"
@@ -78,12 +78,10 @@
 				</div>
 				<span class="max-md:hidden">Buyback</span>
 			</Button>
-		{/if}
+		{/if} -->
 	</div>
 
-	<a href="/" class="flex items-center text-2xl h-full" style="font-family: Garamond, sans-serif;">
-		Illuminated
-	</a>
+	<a href="/" class="flex items-center text-2xl h-full" style="font-family: Garamond, sans-serif;"> Illuminated </a>
 
 	<div class="flex items-center justify-end gap-2 h-full">
 		<!-- <div
