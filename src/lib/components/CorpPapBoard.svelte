@@ -8,6 +8,7 @@
 	import { usePapService } from '@/models/usePapService';
 	const { getCorporationPaps } = usePapService();
 
+	export let month = moment.utc().month();
 	let corpPaps = null;
 
 	onMount(async () => {
@@ -19,16 +20,30 @@
 	});
 
 	const updateCorpPaps = async () => {
-		const startDate = moment.utc().startOf('month').toISOString();
-		const endDate = moment.utc().endOf('month').toISOString();
+		// const startDate = moment.utc().startOf('month').toISOString();
+		// const endDate = moment.utc().endOf('month').toISOString();
+		corpPaps = null;
+
+		const startDate = moment.utc().month(month).date(1).startOf('day').toISOString();
+		const endDate = moment
+			.utc()
+			.month(month + 1)
+			.date(1)
+			.startOf('day')
+			.toISOString();
 
 		corpPaps = await getCorporationPaps(98718341, startDate, endDate, null, true);
 	};
+
+	$: {
+		month;
+		updateCorpPaps();
+	}
 </script>
 
-<div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black">
+<div class="flex flex-col flex-grow items-start gap-1 w-fit bg-background-900 shadow-sm shadow-black max-h-[320px] {$$restProps.class}">
 	<div class="flex items-center justify-between gap-2 text-xl bg-black px-3 py-1 w-full">
-		Corp {moment.utc().format('MMMM')} Strategic PAP Board
+		Corp {moment.utc().month(month).format('MMMM')} Strategic PAP Board
 
 		<Tooltip.Root openDelay={0}>
 			<Tooltip.Trigger><i class="fas fa-question-circle text-base" /></Tooltip.Trigger>
@@ -42,7 +57,7 @@
 		</Tooltip.Root>
 	</div>
 
-	<div class="flex flex-col flex-grow gap-1 w-full overflow-y-auto max-h-[276px]">
+	<div class="flex flex-col flex-grow gap-1 w-full overflow-y-auto">
 		{#if corpPaps === null}
 			<div class="flex flex-col gap-1 w-full">
 				{#each Array(10) as _}
@@ -57,7 +72,7 @@
 			{#each corpPaps as contributor}
 				<div class="flex items-center justify-between gap-3 px-3 even:bg-background-800 odd:bg-background-700 !bg-opacity-50">
 					<div class="text-left text-base">{contributor.name}</div>
-					<div class="text-right text-base">
+					<div class="text-right text-base whitespace-nowrap">
 						{#if contributor.totalStrategic > 8}
 							<span class="text-green-500">+{contributor.totalStrategic - 8} </span>
 						{/if}
