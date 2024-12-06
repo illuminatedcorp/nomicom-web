@@ -1,5 +1,6 @@
 <script lang="ts">
 	import moment from 'moment';
+	import debounce from 'lodash/debounce';
 	import { onMount } from 'svelte';
 
 	import * as Tooltip from '$lib/components/ui/tooltip';
@@ -19,7 +20,7 @@
 		updateCorpPaps();
 	});
 
-	const updateCorpPaps = async () => {
+	const updateCorpPaps = debounce(async () => {
 		// const startDate = moment.utc().startOf('month').toISOString();
 		// const endDate = moment.utc().endOf('month').toISOString();
 		corpPaps = null;
@@ -33,7 +34,7 @@
 			.toISOString();
 
 		corpPaps = await getCorporationPaps(98718341, startDate, endDate, null, true);
-	};
+	}, 100);
 
 	$: {
 		month;

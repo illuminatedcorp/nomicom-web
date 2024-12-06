@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import moment from 'moment';
+	import debounce from 'lodash/debounce';
 
 	import PapsBarChart from './PapsBarChart.svelte';
 	import Separator from './ui/separator/separator.svelte';
@@ -76,12 +77,11 @@
 
 	const copyPapNumbers = () => {
 		// we want to assemble the data so we copy two columns, the name and the total strategic
-		console.log(monthMetrics);
 		const data = monthMetrics.map((m) => `${m.name}\t${m.totalStrategic}`).join('\n');
 		navigator.clipboard.writeText(data);
 	};
 
-	export const update = async () => {
+	export const update = debounce(async () => {
 		monthMetrics = await getCorporationPaps(98718341, currentStartDate, currentEndDate, null, true);
 		if (monthMetrics) {
 			monthMetrics.sort((a, b) => a.totalStrategic - b.totalStrategic);
@@ -95,7 +95,7 @@
 
 		// 	lastMonthPapsBarChart.update();
 		// }
-	};
+	}, 100);
 </script>
 
 <div class="flex w-full h-full overflow-hidden">

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import moment from 'moment';
+	import debounce from 'lodash/debounce';
 
 	import { Skeleton } from '$lib/components/ui/skeleton';
 
@@ -11,12 +12,12 @@
 
 	export let characterIds;
 
-	const currentPoolAmount = 8000000000; // 8 billion
+	const currentPoolAmount = 3500000000; // 3.5 billion
 	const minimumPaps = 8;
 
 	let potentialIskReward = null;
 	let rewardPercentage = 0;
-	let iskReward = 0;
+	let iskReward = null;
 	let userPaps = 0;
 
 	let papMetrics = null;
@@ -24,7 +25,7 @@
 
 	let randomTextElements = [];
 
-	const previewMode = true;
+	const previewMode = false;
 
 	onMount(async () => {
 		if (previewMode) {
@@ -43,12 +44,12 @@
 		papMetrics = await getCharacterPapMetrics(characterIds);
 	};
 
-	const updateCorpPaps = async () => {
+	const updateCorpPaps = debounce(async () => {
 		const startDate = moment.utc().startOf('month').toISOString();
 		const endDate = moment.utc().endOf('month').toISOString();
 
 		corpPaps = await getCorporationPaps(98718341, startDate, endDate, null, true);
-	};
+	}, 100);
 
 	const calculateReward = () => {
 		// First we want to sum up the total number of strategic PAPs above the minimum
@@ -60,7 +61,7 @@
 		});
 
 		// Then we calculate the percentage of the total pool that the current user will receive
-		userPaps = 0; //papMetrics.monthlyTotals[moment.utc().format('MM/YYYY')]?.totalStrategic || 0;
+		userPaps = papMetrics.monthlyTotals[moment.utc().format('MM/YYYY')]?.totalStrategic || 0;
 
 		if (userPaps > minimumPaps) {
 			rewardPercentage = ((userPaps - minimumPaps) / totalPaps) * 100;
@@ -86,6 +87,25 @@
 			const potentialRewardPercentage = (1 / totalPaps) * 100;
 			potentialIskReward = (potentialRewardPercentage / 100) * currentPoolAmount;
 		}
+	};
+
+	const getRank = () => {
+		// rank is based on index in the array
+		const index = corpPaps.findIndex((contributor) => characterIds.includes(contributor.id));
+		if (index === 0) return '1st';
+		if (index === 1) return '2nd';
+		if (index === 2) return '3rd';
+		return `${index + 1}th`;
+	};
+
+	const getBonusReward = () => {
+		if (iskReward === 0) return 0;
+
+		// we have 500 million to distribute to the top 3 contributors
+		if (getRank() === '1st') return 300000000; // 300 million
+		if (getRank() === '2nd') return 150000000; // 150 million
+		if (getRank() === '3rd') return 50000000; // 50 million
+		return 0;
 	};
 
 	$: {
@@ -130,14 +150,18 @@
 
 			{#if userPaps < minimumPaps}
 				<div class="flex flex-col justify-center items-center py-1 px-3 bg-slate-800">
-					<div class="text-2xl">You have <span class="text-error-500">0</span> bonus PAPs</div>
+					{#if potentialIskReward !== null}
+						<div class="text-2xl">You have <span class="text-error-500">0</span> bonus PAPs</div>
+					{:else}
+						<Skeleton class="h-8 w-full mt-1 rounded-sm bg-background-300" />
+					{/if}
 				</div>
 
 				<div class="flex flex-col flex-grow justify-center items-center py-1 px-3 bg-background-800">
-					<div class="text-xl">If you got <span class="text-green-500">+{minimumPaps - userPaps}</span> PAPs,</div>
-					<div class="text-xl">your reward would be</div>
-
 					{#if potentialIskReward !== null}
+						<div class="text-xl">If you got {minimumPaps - userPaps + 1} more PAPs,</div>
+						<div class="text-xl">your reward could be</div>
+
 						<div class="text-3xl text-green-500">
 							{potentialIskReward.toLocaleString(undefined, {
 								minimumFractionDigits: 2,
@@ -145,31 +169,48 @@
 							})} ISK
 						</div>
 					{:else}
+						<Skeleton class="h-5 w-4/5 mt-1 rounded-sm bg-background-300" />
+						<Skeleton class="h-5 w-3/4 mt-1 rounded-sm bg-background-300" />
 						<Skeleton class="h-8 w-full mt-1 rounded-sm bg-background-300" />
 					{/if}
 				</div>
 			{:else}
 				<div class="flex flex-col items-center py-1 px-3 bg-slate-800">
 					<div class="text-xl">You have gotten</div>
-					<div class="text-3xl">
-						<span class="text-green-500">+{userPaps - minimumPaps}</span> bonus PAPs
-					</div>
-					<div class="text-base">
-						({rewardPercentage.toLocaleString(undefined, {
-							minimumFractionDigits: 2,
-							maximumFractionDigits: 2
-						})}% of all bonus PAPs this month)
-					</div>
+					{#if iskReward !== null}
+						<div class="text-3xl">
+							<span class="text-green-500">+{userPaps - minimumPaps}</span> bonus PAPs
+						</div>
+						<div class="text-base">
+							({rewardPercentage.toLocaleString(undefined, {
+								minimumFractionDigits: 2,
+								maximumFractionDigits: 2
+							})}% of all bonus PAPs this month)
+						</div>
+					{:else}
+						<Skeleton class="h-8 w-full mt-1 rounded-sm bg-background-300" />
+						<Skeleton class="h-4 w-1/2 mt-1 rounded-sm bg-background-300" />
+					{/if}
 				</div>
 
 				<div class="flex flex-col flex-grow items-center py-2 px-3 bg-green-800 bg-opacity-50">
-					<div class="text-xl">Your reward is</div>
+					<div class="text-xl">Your reward will be</div>
 					<div class="text-3xl">
 						{iskReward.toLocaleString(undefined, {
 							minimumFractionDigits: 2,
 							maximumFractionDigits: 2
 						})} ISK
 					</div>
+					{#if getBonusReward() > 0}
+						<div>
+							+{getBonusReward().toLocaleString(undefined, {
+								minimumFractionDigits: 2,
+								maximumFractionDigits: 2
+							})} ISK for being in {getRank()}
+						</div>
+					{:else}
+						<div class="text-background-200">1st - 3rd place get a bonus</div>
+					{/if}
 				</div>
 			{/if}
 		</div>
