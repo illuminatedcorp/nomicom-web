@@ -72,21 +72,14 @@
 			Join Today
 		</button>
 
-		{#if $userStore.valid}
-			<button
-				on:click={() => safeGoto(WEB_ROUTES.nomicon)}
-				class="nav-button font-bold hover:text-glow hover:!opacity-100"
-			>
-				Nomicon
-			</button>
-		{:else}
-			<button
-				on:click={() => safeGoto(WEB_ROUTES.login)}
+
+			<a
+				href="https://nomicon.illuminatedcorp.com"
 				class="nav-button font-bold hover:text-glow hover:!opacity-100"
 			>
 				Login
-			</button>
-		{/if}
+			</a>
+
 	</div>
 </div>
 
