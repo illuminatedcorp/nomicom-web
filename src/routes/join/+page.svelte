@@ -104,7 +104,7 @@
 					</div>
 					<div class="ml-2"><span class="text-primary-50">•</span> You must have Jabber set up to recieve pings.</div>
 					<div class="ml-2"><span class="text-primary-50">•</span> You must have Mumble set up.</div>
-					<div class="ml-2"><span class="text-primary-50">•</span> You must get 8 Strategic PAPs per month.</div>
+					<div class="ml-2"><span class="text-primary-50">•</span> You must get 4 Strategic PAPs per month.</div>
 					<div class="ml-2"><span class="text-primary-50">•</span> You must have an alpha alt character set up in Control Alt Delve.</div>
 				</div>
 			</div>
