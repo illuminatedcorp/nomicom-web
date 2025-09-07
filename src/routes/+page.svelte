@@ -148,34 +148,49 @@
 		
 		<!-- Ancient text blocks -->
 		<div class="scripture-blocks">
-			<div class="text-block">
-				<h3 class="block-heading" style="font-family: Garamond, serif;">THE INQUISITION</h3>
-				<p class="ancient-text">
-					From the shadows we strike with righteous fury. Our bomber wings and black operations 
-					fleets serve as the divine instrument of judgment upon the enemies of the faithful. 
-					When darkness must be met with darkness, the Inquisition answers the call, bringing 
-					swift retribution to those who would oppose the sacred order.
-				</p>
+			<div class="illuminated-manuscript">
+				<div class="manuscript-image">
+					<div class="image-placeholder inquisition-image"></div>
+				</div>
+				<div class="manuscript-text">
+					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">THE INQUISITION</h3>
+					<p class="manuscript-body">
+						From the shadows we strike with righteous fury. Our bomber wings and black operations 
+						fleets serve as the divine instrument of judgment upon the enemies of the faithful. 
+						When darkness must be met with darkness, the Inquisition answers the call, bringing 
+						swift retribution to those who would oppose the sacred order.
+					</p>
+				</div>
 			</div>
 			
-			<div class="text-block">
-				<h3 class="block-heading" style="font-family: Garamond, serif;">FORGE OF WAR</h3>
-				<p class="ancient-text">
-					Behold the mighty industrial foundation upon which our crusade is built. Through 
-					our vast manufacturing networks and resource extraction operations, we forge the 
-					instruments of divine will. From the humblest mining barge to the mightiest 
-					dreadnought, all are crafted within our sacred forges to serve the greater purpose.
-				</p>
+			<div class="illuminated-manuscript reverse">
+				<div class="manuscript-image">
+					<div class="image-placeholder forge-image"></div>
+				</div>
+				<div class="manuscript-text">
+					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">FORGE OF WAR</h3>
+					<p class="manuscript-body">
+						Behold the mighty industrial foundation upon which our crusade is built. Through 
+						our vast manufacturing networks and resource extraction operations, we forge the 
+						instruments of divine will. From the humblest mining barge to the mightiest 
+						dreadnought, all are crafted within our sacred forges to serve the greater purpose.
+					</p>
+				</div>
 			</div>
 			
-			<div class="text-block">
-				<h3 class="block-heading" style="font-family: Garamond, serif;">TRIBE OVER GUILD</h3>
-				<p class="ancient-text">
-					We are not mere mercenaries bound by contract, but brothers and sisters united 
-					by sacred covenant. In the Illuminated, you will find not just allies in battle, 
-					but a family forged in the fires of shared purpose. Our bonds transcend the cold 
-					calculations of profit, rooted instead in loyalty, honor, and brotherhood eternal.
-				</p>
+			<div class="illuminated-manuscript">
+				<div class="manuscript-image">
+					<div class="image-placeholder tribe-image"></div>
+				</div>
+				<div class="manuscript-text">
+					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">TRIBE OVER GUILD</h3>
+					<p class="manuscript-body">
+						We are not mere mercenaries bound by contract, but brothers and sisters united 
+						by sacred covenant. In the Illuminated, you will find not just allies in battle, 
+						but a family forged in the fires of shared purpose. Our bonds transcend the cold 
+						calculations of profit, rooted instead in loyalty, honor, and brotherhood eternal.
+					</p>
+				</div>
 			</div>
 		</div>
 		
@@ -271,50 +286,157 @@
 
 	/* Scripture blocks */
 	.scripture-blocks {
-		display: grid;
-		gap: 3rem;
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
 		margin-bottom: 4rem;
 	}
 
-	.text-block {
-		text-align: left;
+	.illuminated-manuscript {
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		gap: 3rem;
+		align-items: start;
 		padding: 2rem 0;
 		border-bottom: 1px solid rgba(152, 28, 32, 0.2);
-		position: relative;
 	}
 
-	.text-block:last-child {
+	.illuminated-manuscript.reverse {
+		grid-template-columns: 1fr 300px;
+	}
+
+	.illuminated-manuscript.reverse .manuscript-image {
+		order: 2;
+	}
+
+	.illuminated-manuscript.reverse .manuscript-text {
+		order: 1;
+		text-align: right;
+	}
+
+	.illuminated-manuscript:last-child {
 		border-bottom: none;
 	}
 
-	.text-block::before {
-		content: '¶';
-		position: absolute;
-		left: -2rem;
-		top: 2rem;
-		font-size: 2rem;
-		color: rgba(152, 28, 32, 0.6);
-		font-weight: bold;
+	.manuscript-image {
+		position: relative;
 	}
 
-	.block-heading {
-		font-size: 1.5rem;
+	.image-placeholder {
+		width: 100%;
+		height: 250px;
+		background: rgba(0, 0, 0, 0.4);
+		border: 2px solid rgba(152, 28, 32, 0.3);
+		border-radius: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.image-placeholder::before {
+		content: '';
+		position: absolute;
+		top: -2px;
+		left: -2px;
+		right: -2px;
+		bottom: -2px;
+		background: linear-gradient(45deg, rgba(152, 28, 32, 0.1), transparent, rgba(152, 28, 32, 0.1));
+		border-radius: 8px;
+		z-index: -1;
+	}
+
+	.inquisition-image::after {
+		content: '🗡';
+		font-size: 3rem;
+		color: rgba(152, 28, 32, 0.6);
+		text-shadow: 0 0 20px rgba(152, 28, 32, 0.8);
+	}
+
+	.forge-image::after {
+		content: '⚒';
+		font-size: 3rem;
+		color: rgba(152, 28, 32, 0.6);
+		text-shadow: 0 0 20px rgba(152, 28, 32, 0.8);
+	}
+
+	.tribe-image::after {
+		content: '☩';
+		font-size: 3rem;
+		color: rgba(152, 28, 32, 0.6);
+		text-shadow: 0 0 20px rgba(152, 28, 32, 0.8);
+	}
+
+	.manuscript-text {
+		padding: 1rem 0;
+	}
+
+	.illuminated-heading {
+		font-size: 1.8rem;
 		color: rgba(152, 28, 32, 0.9);
-		margin: 0 0 1rem 0;
+		margin: 0 0 1.5rem 0;
 		font-weight: 400;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.15em;
 		text-transform: uppercase;
 		font-family: Garamond, serif;
+		position: relative;
 	}
 
-	.ancient-text {
-		font-size: 1.1rem;
+	.illuminated-heading::before {
+		content: '❦';
+		position: absolute;
+		left: -2rem;
+		top: 0;
+		font-size: 1.5rem;
+		color: rgba(152, 28, 32, 0.6);
+	}
+
+	.reverse .illuminated-heading::before {
+		left: auto;
+		right: -2rem;
+	}
+
+	.manuscript-body {
+		font-size: 1.2rem;
 		color: #e5e5e5;
 		line-height: 1.8;
 		margin: 0;
 		text-align: justify;
 		text-indent: 2em;
 		font-family: Garamond, serif;
+	}
+
+	.reverse .manuscript-body {
+		text-align: justify;
+		text-indent: 0;
+	}
+
+	@media (max-width: 768px) {
+		.illuminated-manuscript,
+		.illuminated-manuscript.reverse {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.illuminated-manuscript.reverse .manuscript-image {
+			order: 1;
+		}
+
+		.illuminated-manuscript.reverse .manuscript-text {
+			order: 2;
+			text-align: left;
+		}
+
+		.reverse .illuminated-heading::before {
+			left: -2rem;
+			right: auto;
+		}
+
+		.reverse .manuscript-body {
+			text-align: justify;
+			text-indent: 2em;
+		}
 	}
 
 	/* Illuminated manuscript footer */
