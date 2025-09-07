@@ -131,11 +131,11 @@
 	<div class="manuscript-container">
 		<!-- Ancient chapter heading -->
 		<div class="chapter-heading">
-			<div class="ornamental-flourish">✠</div>
+			<div class="ornamental-flourish">✞</div>
 			<h2 class="chapter-title" style="font-family: Garamond, serif;">
-				THE ILLUMINATED CODEX
+				THE ILLUMINATED PATH
 			</h2>
-			<div class="ornamental-flourish">✠</div>
+			<div class="ornamental-flourish">✞</div>
 		</div>
 		
 		<!-- Scripture verse -->
@@ -183,19 +183,18 @@
 		<div class="manuscript-footer">
 			<div class="illuminated-border">
 				<h3 class="final-verse" style="font-family: Garamond, serif;">
-					"Seeketh ye the path of illumination?"
+					Seek the path of Illumination
 				</h3>
 				<p class="closing-text">
-					Let thy name be inscribed in our sacred registry. 
-					The brotherhood awaits those who would walk in both light and shadow.
+          Help us tell the story you've always wanted to be apart of in New Eden and join our ranks today
 				</p>
 				
 				<div class="covenant-buttons">
-					<button class="covenant-btn">
+					<a href="https://discord.gg/illuminated" target="_blank" rel="noopener noreferrer" class="covenant-btn">
 						<i class="fas fa-cross" style="line-height: 1;"></i>
 						<span style="line-height: 1;">JOIN US</span>
 						<i class="fas fa-cross" style="line-height: 1;"></i>
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -214,7 +213,7 @@
 	}
 
 	.scripture-section {
-		background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.95) 100%);
+		background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.85) 100%);
 		min-height: 100vh;
 		padding: 6rem 0;
 		position: relative;
@@ -333,7 +332,7 @@
 
 	.illuminated-border::before,
 	.illuminated-border::after {
-		content: '✠';
+		content: '✞';
 		position: absolute;
 		font-size: 1.5rem;
 		color: rgba(152, 28, 32, 0.8);
@@ -395,6 +394,7 @@
 		justify-content: center;
 		gap: 1.2rem;
 		line-height: 1;
+		text-decoration: none;
 	}
 
 	.covenant-btn:hover {
@@ -476,6 +476,7 @@
 	.scroll-arrow:hover {
 		opacity: 1 !important;
 	}
+
 
 	.logo-image {
 		transition: filter 0.3s;
