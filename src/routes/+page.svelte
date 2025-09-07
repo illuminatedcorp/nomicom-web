@@ -123,47 +123,62 @@
 	{/if}
 </div>
 
-<section class="value-proposition-section">
-	<div class="container mx-auto px-6 py-16">
-		<div class="max-w-4xl mx-auto text-center">
-			<h2 class="text-5xl font-bold mb-8 text-white" style="font-family: Garamond, sans-serif;">Our Mission</h2>
-			<p class="text-xl mb-12 text-gray-300 leading-relaxed">
-				Illuminated Corporation stands at the crossroads of darkness and light, offering capsuleers 
-				a choice that defines their destiny among the stars. Whether you seek redemption through 
-				righteous purpose or embrace the shadows of profit and power, we provide the framework 
-				for your journey.
+<section class="scripture-section">
+	<div class="manuscript-container">
+		<!-- Ancient chapter heading -->
+		<div class="chapter-heading">
+			<div class="ornamental-flourish">✠</div>
+			<h2 class="chapter-title" style="font-family: Garamond, serif;">
+				THE ILLUMINATED CODEX
+			</h2>
+			<div class="ornamental-flourish">✠</div>
+		</div>
+		
+		<!-- Scripture verse -->
+		<div class="verse-container">
+			<p class="opening-verse" style="font-family: Garamond, serif;">
+				"<em>For in the darkness between stars, we carry the light of purpose. 
+				Choose thy path, capsuleer, for both lead to glory eternal.</em>"
 			</p>
-			
-			<div class="grid md:grid-cols-2 gap-12 mt-16">
-				<div class="text-center">
-					<h3 class="text-3xl font-semibold mb-6 text-white" style="font-family: Garamond, sans-serif;">Path of Light</h3>
-					<p class="text-gray-400 leading-relaxed">
-						Join our industrial and mining operations. Build, create, and contribute to the prosperity 
-						of New Eden through honest work and collaborative effort. Find purpose in construction 
-						rather than destruction.
-					</p>
-				</div>
-				
-				<div class="text-center">
-					<h3 class="text-3xl font-semibold mb-6 text-white" style="font-family: Garamond, sans-serif;">Path of Darkness</h3>
-					<p class="text-gray-400 leading-relaxed">
-						Embrace the void through PvP operations, mercenary work, and the pursuit of power. 
-						Hunt among the stars, claim what is yours by right of strength, and leave your mark 
-						on the galaxy through decisive action.
-					</p>
-				</div>
+		</div>
+		
+		<!-- Ancient text blocks -->
+		<div class="scripture-blocks">
+			<div class="text-block">
+				<h3 class="block-heading" style="font-family: Garamond, serif;">OUR SACRED CHARGE</h3>
+				<p class="ancient-text">
+					We are bound by covenant to guide the lost souls of New Eden toward their destined purpose. 
+					Whether through righteous industry or sanctified warfare, each member finds their calling 
+					within our hallowed ranks. The light of knowledge illuminates the path forward.
+				</p>
 			</div>
 			
-			<div class="mt-16">
-				<p class="text-lg text-gray-400 mb-8">
-					Ready to choose your path? Join thousands of capsuleers who have found their calling.
+			<div class="text-block">
+				<h3 class="block-heading" style="font-family: Garamond, serif;">THE DUAL NATURE</h3>
+				<p class="ancient-text">
+					As written in the ancient texts: there exists both shadow and illumination, 
+					destruction and creation. We embrace this duality, for it mirrors the very 
+					essence of existence itself. Choose thy covenant with wisdom.
 				</p>
-				<div class="flex flex-col sm:flex-row gap-4 justify-center">
-					<button class="bg-yellow-600 hover:bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold transition-all duration-300">
-						Apply to Join
-					</button>
-					<button class="border border-gray-500 hover:border-gray-300 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
-						Learn More
+			</div>
+		</div>
+		
+		<!-- Illuminated manuscript call to action -->
+		<div class="manuscript-footer">
+			<div class="illuminated-border">
+				<h3 class="final-verse" style="font-family: Garamond, serif;">
+					"Seeketh ye the path of illumination?"
+				</h3>
+				<p class="closing-text">
+					Let thy name be inscribed in our sacred registry. 
+					The brotherhood awaits those who would walk in both light and shadow.
+				</p>
+				
+				<div class="covenant-buttons">
+					<button class="covenant-btn">
+						<i class="fas fa-cross" style="line-height: 1;"></i>
+						<span style="line-height: 1;">JOIN US</span>
+						<i class="fas fa-cross" style="line-height: 1;"></i>
 					</button>
 				</div>
 			</div>
@@ -182,13 +197,230 @@
 		padding-bottom: 4rem;
 	}
 
-	.value-proposition-section {
-		background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.9) 100%);
+	.scripture-section {
+		background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.95) 100%);
 		min-height: 100vh;
-		display: flex;
-		align-items: center;
+		padding: 6rem 0;
 		position: relative;
 		z-index: 10;
+		font-family: Garamond, serif;
+	}
+
+	.manuscript-container {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	/* Ancient Chapter Heading */
+	.chapter-heading {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 4rem;
+		gap: 2rem;
+	}
+
+	.ornamental-flourish {
+		font-size: 2rem;
+		color: rgba(152, 28, 32, 0.8);
+		font-weight: bold;
+	}
+
+	.chapter-title {
+		font-size: 2.5rem;
+		color: #ffffff;
+		text-align: center;
+		font-weight: 300;
+		letter-spacing: 0.3em;
+		margin: 0;
+		text-transform: uppercase;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+	}
+
+	/* Opening verse */
+	.verse-container {
+		text-align: center;
+		margin-bottom: 4rem;
+		padding: 2rem;
+	}
+
+	.opening-verse {
+		font-size: 1.5rem;
+		color: #d1d5db;
+		line-height: 1.8;
+		margin: 0;
+		font-style: italic;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+	}
+
+	/* Scripture blocks */
+	.scripture-blocks {
+		display: grid;
+		gap: 3rem;
+		margin-bottom: 4rem;
+	}
+
+	.text-block {
+		text-align: left;
+		padding: 2rem 0;
+		border-bottom: 1px solid rgba(152, 28, 32, 0.2);
+		position: relative;
+	}
+
+	.text-block:last-child {
+		border-bottom: none;
+	}
+
+	.text-block::before {
+		content: '¶';
+		position: absolute;
+		left: -2rem;
+		top: 2rem;
+		font-size: 2rem;
+		color: rgba(152, 28, 32, 0.6);
+		font-weight: bold;
+	}
+
+	.block-heading {
+		font-size: 1.5rem;
+		color: rgba(152, 28, 32, 0.9);
+		margin: 0 0 1rem 0;
+		font-weight: 400;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		font-family: Garamond, serif;
+	}
+
+	.ancient-text {
+		font-size: 1.1rem;
+		color: #e5e5e5;
+		line-height: 1.8;
+		margin: 0;
+		text-align: justify;
+		text-indent: 2em;
+		font-family: Garamond, serif;
+	}
+
+	/* Illuminated manuscript footer */
+	.manuscript-footer {
+		text-align: center;
+		margin-top: 3rem;
+	}
+
+	.illuminated-border {
+		border: 2px solid rgba(152, 28, 32, 0.3);
+		padding: 3rem 2rem;
+		position: relative;
+		background: rgba(0, 0, 0, 0.3);
+	}
+
+	.illuminated-border::before,
+	.illuminated-border::after {
+		content: '✠';
+		position: absolute;
+		font-size: 1.5rem;
+		color: rgba(152, 28, 32, 0.8);
+		background: rgba(0, 0, 0, 0.9);
+		padding: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		line-height: 1;
+	}
+
+	.illuminated-border::before {
+		top: -1rem;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.illuminated-border::after {
+		bottom: -1.6rem;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.final-verse {
+		font-size: 2rem;
+		color: #ffffff;
+		margin: 0 0 1rem 0;
+		font-weight: 300;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+	}
+
+	.closing-text {
+		font-size: 1.2rem;
+		color: #d1d5db;
+		margin: 0 0 2rem 0;
+		line-height: 1.6;
+		font-style: italic;
+		font-family: Garamond, serif;
+	}
+
+	.covenant-buttons {
+		margin-top: 2rem;
+	}
+
+	.covenant-btn {
+		background: transparent;
+		color: rgba(152, 28, 32, 0.9);
+		border: 2px solid rgba(152, 28, 32, 0.6);
+		padding: 1rem 2rem;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		font-family: Garamond, serif;
+		display: inline-flex;
+		align-items: baseline;
+		justify-content: center;
+		gap: 1.2rem;
+		line-height: 1;
+	}
+
+	.covenant-btn:hover {
+		background: rgba(152, 28, 32, 0.1);
+		color: #ffffff;
+		border-color: rgba(152, 28, 32, 0.8);
+		text-shadow: 0 0 10px #981c20, 0 0 10px #981c20, 0 0 20px #981c20;
+		box-shadow: 0 0 20px rgba(152, 28, 32, 0.3);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.section-title {
+			font-size: 2.5rem;
+		}
+		
+		.section-subtitle {
+			font-size: 1.25rem;
+		}
+		
+		.decorative-line {
+			width: 60px;
+		}
+		
+		.cta-title {
+			font-size: 2rem;
+		}
+		
+		.cta-buttons {
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		.stats-row {
+			flex-direction: column;
+			gap: 1rem;
+		}
+		
+		.stat-divider {
+			width: 2rem;
+			height: 1px;
+		}
 	}
 
 	.scroll-indicator {
