@@ -63,7 +63,7 @@
 
 {#if !loading && $userStore.initialized && !standaloneRoutes.includes(currentRoute)}
 	<div
-		class="flex flex-col relative h-full transition-opacity duration-300 {fadeInFlag
+		class="flex flex-col relative min-h-full transition-opacity duration-300 {fadeInFlag
 			? 'opacity-100'
 			: 'opacity-0'} {currentMode}"
 	>
@@ -78,9 +78,9 @@
 		{/if}
 
 		<div
-			class="flex-grow relative overflow-hidden {currentRoute.startsWith(WEB_ROUTES.nomicon)
-				? 'background-gradient'
-				: ''} "
+			class="flex-grow relative {currentRoute.startsWith(WEB_ROUTES.nomicon)
+				? 'background-gradient overflow-hidden'
+				: 'overflow-auto'} "
 		>
 			<slot />
 		</div>
@@ -93,15 +93,16 @@
 
 <style lang="postcss">
 	.background-picture {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 100%;
+		height: 100vh;
 		z-index: -1;
 		background-image: url('/images/background_angels_color.png');
 		background-size: cover;
 		background-position: center;
+		background-attachment: fixed;
 		filter: brightness(10%) contrast(100%) grayscale(100%);
 		transition: filter 0.3s;
 	}
