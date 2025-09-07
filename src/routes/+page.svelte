@@ -29,7 +29,7 @@
 	let showScrollIndicator = true;
 
 	const scrollToValueSection = () => {
-		document.querySelector('.value-proposition-section')?.scrollIntoView({ 
+		document.querySelector('.scripture-section')?.scrollIntoView({ 
 			behavior: 'smooth' 
 		});
 	};
@@ -116,8 +116,12 @@
 	
 	{#if showScrollIndicator}
 		<div class="scroll-indicator">
-			<div class="scroll-arrow animate-bounce" on:click={scrollToValueSection}>
-				<i class="fas fa-chevron-down text-2xl text-white opacity-70"></i>
+			<div class="scroll-divider" on:click={scrollToValueSection}>
+				<div class="divider-line"></div>
+				<div class="scroll-arrow animate-bounce">
+					<i class="fas fa-chevron-down text-2xl text-white opacity-70"></i>
+				</div>
+				<div class="divider-line"></div>
 			</div>
 		</div>
 	{/if}
@@ -145,20 +149,32 @@
 		<!-- Ancient text blocks -->
 		<div class="scripture-blocks">
 			<div class="text-block">
-				<h3 class="block-heading" style="font-family: Garamond, serif;">OUR SACRED CHARGE</h3>
+				<h3 class="block-heading" style="font-family: Garamond, serif;">THE INQUISITION</h3>
 				<p class="ancient-text">
-					We are bound by covenant to guide the lost souls of New Eden toward their destined purpose. 
-					Whether through righteous industry or sanctified warfare, each member finds their calling 
-					within our hallowed ranks. The light of knowledge illuminates the path forward.
+					From the shadows we strike with righteous fury. Our bomber wings and black operations 
+					fleets serve as the divine instrument of judgment upon the enemies of the faithful. 
+					When darkness must be met with darkness, the Inquisition answers the call, bringing 
+					swift retribution to those who would oppose the sacred order.
 				</p>
 			</div>
 			
 			<div class="text-block">
-				<h3 class="block-heading" style="font-family: Garamond, serif;">THE DUAL NATURE</h3>
+				<h3 class="block-heading" style="font-family: Garamond, serif;">FORGE OF WAR</h3>
 				<p class="ancient-text">
-					As written in the ancient texts: there exists both shadow and illumination, 
-					destruction and creation. We embrace this duality, for it mirrors the very 
-					essence of existence itself. Choose thy covenant with wisdom.
+					Behold the mighty industrial foundation upon which our crusade is built. Through 
+					our vast manufacturing networks and resource extraction operations, we forge the 
+					instruments of divine will. From the humblest mining barge to the mightiest 
+					dreadnought, all are crafted within our sacred forges to serve the greater purpose.
+				</p>
+			</div>
+			
+			<div class="text-block">
+				<h3 class="block-heading" style="font-family: Garamond, serif;">TRIBE OVER GUILD</h3>
+				<p class="ancient-text">
+					We are not mere mercenaries bound by contract, but brothers and sisters united 
+					by sacred covenant. In the Illuminated, you will find not just allies in battle, 
+					but a family forged in the fires of shared purpose. Our bonds transcend the cold 
+					calculations of profit, rooted instead in loyalty, honor, and brotherhood eternal.
 				</p>
 			</div>
 		</div>
@@ -429,6 +445,21 @@
 		left: 50%;
 		transform: translateX(-50%);
 		z-index: 20;
+	}
+
+	.scroll-divider {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		opacity: 0.7;
+		cursor: pointer;
+	}
+
+	.divider-line {
+		width: 6rem;
+		height: 2px;
+		background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.7), transparent);
+		border-radius: 1px;
 	}
 
 	@media (max-height: 600px) {
