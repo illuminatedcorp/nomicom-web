@@ -12,6 +12,12 @@
 
 	let currentMode = get(styleStore).selectedMode;
 
+	const scrollToValueSection = () => {
+		document.querySelector('.scripture-section')?.scrollIntoView({ 
+			behavior: 'smooth' 
+		});
+	};
+
 	onMount(async () => {
 		styleStore.subscribe(() => {
 			currentMode = getMode();
@@ -66,7 +72,7 @@
 		class="flex justify-center max-sm:text-sm lg:text-lg max-lg:mt-5 max-lg:gap-4 xl:gap-12 lg:gap-6 max-lg:order-2 max-lg:justify-start whitespace-nowrap"
 	>
 		<button
-			on:click={() => safeGoto(WEB_ROUTES.join)}
+			on:click={scrollToValueSection}
 			class="nav-button font-bold hover:text-glow hover:!opacity-100"
 		>
 			Join Today
