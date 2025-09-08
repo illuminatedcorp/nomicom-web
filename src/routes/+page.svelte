@@ -154,10 +154,9 @@
 				<div class="manuscript-text">
 					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">THE INQUISITION</h3>
 					<p class="manuscript-body">
-						From the shadows we strike with righteous fury. Our bomber wings and black operations 
-						fleets serve as the divine instrument of judgment upon the enemies of the faithful. 
-						When darkness must be met with darkness, the Inquisition answers the call, bringing 
-						swift retribution to those who would oppose the sacred order.
+            From the shadows within hostile space, we strike with Stealth Bombers and Black Ops Battleships
+            in our foreverwar PVP campaign, The Inquisition. This campaign is for those pilots who have
+            a need to make the farms and fields of the enemy backline nervous about undocking in their own space
 					</p>
 				</div>
 			</div>
@@ -169,10 +168,9 @@
 				<div class="manuscript-text">
 					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">FORGE OF WAR</h3>
 					<p class="manuscript-body">
-						Behold the mighty industrial foundation upon which our crusade is built. Through 
-						our vast manufacturing networks and resource extraction operations, we forge the 
-						instruments of divine will. From the humblest mining barge to the mightiest 
-						dreadnought, all are crafted within our sacred forges to serve the greater purpose.
+            With a litany of moons up to R64 rarity and access to the largest industrial infrastructure in New Eden,
+            if building weapons of war is your calling, you shall find no better a place to amass wealth and
+            ensure that the engines of conflict are well fueled.
 					</p>
 				</div>
 			</div>
@@ -184,10 +182,9 @@
 				<div class="manuscript-text">
 					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">TRIBE OVER GUILD</h3>
 					<p class="manuscript-body">
-						We are not mere mercenaries bound by contract, but brothers and sisters united 
-						by sacred covenant. In the Illuminated, you will find not just allies in battle, 
-						but a family forged in the fires of shared purpose. Our bonds transcend the cold 
-						calculations of profit, rooted instead in loyalty, honor, and brotherhood eternal.
+            We are far more than an Eve Online corporation. We value being a tribe over being a guild, and if the
+            servers were to go cold tomorrow, we would continue onward. We value being something which is greater
+            than the sum of its parts and carry that philosophy into all aspects of our order.
 					</p>
 				</div>
 			</div>
@@ -199,10 +196,9 @@
 				<div class="manuscript-text">
 					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">SACRED KNOWLEDGE</h3>
 					<p class="manuscript-body">
-						Within our archives lie the forbidden secrets of New Eden, gathered through 
-						centuries of exploration and conquest. From ancient technologies to the 
-						hidden truths of the void, we share this wisdom only with the worthy. 
-						Knowledge is power, and power serves the divine purpose of the Illuminated.
+            The leaders of our organization are highly experienced and have put infrastructure in place to ensure
+            that knowledge can be passed on to you. Our extensive wiki called Nomicon holds decades of New Eden
+            wisdom and experience gathered from the shared knowledge held by the members of our tribe.
 					</p>
 				</div>
 			</div>
@@ -214,10 +210,9 @@
 				<div class="manuscript-text">
 					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">THE GREAT CRUSADE</h3>
 					<p class="manuscript-body">
-						Our destiny lies not in mere survival, but in dominion. The Great Crusade 
-						calls us to expand our holy influence across the stars, bringing order to 
-						chaos and purpose to the lost. Every system claimed, every enemy vanquished, 
-						brings us closer to the ultimate realization of our sacred vision.
+            As a member of Goonswarm Federation, we are proud to board our doctrine ships and throw ourselves into
+            the fray of the most massive battles ever to occur in the galaxy as part of the greatest story ever
+            told in New Eden.
 					</p>
 				</div>
 			</div>
