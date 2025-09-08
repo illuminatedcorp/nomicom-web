@@ -614,7 +614,7 @@
 
 	.neutral {
 		.logo-image {
-			filter: grayscale(100%) brightness(200%);
+			filter: grayscale(100%) brightness(150%);
 		}
 
 		.light-button:hover {
@@ -635,7 +635,7 @@
 
 	.light {
 		.logo-image {
-			filter: grayscale(0%) brightness(160%) saturate(100%) !important;
+			filter: grayscale(0%) brightness(110%) saturate(100%) !important;
 		}
 
 		.light-button:hover {
