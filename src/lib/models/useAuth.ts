@@ -6,7 +6,7 @@ import { toast } from 'svelte-sonner';
 
 import { API_ROUTES, WEB_ROUTES, ROUTE_PERMISSIONS } from '$lib/models/useConstants';
 
-import { userStore } from '$lib/stores/userStore';
+import { userStore } from '@/stores/userStore';
 import { useUsers } from '@/models/useUsers';
 const { getUserData, getPermissionList } = useUsers();
 

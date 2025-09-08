@@ -37,6 +37,13 @@
 		});
 
 		loading = false;
+		
+		// Force fade-in after user store is initialized
+		if ($userStore.initialized && currentRoute !== WEB_ROUTES.loginRedirect) {
+			setTimeout(() => {
+				fadeInFlag = true;
+			}, 400);
+		}
 	});
 
 	const fadeIn = async () => {

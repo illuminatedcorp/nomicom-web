@@ -9,37 +9,22 @@ import { userStore } from '@/stores/userStore';
 
 export const useUsers = () => {
 	const setup = async () => {
-		getUserData();
+		await getUserData();
 	};
 
 	const getUserData = async () => {
-		const user = await apiCall(API_ROUTES.userData, {});
-
-		if (user) {
-			// if (user.characters.length > 0) {
-			// 	// we want to go populate the character records with some ESI information to make our lives easier
-			// 	let newCharacters = await populateCharacterData(user.characters);
-			// 	user.characters = newCharacters;
-			// }
-
-			userStore.set({
-				id: user.id,
-				valid: true,
-				initialized: true,
-				characters: user.characters,
-				roles: user.roles,
-				hasValidWardenCheck: user.has_valid_warden_check
-			});
-		} else {
-			userStore.set({
-				id: null,
-				valid: false,
-				initialized: true,
-				characters: [],
-				roles: [],
-				hasValidWardenCheck: false
-			});
-		}
+		// Skip API call to /me - set default invalid user state
+		// const user = await apiCall(API_ROUTES.userData, {});
+		
+		// Set invalid user state to maintain existing UI behavior
+		userStore.set({
+			id: null,
+			valid: false,
+			initialized: true,
+			characters: [],
+			roles: [],
+			hasValidWardenCheck: false
+		});
 	};
 
 	const getPermissionList = (userData) => {
