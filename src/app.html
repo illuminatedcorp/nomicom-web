@@ -2,6 +2,25 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<title>Illuminated | An Eve Online Corporation</title>
+		<meta name="description" content="Join Illuminated, an elite EVE Online corporation and member of Goonswarm Federation. Experience massive battles, comprehensive training, and decades of New Eden wisdom through our extensive Nomicon wiki." />
+		<meta name="keywords" content="EVE Online, corporation, Goonswarm Federation, spaceship MMO, nullsec, PvP, New Eden, gaming community" />
+		<meta name="author" content="Illuminated Corporation" />
+		<meta name="robots" content="index, follow" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Illuminated | An Eve Online Corporation" />
+		<meta property="og:description" content="Join Illuminated, an EVE Online corporation and membe of Goonswarm Federation. Experience massive battles, comprehensive training, and decades of New Eden wisdom." />
+		<meta property="og:url" content="https://illuminatedcorp.com" />
+		<meta property="og:site_name" content="Illuminated Corporation" />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Illuminated | An Eve Online Corporation" />
+		<meta name="twitter:description" content="Join Illuminated, an elite EVE Online corporation and member of Goonswarm Federation. Experience massive battles, comprehensive training, and decades of New Eden wisdom." />
+		
+		<link rel="canonical" href="https://illuminatedcorp.com" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="%sveltekit.assets%/apple-touch-icon.png" />
 		<link rel="icon" type="image/png" sizes="32x32" href="%sveltekit.assets%/favicon-32x32.png" />
@@ -12,6 +31,33 @@
 		<meta name="theme-color" content="#ffffff" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link href="%sveltekit.assets%/output.css" rel="stylesheet" />
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"name": "Illuminated Corporation",
+			"url": "https://illuminatedcorp.com",
+			"logo": "https://illuminatedcorp.com/images/Illuminated-Text.svg",
+			"description": "An elite EVE Online corporation and member of Goonswarm Federation, providing comprehensive training and decades of New Eden wisdom through extensive knowledge sharing.",
+			"foundingDate": "2010",
+			"sameAs": [
+				"https://discord.gg/illuminated",
+				"https://zkillboard.com/corporation/98718341/"
+			],
+			"memberOf": {
+				"@type": "Organization",
+				"name": "Goonswarm Federation"
+			},
+			"contactPoint": {
+				"@type": "ContactPoint",
+				"contactType": "recruitment",
+				"url": "https://discord.gg/illuminated"
+			}
+		}
+		</script>
+		
 		%sveltekit.head%
 	</head>
 
