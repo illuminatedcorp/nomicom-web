@@ -23,7 +23,7 @@
 	const onLightClick = () => {
 		// styleStore.set({ hoveredMode: get(styleStore).hoveredMode, selectedMode: SITE_MODES.light });
 		setModes(get(styleStore).hoveredMode, SITE_MODES.light);
-		goto(base + WEB_ROUTES.join);
+		scrollToValueSection();
 	};
 
 	let showScrollIndicator = true;
