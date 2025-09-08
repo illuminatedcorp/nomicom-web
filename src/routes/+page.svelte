@@ -131,18 +131,17 @@
 	<div class="manuscript-container">
 		<!-- Ancient chapter heading -->
 		<div class="chapter-heading">
-			<div class="ornamental-flourish">✞</div>
+			<div class="ornamental-flourish">✝</div>
 			<h2 class="chapter-title" style="font-family: Garamond, serif;">
 				THE ILLUMINATED PATH
 			</h2>
-			<div class="ornamental-flourish">✞</div>
+			<div class="ornamental-flourish">✝</div>
 		</div>
 		
 		<!-- Scripture verse -->
 		<div class="verse-container">
 			<p class="opening-verse" style="font-family: Garamond, serif;">
-				"<em>For in the darkness between stars, we carry the light of purpose. 
-				Choose thy path, capsuleer, for both lead to glory eternal.</em>"
+        <em>"Of my body and last spoils, you shall have nothing."</em>
 			</p>
 		</div>
 		
@@ -189,6 +188,36 @@
 						by sacred covenant. In the Illuminated, you will find not just allies in battle, 
 						but a family forged in the fires of shared purpose. Our bonds transcend the cold 
 						calculations of profit, rooted instead in loyalty, honor, and brotherhood eternal.
+					</p>
+				</div>
+			</div>
+			
+			<div class="illuminated-manuscript reverse">
+				<div class="manuscript-image">
+					<div class="image-placeholder knowledge-image"></div>
+				</div>
+				<div class="manuscript-text">
+					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">SACRED KNOWLEDGE</h3>
+					<p class="manuscript-body">
+						Within our archives lie the forbidden secrets of New Eden, gathered through 
+						centuries of exploration and conquest. From ancient technologies to the 
+						hidden truths of the void, we share this wisdom only with the worthy. 
+						Knowledge is power, and power serves the divine purpose of the Illuminated.
+					</p>
+				</div>
+			</div>
+			
+			<div class="illuminated-manuscript">
+				<div class="manuscript-image">
+					<div class="image-placeholder crusade-image"></div>
+				</div>
+				<div class="manuscript-text">
+					<h3 class="illuminated-heading" style="font-family: Garamond, serif;">THE GREAT CRUSADE</h3>
+					<p class="manuscript-body">
+						Our destiny lies not in mere survival, but in dominion. The Great Crusade 
+						calls us to expand our holy influence across the stars, bringing order to 
+						chaos and purpose to the lost. Every system claimed, every enemy vanquished, 
+						brings us closer to the ultimate realization of our sacred vision.
 					</p>
 				</div>
 			</div>
@@ -254,7 +283,8 @@
 	.ornamental-flourish {
 		font-size: 2rem;
 		color: rgba(152, 28, 32, 0.8);
-		font-weight: bold;
+		font-weight: 900;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 	}
 
 	.chapter-title {
@@ -288,21 +318,21 @@
 	.scripture-blocks {
 		display: flex;
 		flex-direction: column;
-		gap: 4rem;
+		gap: 3rem;
 		margin-bottom: 4rem;
 	}
 
 	.illuminated-manuscript {
 		display: grid;
-		grid-template-columns: 300px 1fr;
-		gap: 3rem;
-		align-items: start;
-		padding: 2rem 0;
+		grid-template-columns: 280px 1fr;
+		gap: 4rem;
+		align-items: center;
+		padding: 3rem 0;
 		border-bottom: 1px solid rgba(152, 28, 32, 0.2);
 	}
 
 	.illuminated-manuscript.reverse {
-		grid-template-columns: 1fr 300px;
+		grid-template-columns: 1fr 280px;
 	}
 
 	.illuminated-manuscript.reverse .manuscript-image {
@@ -324,7 +354,7 @@
 
 	.image-placeholder {
 		width: 100%;
-		height: 250px;
+		height: 200px;
 		background: rgba(0, 0, 0, 0.4);
 		border: 2px solid rgba(152, 28, 32, 0.3);
 		border-radius: 8px;
@@ -368,8 +398,22 @@
 		text-shadow: 0 0 20px rgba(152, 28, 32, 0.8);
 	}
 
+	.knowledge-image::after {
+		content: '◈';
+		font-size: 3rem;
+		color: rgba(152, 28, 32, 0.6);
+		text-shadow: 0 0 20px rgba(152, 28, 32, 0.8);
+	}
+
+	.crusade-image::after {
+		content: '⚔';
+		font-size: 3rem;
+		color: rgba(152, 28, 32, 0.6);
+		text-shadow: 0 0 20px rgba(152, 28, 32, 0.8);
+	}
+
 	.manuscript-text {
-		padding: 1rem 0;
+		padding: 0;
 	}
 
 	.illuminated-heading {
@@ -383,19 +427,6 @@
 		position: relative;
 	}
 
-	.illuminated-heading::before {
-		content: '❦';
-		position: absolute;
-		left: -2rem;
-		top: 0;
-		font-size: 1.5rem;
-		color: rgba(152, 28, 32, 0.6);
-	}
-
-	.reverse .illuminated-heading::before {
-		left: auto;
-		right: -2rem;
-	}
 
 	.manuscript-body {
 		font-size: 1.2rem;
@@ -403,7 +434,7 @@
 		line-height: 1.8;
 		margin: 0;
 		text-align: justify;
-		text-indent: 2em;
+		text-indent: 0;
 		font-family: Garamond, serif;
 	}
 
@@ -428,14 +459,10 @@
 			text-align: left;
 		}
 
-		.reverse .illuminated-heading::before {
-			left: -2rem;
-			right: auto;
-		}
 
 		.reverse .manuscript-body {
 			text-align: justify;
-			text-indent: 2em;
+			text-indent: 0;
 		}
 	}
 
@@ -452,31 +479,6 @@
 		background: rgba(0, 0, 0, 0.3);
 	}
 
-	.illuminated-border::before,
-	.illuminated-border::after {
-		content: '✞';
-		position: absolute;
-		font-size: 1.5rem;
-		color: rgba(152, 28, 32, 0.8);
-		background: rgba(0, 0, 0, 0.9);
-		padding: 0.5rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		line-height: 1;
-	}
-
-	.illuminated-border::before {
-		top: -1rem;
-		left: 50%;
-		transform: translateX(-50%);
-	}
-
-	.illuminated-border::after {
-		bottom: -1.6rem;
-		left: 50%;
-		transform: translateX(-50%);
-	}
 
 	.final-verse {
 		font-size: 2rem;
