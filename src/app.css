@@ -115,7 +115,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: var(--color-primary-200);
+	background-color: var(--color-background-500);
 	border-radius: 10px;
 }
 
